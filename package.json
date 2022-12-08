@@ -1,0 +1,31 @@
+{
+  "name": "devs_space",
+  "version": "1.0.0",
+  "description": "platform for finding project teams",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Park1016/Devs_Space.git"
+  },
+  "author": "park",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Park1016/Devs_Space/issues"
+  },
+  "homepage": "https://github.com/Park1016/Devs_Space#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^6.0.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
