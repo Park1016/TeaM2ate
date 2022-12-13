@@ -1,5 +1,6 @@
 ﻿import express from 'express';
 import 'express-async-errors';
+import * as userRepository from './user.js';
 
 let comments = [
     {
@@ -7,8 +8,7 @@ let comments = [
         id: '123123',  // 댓글 아이디
         text: '123comment',  // 댓글 텍스트
         createdAt: 'Date', // 댓글 생성 날짜
-        name: '123name',  // 사용자 이름
-        username: '123username',  // 사용자 닉네임 (아이디)
+        userId: '123',
         url: '' // 사용자 프로파일 사진 URL
     },
     {
@@ -16,8 +16,7 @@ let comments = [
         id: '123-2',  // 댓글 아이디
         text: '123-2comment',  // 댓글 텍스트
         createdAt: 'Date', // 댓글 생성 날짜
-        name: '123-2name',  // 사용자 이름
-        username: '123-2username',  // 사용자 닉네임 (아이디)
+        userId: '123',
         url: '' // 사용자 프로파일 사진 URL
     },
     {
@@ -25,8 +24,7 @@ let comments = [
         id: '456456',  // 댓글 아이디
         text: '456comment',  // 댓글 텍스트
         createdAt: 'Date', // 댓글 생성 날짜
-        name: '456name',  // 사용자 이름
-        username: '456username',  // 사용자 닉네임 (아이디)
+        userId: '456',
         url: '' // 사용자 프로파일 사진 URL
     },
     {
@@ -34,31 +32,52 @@ let comments = [
         id: '789789',  // 댓글 아이디
         text: '789comment',  // 댓글 텍스트
         createdAt: 'Date', // 댓글 생성 날짜
-        name: '789name',  // 사용자 이름
-        username: '789username',  // 사용자 닉네임 (아이디)
+        userId: '789',
         url: '' // 사용자 프로파일 사진 URL
     }
 ]
 
+export async function getUser() {
+    return Promise.all(
+        comments.map(async(comment)=>{
+            const {username, name} = await userRepository.findById(comment.userId);
+            return { ...comment, username, name };
+        })
+    );
+}
+
 export async function getByUsername(username) {
-    return comments.filter((x) => x.username === username);
+    return getUser().then((comment)=>comment.filter((x)=>x.username === username));
 }
 
 export async function getByPostId(postId) {
-    return comments.filter((x) => x.postId === postId);
+    const found = comments.find((comment) => comment.postId === postId);
+    if (!found) {
+        return null;
+    }
+    const { username, name } = await userRepository.findById(found.userId);
+    return { ...found, username, name };
 }
 
-export async function create(postId, text, name, username, url) {
+export async function getById(id) {
+    const found = comments.find((comment)=>comment.id === id);
+    if(!found) {
+        return null;
+    }
+    const { username, name } = await userRepository.findById(found.userId);
+    return { ...found, username, name };
+}
+
+export async function create(postId, text, userId, url) {
     const comment = {
         postId,
         id: '777777',
         text,
-        name,
-        username,
+        userId,
         url
     }
     comments = [comment, ...comments];
-    return comment;
+    return getByPostId(postId);
 }
 
 export async function update(id, text) {

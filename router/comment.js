@@ -2,6 +2,7 @@
 import 'express-async-errors';
 import { body, param, query } from 'express-validator';
 import { validate } from '../middleware/validation.js';
+import { isAuth } from '../middleware/auth.js';
 import * as commentController from '../controller/comment.js';
 
 const router = express.Router();
@@ -15,6 +16,7 @@ const router = express.Router();
 router.get(
     '/',
     [
+        isAuth,
         query('username').notEmpty().withMessage('닉네임을 입력하세요'),
         validate
     ],
@@ -33,10 +35,10 @@ router.get(
 router.post(
     '/write',
     [
+        isAuth,
         body('postId').notEmpty().withMessage('게시글 아이디를 입력해주세요'),
         body('text').notEmpty().withMessage('게시글을 작성해주세요'),
-        body('name').notEmpty().withMessage('이름을 입력해주세요'),
-        body('username').notEmpty().withMessage('닉네임을 입력해주세요'),
+        body('url').isURL().withMessage('URL형식에 맞게 입력해주세요').optional({ nullable: true, checkFalsy: true }),
         validate
     ],
     commentController.write
@@ -45,6 +47,7 @@ router.post(
 router.put(
     '/update/:id',
     [
+        isAuth,
         param('id').isLength({ min: 3 }).withMessage('댓글 아이디를 입력해주세요'),
         body('text').notEmpty().withMessage('댓글을 작성해주세요'),
         validate
@@ -55,6 +58,7 @@ router.put(
 router.delete(
     '/delete/:id', 
     [
+        isAuth,
         param('id').isLength({ min: 3 }).withMessage('댓글 아이디를 입력해주세요'),
         validate
     ],

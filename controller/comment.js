@@ -13,24 +13,38 @@ export async function getByPostId(req, res) {
 }
 
 export async function write(req, res) {
-    const {postId, text, name, username, url} = req.body;
-    const comment = await commentRepository.create(postId, text, name, username, url);
+    const {postId, text, url} = req.body;
+    const comment = await commentRepository.create(postId, text, req.userId, url);
     res.status(201).json(comment);
 }
 
 export async function update(req, res) {
     const id = req.params.id;
     const {text} = req.body;
-    const comment = await commentRepository.update(id, text);
-    if(comment) {
-        res.status(200).json(comment);
-    } else {
-        res.status(404).json({ message: `Comment id(${id} not found)`});
+
+    const comment = await commentRepository.getById(id);
+    if(!comment) {
+        return res.sendStatus(404);
     }
+    if(comment.userId !== req.userId) {
+        return res.sendStatus(403);
+    }
+
+    const updated = await commentRepository.update(id, text);
+    res.status(200).json(updated);
 }
 
 export async function remove(req, res) {
     const id = req.params.id;
+
+    const comment = await commentRepository.getById(id);
+    if(!comment) {
+        return sendStatus(404);
+    }
+    if(comment.id !== req.id) {
+        return sendStatus(403);
+    }
+
     await commentRepository.remove(id);
     res.sendStatus(204);
 }

@@ -4,9 +4,9 @@ import 'express-async-errors';
 let users = [
     {
         id: '123',  // 사용자의 고유한 아이디
-        name: '123name',  // 사용자 이름
-        username: '123username',  // 사용자 닉네임 (아이디),
-        password: '123123',  // 비밀번호
+        name: 'newname',  // 사용자 이름
+        username: 'newusername',  // 사용자 닉네임 (아이디),
+        password: '$2b$10$sU5OJV4FcHNtZMRsxJGif.9gFbp0r8JUL3c82HLnSaIpPBI.VD1cm',  // 비밀번호
         email: '123@gmail.com',  // 이메일
         url: '', // 사용자 프로파일 사진 URL
         bookmark: ['123'],  // 찜한 게시글
@@ -40,19 +40,18 @@ let users = [
     }
 ];
 
-export async function getBookmarkByUsername(username) {
-    const user = users.find((x) => x.username === username);
-    return user.bookmark;
+export async function findById(id) {
+    return users.find((user) => user.id === id);
 }
 
-export async function getPostByUsername(username) {
-    const user = users.find((x) => x.username === username);
-    return user.post;
+export async function findByUsername(username) {
+    return users.find((user) => user.username === username);
 }
 
-export async function getCommentByUsername(username) {
-    const user = users.find((x) => x.username === username);
-    return user.comment;
+export async function createUser(user) {
+    const created = { ...user, id: Date.now().toString() };
+    users.push(created);
+    return created.id;
 }
 
 export async function signup(name, username, password, email, url) {

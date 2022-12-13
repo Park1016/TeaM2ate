@@ -10,6 +10,5 @@ export async function getBoardByAmount(req, res) {
     const start = parseInt(req.params.start);
     const amount = parseInt(req.params.amount);
     const data = await boardRepository.getBoardByAmount(table, start, amount);
-    console.log(data, start, amount);
     res.status(200).json(data); 
 };
