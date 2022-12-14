@@ -6,9 +6,9 @@ export async function getBoard(req, res) {
 };
 
 export async function getBoardByAmount(req, res) {
-    const table = req.params.table;
+    const cate = req.params.cate;
     const start = parseInt(req.params.start);
     const amount = parseInt(req.params.amount);
-    const data = await boardRepository.getBoardByAmount(table, start, amount);
+    const data = await boardRepository.getBoardByAmount(cate, start, amount);
     res.status(200).json(data); 
 };

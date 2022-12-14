@@ -1,4 +1,5 @@
 ﻿import * as commentRepository from '../data/comment.js';
+import * as userRepository from '../data/user.js';
 
 export async function getByUsername(req, res) {
     const username = req.query.username;
@@ -13,9 +14,10 @@ export async function getByPostId(req, res) {
 }
 
 export async function write(req, res) {
-    const {postId, text, url} = req.body;
-    const comment = await commentRepository.create(postId, text, req.userId, url);
+    const {postId, text} = req.body;
+    const comment = await commentRepository.create(postId, text, req.userId);
     res.status(201).json(comment);
+    userRepository.addList(req.userId, 'comment', comment.id);
 }
 
 export async function update(req, res) {
@@ -39,12 +41,13 @@ export async function remove(req, res) {
 
     const comment = await commentRepository.getById(id);
     if(!comment) {
-        return sendStatus(404);
+        return res.sendStatus(404);
     }
-    if(comment.id !== req.id) {
-        return sendStatus(403);
+    if(comment.userId !== req.userId) {
+        return res.sendStatus(403);
     }
 
     await commentRepository.remove(id);
+    await userRepository.removeList(req.userId, 'comment', comment.id);
     res.sendStatus(204);
 }

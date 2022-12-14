@@ -1,4 +1,5 @@
 ﻿import * as postRepository from '../data/post.js';
+import * as userRepository from '../data/user.js';
 
 export async function getByUsername(req, res) {
     const username = req.query.username;
@@ -13,15 +14,15 @@ export async function getById(req, res) {
 }
 
 export async function write(req, res) {
-    const {table, text, lang, url} = req.body;
-    // console.log(req.userId);
-    const post = await postRepository.create(table, text, req.userId, lang, url);
+    const {cate, text, lang} = req.body;
+    const post = await postRepository.create(cate, text, req.userId, lang);
     res.status(201).json(post);
+    userRepository.addList(req.userId, 'post', post.id);
 }
 
 export async function update(req, res) {
     const id = req.params.id;
-    const {table, text, lang} = req.body;
+    const {cate, text, lang} = req.body;
 
 
     const post = await postRepository.getById(id);
@@ -33,8 +34,7 @@ export async function update(req, res) {
         return res.sendStatus(403);
     }
 
-    const updated = await postRepository.update(id, table, text, lang);
-    console.log('updated : ', updated);
+    const updated = await postRepository.update(id, cate, text, lang);
     res.status(200).json(updated);
 }
 
@@ -50,5 +50,6 @@ export async function remove(req, res) {
     }
 
     await postRepository.remove(id);
+    await userRepository.removeList(req.userId, 'post', post.id);
     res.sendStatus(204);
 }

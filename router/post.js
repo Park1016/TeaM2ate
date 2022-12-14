@@ -26,7 +26,7 @@ router.get(
 router.get(
     '/:id', 
     [
-        param('id').isLength({ min: 2 }).withMessage('게시글 아이디를 입력해주세요'),
+        param('id').isLength({ min: 1 }).withMessage('게시글 아이디를 입력해주세요'),
         validate
     ],
     postController.getById
@@ -36,7 +36,7 @@ router.post(
     '/write', 
     [
         isAuth,
-        body('table').notEmpty().withMessage('게시판 유형을 입력해주세요'),
+        body('cate').notEmpty().withMessage('게시판 유형을 입력해주세요'),
         body('text').notEmpty().withMessage('게시글을 작성해주세요'),
         body('url').isURL().withMessage('URL형식에 맞게 입력해주세요').optional({ nullable: true, checkFalsy: true }),
         validate
@@ -48,7 +48,7 @@ router.put(
     '/update/:id', 
     [
         isAuth,
-        param('id').isLength({ min: 3 }).withMessage('게시글 아이디를 입력해주세요'),
+        param('id').isLength({ min: 1 }).withMessage('게시글 아이디를 입력해주세요'),
         body('text').notEmpty().withMessage('게시글을 작성해주세요'),
         validate
     ],
@@ -59,7 +59,7 @@ router.delete(
     '/delete/:id', 
     [
         isAuth,
-        param('id').isLength({ min: 3 }).withMessage('게시글 아이디를 입력해주세요'),
+        param('id').isLength({ min: 1 }).withMessage('게시글 아이디를 입력해주세요'),
         validate
     ],
     postController.remove

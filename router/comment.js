@@ -48,7 +48,7 @@ router.put(
     '/update/:id',
     [
         isAuth,
-        param('id').isLength({ min: 3 }).withMessage('댓글 아이디를 입력해주세요'),
+        param('id').isLength({ min: 1 }).withMessage('댓글 아이디를 입력해주세요'),
         body('text').notEmpty().withMessage('댓글을 작성해주세요'),
         validate
     ],
@@ -59,7 +59,7 @@ router.delete(
     '/delete/:id', 
     [
         isAuth,
-        param('id').isLength({ min: 3 }).withMessage('댓글 아이디를 입력해주세요'),
+        param('id').isLength({ min: 1 }).withMessage('댓글 아이디를 입력해주세요'),
         validate
     ],
     commentController.remove

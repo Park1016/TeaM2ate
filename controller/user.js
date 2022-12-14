@@ -4,7 +4,7 @@ import * as userRepository from '../data/user.js';
 import { config } from '../config.js';
 
 export async function me(req, res) {
-    const user = await userRepository.findById(req.userId);
+    const user = await userRepository.getById(req.userId);
     if (!user) {
         return res.status(404).json({ message: '사용자를 찾을 수 없습니다' });
     }
@@ -39,7 +39,7 @@ export async function signup(req, res) {
     // 비밀번호 hashing해서 보안처리
     const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
     // user 생성
-    const userId = await userRepository.createUser({
+    const userId = await userRepository.signUp({
         name,
         username,
         password: hashed,
