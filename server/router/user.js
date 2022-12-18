@@ -21,7 +21,7 @@ const validateLogin = [
         .withMessage('닉네임을 입력해주세요'),
     body('password')
         .trim()
-        .isLength({ min: 5 })
+        .isLength({ min: 2 })
         .withMessage('비밀번호를 입력해주세요'),
     validate,
 ];
@@ -46,14 +46,14 @@ router.post('/login', validateLogin, userController.login);
 
 router.put(
     '/update/:id', 
-    [
-        isAuth,
-        param('id').isLength({ min : 2 }).withMessage('유저 고유아이디를 입력해주세요'),
-        body('username').notEmpty().withMessage('닉네임을 입력해주세요'),
-        body('password').notEmpty().withMessage('비밀번호를 입력해주세요'),
-        body('email').isEmail().withMessage('이메일을 형식에 맞게 입력해주세요').normalizeEmail(),
-        validate
-    ],
+    // [
+    //     isAuth,
+    //     param('id').isLength({ min : 2 }).withMessage('유저 고유아이디를 입력해주세요'),
+    //     body('username').notEmpty().withMessage('닉네임을 입력해주세요'),
+    //     body('password').notEmpty().withMessage('비밀번호를 입력해주세요'),
+    //     body('email').isEmail().withMessage('이메일을 형식에 맞게 입력해주세요').normalizeEmail(),
+    //     validate
+    // ],
     userController.update
 );
 

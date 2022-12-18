@@ -13,8 +13,8 @@ export async function me(req, res) {
 
 export async function update(req, res) {
     const id = req.params.id;
-    const {username, password, email, url} = req.body;
-    const user = await userRepository.update(id, username, password, email, url);
+    const {username, password, url} = req.body;
+    const user = await userRepository.update(id, username, password, url);
     if(user) {
         res.status(200).json(user);
     } else {

@@ -15,7 +15,7 @@ export async function getByPostId(req, res) {
 
 export async function write(req, res) {
     const {postId, text} = req.body;
-    const comment = await commentRepository.create(postId, text, req.userId);
+    const comment = await commentRepository.create(postId, text, req.userId, req.username);
     res.status(201).json(comment);
     userRepository.addList(req.userId, 'comment', comment.id);
 }

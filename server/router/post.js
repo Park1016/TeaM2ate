@@ -36,9 +36,9 @@ router.post(
     '/write', 
     [
         isAuth,
-        body('cate').notEmpty().withMessage('게시판 유형을 입력해주세요'),
+        body('title').notEmpty().withMessage('제목을 작성해주세요'),
         body('text').notEmpty().withMessage('게시글을 작성해주세요'),
-        body('url').isURL().withMessage('URL형식에 맞게 입력해주세요').optional({ nullable: true, checkFalsy: true }),
+        body('cate').notEmpty().withMessage('게시판 유형을 입력해주세요'),
         validate
     ],
     postController.write

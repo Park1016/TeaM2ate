@@ -32,9 +32,9 @@ export async function addList(userId, column, value) {
     .then(async() => await getById(userId));
 }
 
-export async function update(id, username, password, email, url) {
+export async function update(id, username, password, url) {
     return db
-    .execute('UPDATE user SET username=?, password=?, email=?, url=? WHERE id=?', [username, password, email, url, id])
+    .execute(`UPDATE user SET username=?, password=?, url=? WHERE id=?`, [username, password, url, id])
     .then(async() => await getById(id));
 }
 
