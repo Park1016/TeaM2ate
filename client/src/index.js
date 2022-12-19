@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import App from 'App';
-import NotFound from 'pages/NotFound';
-import Main from 'pages/Main';
-import Post from 'pages/Post';
-import Login from 'pages/Login';
-import Mypage from 'pages/Mypage';
-import Write from 'pages/Write';
-import Update from 'pages/Update';
+import NotFound from 'pages/NotFound/NotFound';
+import Main from 'pages/Main/Main';
+import Post from 'pages/Post/Post';
+import Mypage from 'pages/Mypage/Mypage';
+import Write from 'pages/Post/Write';
+import Update from 'pages/Post/Update';
+import Login from 'pages/Auth/Login/Login';
+import SignUp from 'pages/Auth/SignUp/SignUp';
+import Find from 'pages/Auth/Find/Find';
 
 
 const router = createBrowserRouter([
@@ -19,8 +21,10 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {index: true, element: <Main />},
-      {path: 'post/:id', element: <Post />},
       {path: 'login', element: <Login />},
+      {path: 'signUp', element: <SignUp />},
+      {path: 'find', element: <Find />},
+      {path: 'post/:id', element: <Post />},
       {path: 'mypage', element: <Mypage />},
       {path: 'post/write', element: <Write />},
       {path: 'post/update/:id', element: <Update />} 

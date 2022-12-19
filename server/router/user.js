@@ -1,17 +1,14 @@
 ﻿import express from 'express';
 import 'express-async-errors';
+import multer from 'multer';
 import { body, param } from 'express-validator';
 import { isAuth } from '../middleware/auth.js';
 import { validate } from '../middleware/validation.js';
 import * as userController from '../controller/user.js';
+import * as photoController from '../controller/photo.js';
 
 const router = express.Router();
-
-//Get /post/:id
-//Get /post?username=:username
-//Post /post/write
-//Put /post/update/:id
-//Delete /post/delete/:id
+const upload = multer({ dest: 'uploads/' });
 
 
 const validateLogin = [
@@ -27,8 +24,8 @@ const validateLogin = [
 ];
     
 const validateSignup = [
-    ...validateLogin,
     body('name').notEmpty().withMessage('이름을 입력해주세요'),
+    ...validateLogin,
     body('email').isEmail().normalizeEmail().withMessage('이메일을 형식에 맞게 입력해주세요'),
     body('url')
         .isURL()
@@ -39,6 +36,8 @@ const validateSignup = [
 ];
 
 router.get('/me', isAuth, userController.me);
+
+router.post('/photo', upload.single('url'), (req, res)=>console.log(req.file)); 
 
 router.post('/signup', validateSignup, userController.signup);
 

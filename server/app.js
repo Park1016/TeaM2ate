@@ -2,6 +2,7 @@
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
+import multer from 'multer';
 import 'express-async-errors';
 import boardRouter from './router/board.js';
 import postRouter from './router/post.js';
@@ -12,11 +13,13 @@ import { db } from './db/database.js';
 
 
 const app = express();
+const upload = multer();
 
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
 app.use(morgan('tiny'));
+app.use(upload.array());
 
 app.use('/board', boardRouter);
 app.use('/post', postRouter);

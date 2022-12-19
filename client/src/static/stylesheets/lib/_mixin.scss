@@ -1,0 +1,53 @@
+@import './variables';
+
+
+@mixin flexRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flexColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin headerMargin {
+    margin-top: $header-height;
+}
+
+@mixin fixedFooter {
+    margin-top: $header-height;
+    min-height: calc(100vh - #{$footer-height} - #{$header-height});
+}
+
+@mixin oneLineDots {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+@mixin modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    @include flexColumn;
+    justify-content: flex-start;
+}
+
+@mixin modalWrap {
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    @include flexColumn;
+    justify-content: flex-start;
+}
