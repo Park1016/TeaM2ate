@@ -1,11 +1,12 @@
 ﻿import axios from 'axios';
 import makeFormData from 'hooks/makeFormData';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import UserApi from 'api/user';
 
 function SignUp(props) {
+    const navigate = useNavigate();
     const [form, setForm] = useState({ name: '', username: '', password: '', email: '', url: ''});
-
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -21,9 +22,7 @@ function SignUp(props) {
 
         const formData = new FormData();
         formData.append('url', form.url);
-        const res = await axios.post('http://localhost:8080/user/photo', formData, { withCredentials: false }, {
-            headers: { 'Content-Type': 'multipart/form-data', 'Accept': 'application/json' },
-        })
+        const res = await new UserApi().photo(formData);
         console.log(res);
     }
 
@@ -38,14 +37,13 @@ function SignUp(props) {
         const username = form.username;
         const password = form.password;
         const email = form.email;
-        const url = form.url || '';
+        const url = form.url;
 
         const formData = makeFormData({name, username, password, email, url});
 
-        const res = await axios.post('http://localhost:8080/user/signup', formData, { withCredentials: false }, {
-            headers: { 'Content-Type': 'multipart/form-data', 'Accept': 'application/json' },
-        })
-        console.log(res);
+        const res = await new UserApi().signup(formData);
+        localStorage.setItem('token', res.token);
+        navigate('/login');
     };
 
     return (

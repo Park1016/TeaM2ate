@@ -1,8 +1,12 @@
-﻿import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+﻿import User from 'api/user';
+import axios from 'axios';
+import makeFormData from 'hooks/makeFormData';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
 
+    const navigate = useNavigate();
     const [form, setForm] = useState({ id: '', pw: '' });
 
     const onChange = (e) => {
@@ -10,9 +14,17 @@ const Login = (props) => {
         setForm({ ...form, [name]: value });
     };
 
-    const onSubmit = (e) => {
+    const onSubmit = async(e) => {
         e.preventDefault();
-        console.log(form);
+
+        const username = form.id;
+        const password = form.pw;
+
+        const formData = makeFormData({username, password});
+
+        const res = await new User().login(formData);
+        localStorage.setItem('token', res.token);
+        navigate('/');
     }
 
     return (

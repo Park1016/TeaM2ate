@@ -16,9 +16,9 @@ export async function getById(id) {
     .then((result) => result[0][0]);
 }
 
-export async function create(cate, username, title, text, userId, lang, type) {
+export async function create(cate, username, title, text, userId, tag, type) {
     return db
-    .execute('INSERT INTO post (title, username, text, createdAt, cate, userId, view, lang, type, progress) VALUES(?,?,?,?,?,?,?,?,?,?)', [
+    .execute('INSERT INTO post (title, username, text, createdAt, cate, userId, view, tag, type, progress) VALUES(?,?,?,?,?,?,?,?,?,?)', [
         title,
         username,
         text,
@@ -26,16 +26,16 @@ export async function create(cate, username, title, text, userId, lang, type) {
         cate,
         userId,
         1,
-        JSON.stringify(lang),
+        JSON.stringify(tag),
         type,
         'ing'
     ])
     .then(async(result) => await getById(result[0].insertId));
 }
 
-export async function update(id, cate, title, text, lang, type, progress) {
+export async function update(id, cate, title, text, tag, type, progress) {
     return db
-    .execute('UPDATE post SET cate=?, title=?, text=?, lang=?, type=?, progress=? WHERE id=?', [cate, title, text, lang, type, progress, id])
+    .execute('UPDATE post SET cate=?, title=?, text=?, tag=?, type=?, progress=? WHERE id=?', [cate, title, text, tag, type, progress, id])
     .then(async() => await getById(id));
 }
 

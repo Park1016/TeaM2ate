@@ -4,14 +4,19 @@ import axios from 'axios';
 
 import Header from 'components/Header/Header';
 import { TestProvider } from 'context/testContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const App = (props) => {
 
   return (
-    <TestProvider>
-      <Header />
-      <Outlet />
-    </TestProvider>
+    <QueryClientProvider client={queryClient}>
+      <TestProvider>
+        <Header />
+        <Outlet />
+      </TestProvider>
+    </QueryClientProvider>
   )
 }
 

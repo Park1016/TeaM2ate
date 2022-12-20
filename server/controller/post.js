@@ -14,15 +14,15 @@ export async function getById(req, res) {
 }
 
 export async function write(req, res) {
-    const {cate, title, text, lang, type} = req.body;
-    const post = await postRepository.create(cate, req.username, title, text, req.userId, lang, type);
+    const {cate, title, text, tag, type} = req.body;
+    const post = await postRepository.create(cate, req.username, title, text, req.userId, tag, type);
     res.status(201).json(post);
     userRepository.addList(req.userId, 'post', post.id);
 }
 
 export async function update(req, res) {
     const id = req.params.id;
-    const {cate, title, text, lang, type, progress} = req.body;
+    const {cate, title, text, tag, type, progress} = req.body;
 
 
     const post = await postRepository.getById(id);
@@ -34,7 +34,7 @@ export async function update(req, res) {
         return res.sendStatus(403);
     }
 
-    const updated = await postRepository.update(id, cate, title, text, lang, type, progress);
+    const updated = await postRepository.update(id, cate, title, text, tag, type, progress);
     res.status(200).json(updated);
 }
 
