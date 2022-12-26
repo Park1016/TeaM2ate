@@ -1,6 +1,6 @@
 ﻿import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FramePost from 'components/FramaPost/FramePost';
+import FramePost from 'components/FramePost/FramePost';
 
 function Post({value}) {
 

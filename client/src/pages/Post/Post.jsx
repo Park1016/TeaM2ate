@@ -4,7 +4,7 @@ import styles from './Post.module.scss';
 import classNames from 'classnames/bind';
 import { useQuery } from '@tanstack/react-query';
 import PostApi from 'api/post';
-import FramePost from 'components/FramaPost/FramePost';
+import FramePost from 'components/FramePost/FramePost';
 import Comment from 'components/Comment/Comment';
 
 const Post = (props) => {

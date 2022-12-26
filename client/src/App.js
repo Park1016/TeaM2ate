@@ -1,21 +1,28 @@
-import React, { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import axios from 'axios';
-
-import Header from 'components/Header/Header';
-import { TestProvider } from 'context/testContext';
+import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Outlet } from 'react-router-dom';
+
+import { TestProvider } from 'context/testContext';
+import { LocalProvider } from 'context/localContext';
+import Header from 'components/Header/Header';
 
 const queryClient = new QueryClient();
 
 const App = (props) => {
 
+  const AppProvider = ({ contexts, children }) => contexts.reduce(
+    (prev, context) => React.createElement(context, {
+      children: prev
+    }), 
+    children
+  );
+
   return (
     <QueryClientProvider client={queryClient}>
-      <TestProvider>
+      <AppProvider contexts={[TestProvider, LocalProvider]}>
         <Header />
         <Outlet />
-      </TestProvider>
+      </AppProvider>
     </QueryClientProvider>
   )
 }
