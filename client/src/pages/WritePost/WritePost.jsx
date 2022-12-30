@@ -9,12 +9,14 @@ import PlusBtn from 'components/Common/PlusBtn/PlusBtn';
 import AddBox from 'components/Common/AddBox/AddBox';
 import ChooseBox from 'components/Common/ChooseBox/ChooseBox';
 import PostApi from 'api/post';
+import { HttpContext } from 'context/httpContext';
 
-const Write = (props) => {
+const WritePost = (props) => {
 
     const navigate = useNavigate();
 
     const { tag, progress } = useContext(LocalContext);
+    const { http } = useContext(HttpContext);
 
     const [form, setForm] = useState({ title: '', text: '', tag: [], type: [], progress: 'ing'});
     const [show, setShow] = useState(false);
@@ -44,14 +46,17 @@ const Write = (props) => {
             return;
         }
 
+        const cate = 'findTeam';
         const title = form.title;
         const text = form.text;
-        const tag = form.tag;
-        const type = form.type;
+        const tag = JSON.stringify(form.tag);
+        const type = JSON.stringify(form.type);
         const progress = form.progress;
-        const formData = makeFormData({title, text, tag, type, progress});
-        
-        await new PostApi().writePost(formData);
+        const formData = makeFormData({cate, title, text, tag, type, progress});
+
+        await new PostApi(http).writePost(formData);
+
+        setForm({ title: '', text: '', tag: [], type: [], progress: 'ing'});
     }
 
 
@@ -97,4 +102,4 @@ const Write = (props) => {
     )
 }
 
-export default Write;
+export default WritePost;

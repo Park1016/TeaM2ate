@@ -1,7 +1,7 @@
 ﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function Find(props) {
+function FindAuth(props) {
     const [email, setEmail] = useState('');
 
     const onChange = (value) => {
@@ -10,7 +10,7 @@ function Find(props) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(email);
+        setEmail('');
     }
 
     return (
@@ -25,4 +25,4 @@ function Find(props) {
     )
 }
 
-export default Find;
+export default FindAuth;

@@ -1,12 +1,17 @@
 ﻿import axios from 'axios';
 import makeFormData from 'hooks/makeFormData';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import UserApi from 'api/user';
+import { AuthContext } from 'context/authContext';
+import { HttpContext } from 'context/httpContext';
 
 function SignUp(props) {
     const navigate = useNavigate();
+    // const { setAuth } = useContext(AuthContext);
     const [form, setForm] = useState({ name: '', username: '', password: '', email: '', url: ''});
+
+    const { http } = useContext(HttpContext);
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -22,7 +27,7 @@ function SignUp(props) {
 
         const formData = new FormData();
         formData.append('url', form.url);
-        const res = await new UserApi().photo(formData);
+        const res = await new UserApi(http).photo(formData);
         console.log(res);
     }
 
@@ -41,8 +46,10 @@ function SignUp(props) {
 
         const formData = makeFormData({name, username, password, email, url});
 
-        const res = await new UserApi().signup(formData);
-        localStorage.setItem('token', res.token);
+        const res = await new UserApi(http).signup(formData);
+        // setAuth(res.token);
+        // localStorage.setItem('token', res.token);
+        setForm({ name: '', username: '', password: '', email: '', url: ''});
         navigate('/login');
     };
 

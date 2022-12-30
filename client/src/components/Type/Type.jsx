@@ -50,10 +50,7 @@ function Type({form, setForm, setShow}) {
         };
     }, [t, n]);
 
-    // useEffect(()=>{
-    //     console.log(totalNum);
-    // }, [totalNum]);
-
+    
     return (
         <>
             {(t && n) &&

@@ -1,26 +1,37 @@
 ﻿import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import multer from 'multer';
 import 'express-async-errors';
+
 import boardRouter from './router/board.js';
 import postRouter from './router/post.js';
 import commentRouter from './router/comment.js';
 import userRouter from './router/user.js';
 import { config } from './config.js';
 import { db } from './db/database.js';
+import { csrfCheck } from './middleware/csrf.js';
 
 
 const app = express();
 const upload = multer();
 
+const corsOption = {
+    origin: config.cors.allowedOrigin,
+    optionsSuccessStatus: 200,
+    credentials: true
+};
+
 app.use(express.json());
+app.use(cookieParser());
 app.use(helmet());
-app.use(cors());
+app.use(cors(corsOption));
 app.use(morgan('tiny'));
 app.use(upload.array());
 
+app.use(csrfCheck);
 app.use('/board', boardRouter);
 app.use('/post', postRouter);
 app.use('/comment', commentRouter);

@@ -1,11 +1,8 @@
 ﻿import axios from 'axios';
 
 export default class BoardApi {
-    constructor() {
-        this.board = axios.create({
-            baseURL: 'http://localhost:8080/board',
-            headers: { 'Content-Type': 'multipart/form-data', 'Accept': 'application/json' }
-        });
+    constructor(http) {
+        this.board = axios.create({...http, baseURL: 'http://localhost:8080/board'});
     }
 
     async getBoard() {
@@ -13,6 +10,7 @@ export default class BoardApi {
             const res = await this.board.get('/');
             return res.data;
         } catch(error) {
+            alert(error.response.data.message);
             console.log(error.response);
         }
     }

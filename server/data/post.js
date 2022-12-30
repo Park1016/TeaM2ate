@@ -26,7 +26,7 @@ export async function create(cate, username, title, text, userId, tag, type) {
         cate,
         userId,
         1,
-        JSON.stringify(tag),
+        tag,
         type,
         'ing'
     ])

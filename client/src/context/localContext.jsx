@@ -1,10 +1,10 @@
-﻿import { createContext } from 'react';
+﻿import { createContext, memo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 export const LocalContext = createContext();
 
-export function LocalProvider({ children }) {
+export const LocalProvider = memo(({ children }) => {
 
     const {data: t} = useQuery(['typeSelect'], async() => {
         const res = await axios.get('/type/type.json');
@@ -31,4 +31,4 @@ export function LocalProvider({ children }) {
             {children}
         </LocalContext.Provider>
     );
-}
+})

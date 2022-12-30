@@ -37,11 +37,16 @@ const validateSignup = [
 
 router.get('/me', isAuth, userController.me);
 
+router.get('/csrf-token', userController.csrfToken);
+
 router.post('/photo', upload.single('url'), (req, res)=>console.log(req.file)); 
 
 router.post('/signup', validateSignup, userController.signup);
 
 router.post('/login', validateLogin, userController.login);
+
+router.post('/logout', userController.logout);
+
 
 router.put(
     '/update/:id', 

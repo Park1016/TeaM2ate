@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 function FramePost({value}) {
@@ -22,9 +22,10 @@ function FramePost({value}) {
                         <p>{createdAt}</p>
                     </div>
                 </div>
+                {tag.length !== 0 &&
                 <div>
                     {tag.map((item, index)=>(<p key={`tag${index}`}>{item}</p>))}
-                </div>
+                </div>}
                 <p>{text}</p>
                 <div>
                     {data.map((item, index)=>(
@@ -33,7 +34,7 @@ function FramePost({value}) {
                             <div>
                                 <p>{item[1].num}</p>
                                 <p>/</p>
-                                <p>{item[1].max}</p>
+                                <p>{item[1].totalNum}</p>
                             </div>
                         </div>
                     ))}

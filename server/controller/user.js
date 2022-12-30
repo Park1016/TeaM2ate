@@ -2,6 +2,7 @@
 import bcrypt from 'bcrypt';
 import * as userRepository from '../data/user.js';
 import { config } from '../config.js';
+// import { v4 } from 'uuid';
 
 export async function me(req, res) {
     const user = await userRepository.getById(req.userId);
@@ -46,8 +47,9 @@ export async function signup(req, res) {
         email,
         url,
     });
-    const token = createJwtToken(userId);
-    res.status(201).json({ token, username });
+    // const accessToken = createAccessJwtToken(userId);
+    // const refreshToken = createRefreshJwtToken(userId);
+    res.status(201).json({ username });
 }
 
 export async function login(req, res) {
@@ -60,10 +62,45 @@ export async function login(req, res) {
     if (!isValidPassword) {
         return res.status(401).json({ message: '잘못된 사용자 또는 비밀번호입니다' });
     }
-    const token = createJwtToken(user.id);
-    res.status(200).json({ token, username });
+    const accessToken = createAccessJwtToken(user.id);
+    const refreshToken = createRefreshJwtToken(user.id);
+    setAccessToken(res, accessToken);
+    setRefreshToken(res, refreshToken);
+    res.status(201).json({ accessToken, refreshToken });
 }
 
-function createJwtToken(id) {
-    return jwt.sign({ id }, config.jwt.secretKey, { expiresIn: config.jwt.expiresInSec });
+export async function logout(req, res) {
+    res.cookie('accessToken', '');
+    res.cookie('refreshToken', '');
+    res.status(200).json({ message: '로그아웃됐습니다' })
+}
+
+export async function csrfToken(req, res) {
+    const csrfToken = await generateCSRFToken();
+    res.status(200).json({ csrfToken });
+}
+
+export function createAccessJwtToken(id) {
+    return jwt.sign({ id }, config.jwt.secretKey, { expiresIn: config.jwt.expiresInSecAccess });
+}
+
+function createRefreshJwtToken(id) {
+    return jwt.sign({ id }, config.jwt.secretKey, { expiresIn: config.jwt.expiresInSecRefresh });
+}
+
+const options = {
+    httpOnly: true,
+    sameSite: 'none',
+    secure: true
+};
+export function setAccessToken(res, accessToken) {
+    res.cookie('accessToken', accessToken, {...options, maxAge: config.jwt.expiresInSecAccess * 1000});
+}
+
+function setRefreshToken(res, refreshToken) {
+    res.cookie('refreshToken', refreshToken,  {...options, maxAge: config.jwt.expiresInSecRefresh * 1000});
+}
+
+function generateCSRFToken() {
+    return bcrypt.hash(config.csrf.plainToken, 1);
 }
