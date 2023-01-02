@@ -7,13 +7,13 @@ import * as userRepository from './user.js';
 export async function getByUsername(username) {
     return db
     .execute('SELECT * FROM comment WHERE username=?', [username]) //
-    .then((result) => result[0][0]);
+    .then((result) => result[0]);
 }
 
 export async function getByPostId(postId) {
     return db
     .execute('SELECT * FROM comment WHERE postId=?', [postId]) //
-    .then((result) => result[0][0]);
+    .then((result) => result[0]);
 }
 
 export async function getById(id) {

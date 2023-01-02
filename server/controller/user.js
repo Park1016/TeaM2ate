@@ -62,11 +62,12 @@ export async function login(req, res) {
     if (!isValidPassword) {
         return res.status(401).json({ message: '잘못된 사용자 또는 비밀번호입니다' });
     }
-    const accessToken = createAccessJwtToken(user.id);
-    const refreshToken = createRefreshJwtToken(user.id);
+    const id = user.id;
+    const accessToken = createAccessJwtToken(id);
+    const refreshToken = createRefreshJwtToken(id);
     setAccessToken(res, accessToken);
     setRefreshToken(res, refreshToken);
-    res.status(201).json({ accessToken, refreshToken });
+    res.status(201).json({ id });
 }
 
 export async function logout(req, res) {

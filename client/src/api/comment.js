@@ -1,15 +1,15 @@
 ﻿import axios from 'axios';
 
 
-export default class PostApi {
+export default class CommentApi {
 
     constructor(http) {
-        this.post = axios.create({...http, baseURL: 'http://localhost:8080/post'});
+        this.comment = axios.create({...http, baseURL: 'http://localhost:8080/comment'});
     }
 
-    async getPostById(id) {
+    async getCommentByPostId(postId) {
         try {
-            const res = await this.post.get(`${id}`);
+            const res = await this.comment.get(`${postId}`);
             return res.data;
         } catch(error) {
             alert(error.response.data.message);
@@ -17,9 +17,9 @@ export default class PostApi {
         }
     }
 
-    async getPostByUsername(username) {
+    async getCommentByUsername(username) {
         try {
-            const res = await this.post.get(`?username=${username}`);
+            const res = await this.comment.get(`?username=${username}`);
             return res.data;
         } catch(error) {
             alert(error.response.data.message);
@@ -27,9 +27,9 @@ export default class PostApi {
         }
     }
 
-    async writePost(formData) {
+    async writeComment(formData) {
         try {
-            const res = await this.post.post('write', formData);
+            const res = await this.comment.post('write', formData);
             return res.data;
         } catch(error) {
             // alert(error.response.data.message);
@@ -39,9 +39,9 @@ export default class PostApi {
         }
     }
 
-    async updatePost(formData, id) {
+    async updateComment(formdata, id) {
         try {
-            const res = await this.post.put(`update/${id}`, formData);
+            const res = await this.comment.put(`update/${id}`, formdata);
             return res.data;
         } catch(error) {
             alert(error.response.data.message);
@@ -49,9 +49,9 @@ export default class PostApi {
         }
     }
 
-    async deletePost(id) {
+    async deleteComment(id) {
         try {
-            const res = await this.post.delete(`delete/${id}`);
+            const res = await this.comment.delete(`delete/${id}`);
             return res.data;
         } catch(error) {
             alert(error.response.data.message);

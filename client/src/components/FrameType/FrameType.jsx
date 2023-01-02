@@ -1,8 +1,7 @@
 ﻿import EditType from 'components/Type/EditType';
 import React, { useEffect, useState } from 'react';
 
-function AddBox({form, setForm, type}) {
-
+function FrameType({ type, form, setForm }) {
     const [data, setData] = useState({show: false, item: null});
 
     const onDelete = (item) => {
@@ -11,29 +10,32 @@ function AddBox({form, setForm, type}) {
     }
 
     const onEdit = (item) => {
+        if(!form) {
+            return;
+        }
         setData({show: true, item});
     }
 
     return (
         <> 
-            <ul>
+            {type.length !== 0 && <ul>
                 {type.map((item, index)=>(
                     <li key={index}>
                         <div onClick={()=>onEdit(item)}>
                             <p>{Object.keys(item)}</p>
                             <div>
-                                <span>{Object.values(item)[0].num}</span>
-                                <span>/</span>
-                                <span>{Object.values(item)[0].totalNum}</span>
+                                <p>{Object.values(item)[0].num}</p>
+                                <p>/</p>
+                                <p>{Object.values(item)[0].totalNum}</p>
                             </div>
                         </div>
-                        <p onClick={()=>onDelete(item)}>삭제</p>
+                        {form && <p onClick={()=>onDelete(item)}>삭제</p>}
                     </li>
                 ))}
-            </ul>
+            </ul>}
             {data.show && <EditType form={form} setForm={setForm} data={data} setData={setData}/>}
         </>
     );
 }
 
-export default AddBox;
+export default FrameType;

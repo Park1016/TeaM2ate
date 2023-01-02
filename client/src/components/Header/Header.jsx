@@ -1,16 +1,19 @@
-﻿import React, { useContext } from 'react';
-import styles from './Header.module.scss';
-import classNames from 'classnames/bind';
+﻿import React from 'react';
+import { useRecoilValue } from 'recoil';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames/bind';
 
-import { HttpContext } from 'context/httpContext';
+import styles from './Header.module.scss';
+
+import { HttpSelector } from 'state/http';
 import UserApi from 'api/user';
 import Search from 'components/Header/Search/Search';
 
 const Header = () => {
 
     const cx = classNames.bind(styles);
-    const { http } = useContext(HttpContext);
+
+    const http = useRecoilValue(HttpSelector);
 
     const onLogout = async() => {
         return await new UserApi(http).logout();

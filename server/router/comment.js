@@ -26,7 +26,7 @@ router.get(
 router.get(
     '/:postId', 
     [
-        param('postId').trim().isLength({ min: 2 }).withMessage('게시판 아이디를 입력해주세요'),
+        param('postId').trim().isLength({ min: 1 }).withMessage('게시판 아이디를 입력해주세요'),
         validate
     ],
     commentController.getByPostId

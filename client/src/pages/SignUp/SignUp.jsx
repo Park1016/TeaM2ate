@@ -1,17 +1,18 @@
-﻿import axios from 'axios';
-import makeFormData from 'hooks/makeFormData';
-import React, { useContext, useState } from 'react';
+﻿import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { HttpSelector } from 'state/http';
 import UserApi from 'api/user';
-import { AuthContext } from 'context/authContext';
-import { HttpContext } from 'context/httpContext';
+import makeFormData from 'hooks/makeFormData';
+
 
 function SignUp(props) {
     const navigate = useNavigate();
-    // const { setAuth } = useContext(AuthContext);
+
     const [form, setForm] = useState({ name: '', username: '', password: '', email: '', url: ''});
 
-    const { http } = useContext(HttpContext);
+    const http = useRecoilValue(HttpSelector);
 
     const onChange = (e) => {
         const { name, value } = e.target;

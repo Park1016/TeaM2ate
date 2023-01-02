@@ -1,16 +1,20 @@
-﻿import React, { useContext, useEffect } from 'react';
-import styles from './Board.module.scss';
-import classNames from 'classnames/bind';
+﻿import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import Filter from './Filter/Filter';
+import { useRecoilValue } from 'recoil';
+import classNames from 'classnames/bind';
+
+import styles from './Board.module.scss';
+
+import { HttpSelector } from 'state/http';
 import BoardApi from 'api/board';
+import Filter from './Filter/Filter';
 import Post from './Post/Post';
-import { HttpContext } from 'context/httpContext';
+
 
 function Board(props) {
 
     const cx = classNames.bind(styles);
-    const http = useContext(HttpContext);
+    const http = useRecoilValue(HttpSelector);
     const {isLoading, error, data} = useQuery(['board'], async()=>{
         return await new BoardApi(http).getBoard();
     });

@@ -1,15 +1,17 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
-import { HttpContext } from 'context/httpContext';
-import makeFormData from 'hooks/makeFormData';
+import { HttpSelector } from 'state/http';
+import { authState } from 'state/auth';
 import UserApi from 'api/user';
+import makeFormData from 'hooks/makeFormData';
 
 const Login = (props) => {
 
     const navigate = useNavigate();
-    const { http } = useContext(HttpContext);
+    const http = useRecoilValue(HttpSelector);
+    const setAuth = useSetRecoilState(authState);
     const [form, setForm] = useState({ id: '', pw: '' });
 
     const onChange = (e) => {
@@ -28,6 +30,7 @@ const Login = (props) => {
         const res = await new UserApi(http).login(formData);
         // localStorage.setItem('token', res.token);
         // setAuth(res.accessToken);
+        setAuth(res.id);
         setForm({ id: '', pw: '' });
         navigate('/');
     }

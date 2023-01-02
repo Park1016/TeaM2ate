@@ -1,8 +1,10 @@
-﻿import React, { useContext, useEffect, useState } from 'react';
-import { LocalContext } from 'context/localContext';
+﻿import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import classNames from 'classnames/bind';
 
 import styles from './Type.module.scss';
-import classNames from 'classnames/bind';
+
+import { numSelector, typeSelector } from 'state/local';
 import SelectBox from 'components/Common/SelectBox/SelectBox';
 
 
@@ -10,7 +12,8 @@ function EditType({form, setForm, data, setData}) {
 
     const cx = classNames.bind(styles);
 
-    const {t, n} = useContext(LocalContext);
+    const t = useRecoilValue(typeSelector);
+    const n = useRecoilValue(numSelector);
 
     const [type, setType] = useState(Object.keys(data.item));
     const [num, setNum] = useState(Object.values(data.item)[0].num);
