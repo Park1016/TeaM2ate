@@ -1,17 +1,16 @@
-﻿import React from 'react';
-import styles from './Main.module.scss';
-import classNames from 'classnames/bind';
-import Board from 'components/Board/Board';
-
+﻿import React from "react";
+import styles from "./Main.module.scss";
+import classNames from "classnames/bind";
+import Board from "containers/Board/Board";
 
 const Main = (props) => {
-    const cx = classNames.bind(styles);
+  const cx = classNames.bind(styles);
 
-    return (
-        <section>
-            <Board />
-        </section>
-    )
-}
+  return (
+    <section>
+      <Board />
+    </section>
+  );
+};
 
 export default Main;

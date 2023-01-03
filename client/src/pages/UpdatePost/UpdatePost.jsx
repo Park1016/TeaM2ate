@@ -1,41 +1,44 @@
-﻿import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+﻿import React, { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
-import PostApi from 'api/post';
+import PostApi from "api/post";
 
-import { useRecoilValue } from 'recoil';
-import { HttpSelector } from 'state/http';
-import FrameWrite from 'components/FrameWrite/FrameWrite';
-import { useQuery } from '@tanstack/react-query';
+import { httpSelector } from "state/http";
+import { authState } from "state/auth";
+import FrameWrite from "containers/FrameWrite/FrameWrite";
 
 const UpdatePost = (props) => {
+  const { id } = useParams();
+  const http = useRecoilValue(httpSelector);
+  const auth = useRecoilValue(authState);
+  const navigate = useNavigate();
+  const { data } = useQuery(["post", id], async () => {
+    return await new PostApi(http).getPostById(id);
+  });
 
-    const { id } = useParams();
-    const http = useRecoilValue(HttpSelector);
-    const { data } = useQuery(['post', id], async()=>{
-        return await new PostApi(http).getPostById(id);
-    });
-    
-    const [form, setForm] = useState();
+  const [form, setForm] = useState();
 
-    useEffect(()=>{
-        if(data) {
-            setForm({
-                title: data.title,
-                text: data.text,
-                tag: data.tag,
-                type: data.type,
-                progress: data.progress
-            })
-        }
-    }, [data]);
+  useEffect(() => {
+    if (data) {
+      if (auth !== data.userId) {
+        alert("글 수정,삭제는 작성자 본인만 할 수 있습니다");
+        navigate("/");
+      }
+      setForm({
+        title: data.title,
+        text: data.text,
+        tag: data.tag,
+        type: data.type,
+        progress: data.progress,
+      });
+    }
+  }, [data]);
 
-
-    return (
-        <>
-            {form && <FrameWrite form={form} setForm={setForm} editId={id} />}
-        </>
-    )
-}
+  return (
+    <>{form && <FrameWrite form={form} setForm={setForm} editId={id} />}</>
+  );
+};
 
 export default UpdatePost;

@@ -1,28 +1,33 @@
-﻿import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+﻿import Input from "components/Input/Input";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function FindAuth(props) {
-    const [email, setEmail] = useState('');
+  const [form, setForm] = useState({ email: "" });
 
-    const onChange = (value) => {
-        setEmail(value);
-    };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+    setForm("");
+  };
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        setEmail('');
-    }
-
-    return (
-        <section>
-            <form onSubmit={(e)=>onSubmit(e)}>
-                <label htmlFor="email">이메일</label>
-                <input type="email" name="email" id="email" value={email} onChange={(e)=>onChange(e.target.value)} />
-                <button type="submit">계정찾기</button>
-            </form>
-            <Link to={'/login'}>취소</Link>
-        </section>
-    )
+  return (
+    <section>
+      <form onSubmit={(e) => onSubmit(e)}>
+        <label htmlFor="email">이메일</label>
+        <Input
+          type={"email"}
+          name={"email"}
+          id={"email"}
+          value={form.email}
+          form={form}
+          setForm={setForm}
+        />
+        <button type="submit">계정찾기</button>
+      </form>
+      <Link to={"/login"}>취소</Link>
+    </section>
+  );
 }
 
 export default FindAuth;
