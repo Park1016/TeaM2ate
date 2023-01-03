@@ -14,7 +14,7 @@ export default class UserApi {
       return res.data;
     } catch (error) {
       // alert(error.response.data.message);
-      console.log(error.response.data.message);
+      alert(error.response.data.message);
     }
   }
 
@@ -49,6 +49,24 @@ export default class UserApi {
     }
   }
 
+  async checkPw(params) {
+    try {
+      const res = await this.user.post("checkPw", params);
+      return res;
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  }
+
+  async updatePw(params) {
+    try {
+      const res = await this.user.post("updatePw", params);
+      return res;
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  }
+
   async photo(params) {
     try {
       const res = await this.user.post("photo", params);
@@ -62,7 +80,7 @@ export default class UserApi {
   async update(id, params) {
     try {
       const res = await this.user.put(`update/${id}`, params);
-      console.log(res);
+      return res.data;
     } catch (error) {
       alert(error.response.data.message);
       // console.log(error.response);

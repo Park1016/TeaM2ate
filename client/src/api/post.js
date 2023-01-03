@@ -14,7 +14,7 @@ export default class PostApi {
       return res.data;
     } catch (error) {
       alert(error.response.data.message);
-      console.log(error.response);
+      return false;
     }
   }
 
@@ -33,10 +33,8 @@ export default class PostApi {
       const res = await this.post.post("write", formData);
       return res.data;
     } catch (error) {
-      // alert(error.response.data.message);
-      console.log(error.response.data.message);
-      // if(error.response.data.message === 'Invalid Token Error') {
-      // }
+      alert(error.response.data.message);
+      console.log(error.response);
     }
   }
 

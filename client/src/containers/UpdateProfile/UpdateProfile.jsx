@@ -1,14 +1,36 @@
+import UserApi from "api/user";
 import Input from "components/Input/Input";
+import Textarea from "components/Textarea/Textarea";
+import { makeFormData } from "hooks/makeFormData";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const UpdateProfile = ({ user }) => {
-  const { url, username, introduce } = user;
-  const [form, setForm] = useState({ url, username, introduce });
+const UpdateProfile = ({ http, user }) => {
+  const { id, url, username, introduce, alert } = user;
+  const [form, setForm] = useState({ url, username, introduce, alert });
   const navigate = useNavigate();
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const url = form.url;
+    const username = form.username;
+    const introduce = form.introduce;
+    const alert = JSON.stringify(form.alert);
+
+    const formData = makeFormData({ url, username, introduce, alert });
+
+    try {
+      const res = await new UserApi(http).update(id, formData);
+      if (res) {
+        window.alert("수정이 완료되었습니다");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={(e) => onSubmit(e)}>
       <ul>
         <li>
           <p>프로필 사진</p>
@@ -27,8 +49,7 @@ const UpdateProfile = ({ user }) => {
         </li>
         <li>
           <label htmlFor="introduce">자기소개</label>
-          <Input
-            type={"text"}
+          <Textarea
             name={"introduce"}
             id={"introduce"}
             value={form.introduce}

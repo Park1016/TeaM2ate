@@ -12,6 +12,7 @@ import Search from "components/SelectTag/SelectTag";
 import PlusBtn from "components/PlusBtn/PlusBtn";
 import ChooseBox from "components/ChooseBox/ChooseBox";
 import Input from "components/Input/Input";
+import Textarea from "components/Textarea/Textarea";
 
 const FrameWrite = ({ form, setForm, editId }) => {
   const navigate = useNavigate();
@@ -73,8 +74,7 @@ const FrameWrite = ({ form, setForm, editId }) => {
           setForm={setForm}
         />
         <label htmlFor="text">내용</label>
-        <Input
-          type={"text"}
+        <Textarea
           name={"text"}
           id={"text"}
           value={form.text}

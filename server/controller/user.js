@@ -14,12 +14,12 @@ export async function me(req, res) {
 
 export async function update(req, res) {
   const id = req.params.id;
-  const { username, password, url } = req.body;
-  const user = await userRepository.update(id, username, password, url);
+  const { username, url, introduce, alert } = req.body;
+  const user = await userRepository.update(id, username, url, introduce, alert);
   if (user) {
     res.status(200).json(user);
   } else {
-    res.status(404).json({ message: `User id(${id} not found)` });
+    res.status(404).json({ message: `수정에 실패했습니다` });
   }
 }
 
@@ -47,8 +47,6 @@ export async function signup(req, res) {
     email,
     url,
   });
-  // const accessToken = createAccessJwtToken(userId);
-  // const refreshToken = createRefreshJwtToken(userId);
   res.status(201).json({ username });
 }
 
@@ -89,6 +87,29 @@ export function createAccessJwtToken(id) {
   return jwt.sign({ id }, config.jwt.secretKey, {
     expiresIn: config.jwt.expiresInSecAccess,
   });
+}
+
+export async function updatePw(req, res) {
+  const { id, password } = req.body;
+  const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
+  const response = await userRepository.updatePw(id, hashed);
+  if (response) {
+    res.status(200).json(response);
+  } else {
+    res.status(401).json({ message: "비밀번호 변경에 실패했습니다" });
+  }
+}
+
+export async function checkPw(req, res) {
+  const { id, pw } = req.body;
+  const user = await userRepository.getById(id);
+  const isValidPassword = await bcrypt.compare(pw, user.password);
+
+  if (isValidPassword) {
+    return res.status(200).json(isValidPassword);
+  } else {
+    return res.status(401).json({ message: "잘못된 비밀번호입니다" });
+  }
 }
 
 function createRefreshJwtToken(id) {

@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       { path: "find", element: <FindAuth /> },
       { path: "post/:id", element: <Post /> },
       { path: "mypage", element: <Mypage /> },
-      { path: "setting", element: <Setting /> },
+      { path: "settings", element: <Setting /> },
       { path: "post/write", element: <WritePost /> },
       { path: "post/update/:id", element: <UpdatePost /> },
     ],

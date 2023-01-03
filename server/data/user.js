@@ -18,7 +18,7 @@ export async function signUp(user) {
   const { username, password, name, email, url } = user;
   return db
     .execute(
-      "INSERT INTO user (username, password, name, email, url, type, introduce, bookmark, post, comment, follower, following, report, alert, send_offer, get_offer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO user (username, password, name, email, url, type, introduce, tag, bookmark, post, comment, follower, following, report, alert, send_offer, get_offer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         username,
         password,
@@ -27,6 +27,7 @@ export async function signUp(user) {
         url,
         "gen",
         "",
+        JSON.stringify([]),
         JSON.stringify([]),
         JSON.stringify([]),
         JSON.stringify([]),
@@ -50,12 +51,18 @@ export async function addList(userId, column, value) {
     .then(async () => await getById(userId));
 }
 
-export async function update(id, username, password, url, introduce, alert) {
+export async function update(id, username, url, introduce, alert) {
   return db
     .execute(
-      `UPDATE user SET username=?, password=?, url=?, introduce=? alert=?, WHERE id=?`,
-      [username, password, url, introduce, alert, id]
+      `UPDATE user SET username=?, url=?, introduce=?, alert=? WHERE id=?`,
+      [username, url, introduce, alert, id]
     )
+    .then(async () => await getById(id));
+}
+
+export async function updatePw(id, password) {
+  return db
+    .execute(`UPDATE user SET password=? WHERE id=?`, [password, id])
     .then(async () => await getById(id));
 }
 

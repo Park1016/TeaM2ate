@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
+import { httpSelector } from "state/http";
 import UserApi from "api/user";
 import PostApi from "api/post";
 import CommentApi from "api/comment";
+import { useRecoilValue } from "recoil";
 
-const MypageContent = ({ http }) => {
+const MypageContent = (props) => {
+  const http = useRecoilValue(httpSelector);
   const navigate = useNavigate();
   const [data, setData] = useState();
 
@@ -20,12 +23,18 @@ const MypageContent = ({ http }) => {
     return await new CommentApi(http).getCommentByUsername(user.username);
   });
 
+  useEffect(() => {
+    if (post) {
+      setData(post);
+    }
+  }, []);
+
   return (
     <>
       {user && (
         <section>
           <article>
-            <p onClick={() => navigate("/setting")}>톱니바퀴</p>
+            <p onClick={() => navigate("/settings")}>톱니바퀴</p>
             <div>{user.url}</div>
             <ul>
               <li>{user.username}</li>
