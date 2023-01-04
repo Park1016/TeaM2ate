@@ -48,6 +48,16 @@ export default class PostApi {
     }
   }
 
+  async addList(formData, id) {
+    try {
+      const res = await this.post.put(`addList/${id}`, formData);
+      return res.data;
+    } catch (error) {
+      alert(error.response.data.message);
+      console.log(error.response);
+    }
+  }
+
   async deletePost(id) {
     try {
       const res = await this.post.delete(`delete/${id}`);

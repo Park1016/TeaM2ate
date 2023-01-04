@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 import Select from "react-select";
 
-function SelectTag({ data, form, setForm }) {
+const SelectTag = ({ data, form, setForm }) => {
   const [defaultvalue, setDefaultValue] = useState(null);
   const onChange = (e) => {
     setForm({ ...form, tag: e.map((item) => item.value) });
@@ -25,6 +25,6 @@ function SelectTag({ data, form, setForm }) {
       )}
     </div>
   );
-}
+};
 
 export default SelectTag;

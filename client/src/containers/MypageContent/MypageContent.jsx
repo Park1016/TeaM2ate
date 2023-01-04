@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
@@ -6,10 +7,10 @@ import { httpSelector } from "state/http";
 import UserApi from "api/user";
 import PostApi from "api/post";
 import CommentApi from "api/comment";
-import { useRecoilValue } from "recoil";
 
 const MypageContent = (props) => {
   const http = useRecoilValue(httpSelector);
+
   const navigate = useNavigate();
   const [data, setData] = useState();
 
@@ -21,6 +22,9 @@ const MypageContent = (props) => {
   });
   const { data: comment } = useQuery(["mypageComment"], async () => {
     return await new CommentApi(http).getCommentByUsername(user.username);
+  });
+  const { data: bookmark } = useQuery(["mypageBookmark"], async () => {
+    return await new UserApi(http).getPostByBookmark(user.bookmark);
   });
 
   useEffect(() => {
@@ -44,7 +48,7 @@ const MypageContent = (props) => {
           <ul>
             <li onClick={() => setData(post)}>내가 쓴 글</li>
             <li onClick={() => setData(comment)}>내가 쓴 댓글</li>
-            {/* <li onClick={() => setData(bookmark)}>찜</li> */}
+            <li onClick={() => setData(bookmark)}>찜</li>
           </ul>
           {data && (
             <ul>

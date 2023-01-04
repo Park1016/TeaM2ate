@@ -1,17 +1,12 @@
 ﻿import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
 import classNames from "classnames/bind";
 
 import styles from "./Type.module.scss";
 
-import { numSelector, typeSelector } from "state/local";
 import SelectBox from "components/SelectBox/SelectBox";
 
-function Type({ form, setForm, setShow }) {
+const Type = ({ form, setForm, setShow, t, n }) => {
   const cx = classNames.bind(styles);
-
-  const t = useRecoilValue(typeSelector);
-  const n = useRecoilValue(numSelector);
 
   const [type, setType] = useState(null);
   const [num, setNum] = useState(null);
@@ -70,11 +65,18 @@ function Type({ form, setForm, setShow }) {
               data={setNum}
             />
           </li>
-          <li onClick={onFinish}>완료</li>
+          <li>
+            <button type="button" onClick={() => setShow(false)}>
+              취소
+            </button>
+            <button type="button" onClick={onFinish}>
+              완료
+            </button>
+          </li>
         </ul>
       )}
     </>
   );
-}
+};
 
-export default Type;
+export default React.memo(Type);

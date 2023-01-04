@@ -57,6 +57,18 @@ export async function update(req, res) {
   return res.status(200).json(updated);
 }
 
+export async function addList(req, res) {
+  const id = req.params.id;
+  const { column } = req.body;
+
+  const post = await postRepository.addList(id, column);
+  if (post) {
+    return res.status(200).json(post);
+  } else {
+    return res.status(404).json({ message: "요청 실패" });
+  }
+}
+
 export async function remove(req, res) {
   const id = req.params.id;
 

@@ -2,13 +2,18 @@
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 
-import { progressState, tagSelector } from "state/local";
+import {
+  progressState,
+  tagSelector,
+  numSelector,
+  typeSelector,
+} from "state/local";
 import { httpSelector } from "state/http";
 import PostApi from "api/post";
 import { makeFormData } from "hooks/makeFormData";
 import FrameType from "containers/FrameType/FrameType";
 import Type from "containers/Type/Type";
-import Search from "components/SelectTag/SelectTag";
+import SelectTag from "components/SelectTag/SelectTag";
 import PlusBtn from "components/PlusBtn/PlusBtn";
 import ChooseBox from "components/ChooseBox/ChooseBox";
 import Input from "components/Input/Input";
@@ -17,6 +22,8 @@ import Textarea from "components/Textarea/Textarea";
 const FrameWrite = ({ form, setForm, editId }) => {
   const navigate = useNavigate();
 
+  const t = useRecoilValue(typeSelector);
+  const n = useRecoilValue(numSelector);
   const tag = useRecoilValue(tagSelector);
   const progress = useRecoilValue(progressState);
   const http = useRecoilValue(httpSelector);
@@ -83,12 +90,14 @@ const FrameWrite = ({ form, setForm, editId }) => {
         />
         <article>
           <p>태그</p>
-          <Search data={tag} form={form} setForm={setForm} />
+          <SelectTag data={tag} form={form} setForm={setForm} />
         </article>
         <article>
           <p>유형</p>
           <PlusBtn setShow={setShow} />
-          {show && <Type form={form} setForm={setForm} setShow={setShow} />}
+          {show && (
+            <Type form={form} setForm={setForm} setShow={setShow} t={t} n={n} />
+          )}
           {form.type.length !== 0 && (
             <FrameType type={form.type} form={form} setForm={setForm} />
           )}
@@ -105,4 +114,4 @@ const FrameWrite = ({ form, setForm, editId }) => {
   );
 };
 
-export default FrameWrite;
+export default React.memo(FrameWrite);

@@ -45,17 +45,21 @@ export async function signUp(user) {
 export async function addList(userId, column, value) {
   const user = await getById(userId);
   const arr =
-    column === "post" ? [value, ...user.post] : [value, ...user.comment];
+    column === "post"
+      ? [value, ...user.post]
+      : column === "comment"
+      ? [value, ...user.comment]
+      : [value, ...user.bookmark];
   return db
     .execute(`UPDATE user SET ${column}=? WHERE id=?`, [arr, userId])
     .then(async () => await getById(userId));
 }
 
-export async function update(id, username, url, introduce, alert) {
+export async function update(id, username, url, introduce, alert, tag) {
   return db
     .execute(
-      `UPDATE user SET username=?, url=?, introduce=?, alert=? WHERE id=?`,
-      [username, url, introduce, alert, id]
+      `UPDATE user SET username=?, url=?, introduce=?, alert=?, tag=? WHERE id=?`,
+      [username, url, introduce, alert, tag, id]
     )
     .then(async () => await getById(id));
 }
@@ -75,8 +79,19 @@ export async function removeList(userId, column, value) {
   const arr =
     column === "post"
       ? user.post.filter((x) => x !== value)
-      : user.comment.filter((x) => x !== value);
+      : column === "comment"
+      ? user.comment.filter((x) => x !== value)
+      : user.bookmark.filter((x) => x !== value);
   return db
     .execute(`UPDATE user SET ${column}=? WHERE id=?`, [arr, userId])
     .then(async () => await getById(userId));
+}
+
+export async function getPostByBookmark(value) {
+  const sql = "SELECT * FROM post WHERE id IN(?)";
+  const res = await db.query(sql, [value], (err, result) => {
+    if (err) throw err;
+    result;
+  });
+  return res[0];
 }

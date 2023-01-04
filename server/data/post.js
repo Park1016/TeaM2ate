@@ -18,10 +18,30 @@ export async function getById(id) {
 export async function create(cate, username, title, text, userId, tag, type) {
   return db
     .execute(
-      "INSERT INTO post (title, username, text, createdAt, cate, userId, view, tag, type, progress) VALUES(?,?,?,?,?,?,?,?,?,?)",
-      [title, username, text, new Date(), cate, userId, 1, tag, type, "ing"]
+      "INSERT INTO post (title, username, text, createdAt, cate, userId, view, tag, type, progress, report) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+      [
+        title,
+        username,
+        text,
+        new Date(),
+        cate,
+        userId,
+        1,
+        tag,
+        type,
+        "ing",
+        JSON.stringify([]),
+      ]
     )
     .then(async (result) => await getById(result[0].insertId));
+}
+
+export async function addList(id, column, value) {
+  const post = await getById(id);
+  const arr = column === "report" && [value, ...post.report];
+  return db
+    .execute(`UPDATE post SET ${column}=? WHERE id=?`, [arr, id])
+    .then(async () => await getById(id));
 }
 
 export async function update(id, cate, title, text, tag, type, progress) {

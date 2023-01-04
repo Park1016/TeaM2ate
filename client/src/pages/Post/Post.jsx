@@ -12,6 +12,8 @@ import PostApi from "api/post";
 import FramePost from "containers/FramePost/FramePost";
 import Comment from "containers/Comment/Comment";
 import UpdateDelBtn from "components/UpdateDelBtn/UpdateDelBtn";
+import Bookmark from "components/Bookmark/Bookmark";
+import UserApi from "api/user";
 
 const Post = (props) => {
   const cx = classNames.bind(styles);
@@ -19,24 +21,26 @@ const Post = (props) => {
   const { id } = useParams();
   const http = useRecoilValue(httpSelector);
   const auth = useRecoilValue(authState);
-  const { isLoading, error, data } = useQuery(["post", id], async () => {
+  const { data: post } = useQuery(["post", id], async () => {
     return await new PostApi(http).getPostById(id);
+  });
+  const { data: user } = useQuery(["postUser", id], async () => {
+    return await new UserApi(http).me();
   });
 
   useEffect(() => {
-    if (!data) {
+    if (!post) {
       navigate("/");
     }
-  }, [data]);
+  }, [post]);
 
   return (
     <>
-      {isLoading && <p>Loading...</p>}
-      {error && <p>error!</p>}
-      {data && (
+      {post && (
         <>
-          {data.userId === auth && <UpdateDelBtn type={"post"} id={id} />}
-          <FramePost value={data} />
+          {post.userId === auth && <UpdateDelBtn type={"post"} id={id} />}
+          <Bookmark id={id} http={http} user={user} />
+          <FramePost value={post} />
           <Comment id={id} />
         </>
       )}

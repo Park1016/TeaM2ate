@@ -40,17 +40,23 @@ router.get("/csrf-token", userController.csrfToken);
 
 router.post("/checkPw", isAuth, userController.checkPw);
 
-router.post("/updatePw", isAuth, userController.updatePw);
+router.put("/updatePw", isAuth, userController.updatePw);
 
 router.post("/photo", upload.single("url"), (req, res) =>
   console.log(req.file)
 );
+
+router.put("/addList", isAuth, userController.addList);
+
+router.put("/removeList", isAuth, userController.removeList);
 
 router.post("/signup", validateSignup, userController.signup);
 
 router.post("/login", validateLogin, userController.login);
 
 router.post("/logout", userController.logout);
+
+router.put("/getPostByBookmark", isAuth, userController.getPostByBookmark);
 
 router.put(
   "/update/:id",

@@ -1,13 +1,18 @@
-import UserApi from "api/user";
-import Input from "components/Input/Input";
-import Textarea from "components/Textarea/Textarea";
-import { makeFormData } from "hooks/makeFormData";
 import React, { useState } from "react";
+import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 
+import { tagSelector } from "state/local";
+import UserApi from "api/user";
+import { makeFormData } from "hooks/makeFormData";
+import Input from "components/Input/Input";
+import Textarea from "components/Textarea/Textarea";
+import SelectTag from "components/SelectTag/SelectTag";
+
 const UpdateProfile = ({ http, user }) => {
-  const { id, url, username, introduce, alert } = user;
-  const [form, setForm] = useState({ url, username, introduce, alert });
+  const _tag = useRecoilValue(tagSelector);
+  const { id, url, username, introduce, alert, tag } = user;
+  const [form, setForm] = useState({ url, username, introduce, alert, tag });
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
@@ -16,8 +21,9 @@ const UpdateProfile = ({ http, user }) => {
     const username = form.username;
     const introduce = form.introduce;
     const alert = JSON.stringify(form.alert);
+    const tag = JSON.stringify(form.tag);
 
-    const formData = makeFormData({ url, username, introduce, alert });
+    const formData = makeFormData({ url, username, introduce, alert, tag });
 
     try {
       const res = await new UserApi(http).update(id, formData);
@@ -58,6 +64,7 @@ const UpdateProfile = ({ http, user }) => {
           />
         </li>
       </ul>
+      <SelectTag data={_tag} form={form} setForm={setForm} />
       <button type="button" onClick={() => navigate("/mypage")}>
         취소
       </button>

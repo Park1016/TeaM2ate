@@ -14,12 +14,43 @@ export async function me(req, res) {
 
 export async function update(req, res) {
   const id = req.params.id;
-  const { username, url, introduce, alert } = req.body;
-  const user = await userRepository.update(id, username, url, introduce, alert);
+  const { username, url, introduce, alert, tag } = req.body;
+  const user = await userRepository.update(
+    id,
+    username,
+    url,
+    introduce,
+    alert,
+    tag
+  );
   if (user) {
     res.status(200).json(user);
   } else {
     res.status(404).json({ message: `수정에 실패했습니다` });
+  }
+}
+
+export async function addList(req, res) {
+  const { column, id } = req.body;
+  const data = await userRepository.addList(req.userId, column, parseInt(id));
+  if (data) {
+    res.status(200).json(data);
+  } else {
+    res.status(404).json({ message: `요청 반영 실패` });
+  }
+}
+
+export async function removeList(req, res) {
+  const { column, id } = req.body;
+  const data = await userRepository.removeList(
+    req.userId,
+    column,
+    parseInt(id)
+  );
+  if (data) {
+    res.status(200).json(data);
+  } else {
+    res.status(404).json({ message: `요청 반영 실패` });
   }
 }
 
@@ -109,6 +140,16 @@ export async function checkPw(req, res) {
     return res.status(200).json(isValidPassword);
   } else {
     return res.status(401).json({ message: "잘못된 비밀번호입니다" });
+  }
+}
+
+export async function getPostByBookmark(req, res) {
+  const { bookmark } = req.body;
+  const data = await userRepository.getPostByBookmark(bookmark);
+  if (data) {
+    return res.status(200).json(data);
+  } else {
+    return res.status(401).json({ message: "요청 실패" });
   }
 }
 
