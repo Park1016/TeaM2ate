@@ -108,15 +108,13 @@ export default class UserApi {
     }
   }
 
-  async getPostByBookmark(params) {
-    const bookmark = params;
-    const formData = makeFormData({ bookmark });
+  async getPostByBookmark(username) {
     try {
-      const res = await this.user.put("getPostByBookmark", formData);
+      const res = await this.user.get(`post/${username}`);
       return res.data;
     } catch (error) {
       alert(error.response.data.message);
-      // console.log(error.response);
+      console.log(error.response);
     }
   }
 

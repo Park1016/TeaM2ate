@@ -21,10 +21,10 @@ const MypageContent = (props) => {
     return await new PostApi(http).getPostByUsername(user.username);
   });
   const { data: comment } = useQuery(["mypageComment"], async () => {
-    return await new CommentApi(http).getCommentByUsername(user.username);
+    return await new CommentApi(http).getPostByComment(user.username);
   });
   const { data: bookmark } = useQuery(["mypageBookmark"], async () => {
-    return await new UserApi(http).getPostByBookmark(user.bookmark);
+    return await new UserApi(http).getPostByBookmark(user.username);
   });
 
   useEffect(() => {

@@ -63,7 +63,7 @@ export async function remove(req, res) {
 export async function signup(req, res) {
   const { name, username, password, email, url } = req.body;
   // 사용자가 기존에 이미 있는지 없는지 확인
-  const found = await userRepository.findByUsername(username);
+  const found = await userRepository.getByUsername(username);
   // 이미 있는 username이면 return
   if (found) {
     return res.status(409).json({ message: `${username} already exists` });
@@ -83,7 +83,7 @@ export async function signup(req, res) {
 
 export async function login(req, res) {
   const { username, password } = req.body;
-  const user = await userRepository.findByUsername(username);
+  const user = await userRepository.getByUsername(username);
   if (!user) {
     return res
       .status(401)
@@ -144,13 +144,9 @@ export async function checkPw(req, res) {
 }
 
 export async function getPostByBookmark(req, res) {
-  const { bookmark } = req.body;
-  const data = await userRepository.getPostByBookmark(bookmark);
-  if (data) {
-    return res.status(200).json(data);
-  } else {
-    return res.status(401).json({ message: "요청 실패" });
-  }
+  const username = req.params.username;
+  const data = await userRepository.getPostByBookmark(username);
+  res.status(200).json(data);
 }
 
 function createRefreshJwtToken(id) {

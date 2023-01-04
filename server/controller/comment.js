@@ -3,6 +3,11 @@ import * as userRepository from "../data/user.js";
 
 export async function getByUsername(req, res) {
   const username = req.query.username;
+  res.status(200).json(username);
+}
+
+export async function getPostByComment(req, res) {
+  const username = req.params.username;
   const data = await commentRepository.getPostByComment(username);
   res.status(200).json(data);
 }

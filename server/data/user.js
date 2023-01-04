@@ -8,7 +8,7 @@ export async function getById(id) {
     .then((result) => result[0][0]);
 }
 
-export async function findByUsername(username) {
+export async function getByUsername(username) {
   return db
     .execute("SELECT * FROM user WHERE username=?", [username]) //
     .then((result) => result[0][0]);
@@ -87,9 +87,12 @@ export async function removeList(userId, column, value) {
     .then(async () => await getById(userId));
 }
 
-export async function getPostByBookmark(value) {
+export async function getPostByBookmark(username) {
+  const user = await getByUsername(username);
+  const bookmark = user.bookmark;
+
   const sql = "SELECT * FROM post WHERE id IN(?)";
-  const res = await db.query(sql, [value], (err, result) => {
+  const res = await db.query(sql, [bookmark], (err, result) => {
     if (err) throw err;
     result;
   });

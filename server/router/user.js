@@ -56,7 +56,7 @@ router.post("/login", validateLogin, userController.login);
 
 router.post("/logout", userController.logout);
 
-router.put("/getPostByBookmark", isAuth, userController.getPostByBookmark);
+router.get("/post/:username", [isAuth], userController.getPostByBookmark);
 
 router.put(
   "/update/:id",

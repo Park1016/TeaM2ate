@@ -28,6 +28,16 @@ export default class CommentApi {
     }
   }
 
+  async getPostByComment(username) {
+    try {
+      const res = await this.comment.get(`post/${username}`);
+      return res.data;
+    } catch (error) {
+      alert(error.response.data.message);
+      console.log(error.response);
+    }
+  }
+
   async writeComment(formData) {
     try {
       const res = await this.comment.post("write", formData);
