@@ -7,7 +7,7 @@ const Main = (props) => {
   const cx = classNames.bind(styles);
 
   return (
-    <section>
+    <section className={cx("container")}>
       <Board />
     </section>
   );

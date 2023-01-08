@@ -16,11 +16,14 @@ export async function getByPostId(postId) {
 }
 
 export async function getPostByComment(username) {
-  const user = await userRepository.getByUsername(username);
-  const comment = user.comment;
+  const comment = await getByUsername(username);
+  if (comment.length === 0) {
+    return false;
+  }
+  const postId = comment.map((x) => x.postId);
 
   const sql = "SELECT * FROM post WHERE id IN(?)";
-  const res = await db.query(sql, [comment], (err, result) => {
+  const res = await db.query(sql, [postId], (err, result) => {
     if (err) throw err;
     result;
   });

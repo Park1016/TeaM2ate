@@ -10,11 +10,14 @@ import Input from "components/Input/Input";
 const SignUpForm = (props) => {
   const navigate = useNavigate();
 
+  const [checkAuthNum, setCheckAuthNum] = useState(false);
+
   const [form, setForm] = useState({
     name: "",
     username: "",
     password: "",
     email: "",
+    authNum: "",
     url: "",
   });
 
@@ -31,6 +34,31 @@ const SignUpForm = (props) => {
     const res = await new UserApi(http).photo(formData);
     console.log(res);
   };
+
+  const onAuthNum = async () => {
+    const email = form.email;
+    const authNum = form.authNum;
+    const formData = makeFormData({ email, authNum });
+    const res = await new UserApi(http).checkAuthNum(formData);
+    if (res) {
+      alert("인증이 완료되었습니다");
+
+      // 회원가입
+      try {
+        const res = await new UserApi(http).signup(formData);
+        if (res) {
+          alert("회원가입이 완료되었습니다");
+          setForm({ name: "", username: "", password: "", email: "", url: "" });
+          navigate("/login");
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    } else {
+      setForm({ ...form, authNum: "" });
+    }
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -47,12 +75,12 @@ const SignUpForm = (props) => {
     const formData = makeFormData({ name, username, password, email, url });
 
     try {
-      await new UserApi(http).signup(formData);
-      alert("회원가입이 완료되었습니다");
-      setForm({ name: "", username: "", password: "", email: "", url: "" });
-      navigate("/login");
-    } catch (err) {
-      console.warn(err);
+      const res = await new UserApi(http).certEmail(formData);
+      if (res) {
+        setCheckAuthNum(true);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -91,13 +119,30 @@ const SignUpForm = (props) => {
       />
       <label htmlFor="email">이메일</label>
       <Input
-        type={"text"}
+        type={"email"}
         name={"email"}
         id={"email"}
         value={form.email}
         form={form}
         setForm={setForm}
+        readOnly={checkAuthNum && true}
       />
+      {checkAuthNum && (
+        <>
+          <label htmlFor="authNum">인증번호</label>
+          <Input
+            type={"text"}
+            name={"authNum"}
+            id={"authNum"}
+            value={form.authNum}
+            form={form}
+            setForm={setForm}
+          />
+          <button type="button" onClick={onAuthNum}>
+            인증확인
+          </button>
+        </>
+      )}
       <label htmlFor="url">프로필 사진</label>
       <input
         type="file"

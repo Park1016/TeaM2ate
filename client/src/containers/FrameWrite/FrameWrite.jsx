@@ -18,6 +18,7 @@ import PlusBtn from "components/PlusBtn/PlusBtn";
 import ChooseBox from "components/ChooseBox/ChooseBox";
 import Input from "components/Input/Input";
 import Textarea from "components/Textarea/Textarea";
+import TextEditor from "components/TextEditor/TextEditor";
 
 const FrameWrite = ({ form, setForm, editId }) => {
   const navigate = useNavigate();
@@ -81,7 +82,15 @@ const FrameWrite = ({ form, setForm, editId }) => {
           setForm={setForm}
         />
         <label htmlFor="text">내용</label>
-        <Textarea
+        {/* <Textarea
+          name={"text"}
+          id={"text"}
+          value={form.text}
+          form={form}
+          setForm={setForm}
+        /> */}
+        <TextEditor
+          http={http}
           name={"text"}
           id={"text"}
           value={form.text}

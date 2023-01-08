@@ -1,5 +1,9 @@
 ﻿import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+
+import { Viewer } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+
 import FrameType from "containers/FrameType/FrameType";
 
 function FramePost({ value }) {
@@ -35,7 +39,7 @@ function FramePost({ value }) {
           ))}
         </div>
       )}
-      <p>{text}</p>
+      <Viewer initialValue={text} />
       <FrameType type={type} />
     </>
   );

@@ -1,11 +1,13 @@
 ﻿import express from "express";
 import "express-async-errors";
+import multer from "multer";
 import { body, param, query } from "express-validator";
 import { validate } from "../middleware/validation.js";
 import { isAuth } from "../middleware/auth.js";
 import * as postController from "../controller/post.js";
 
 const router = express.Router();
+const upload = multer({ dest: "uploads/" });
 
 router.get(
   "/",
@@ -27,6 +29,10 @@ router.get(
   ],
   postController.getById
 );
+
+router.post("/photo", upload.single("blob"), (req, res) => {
+  console.log("------------", req);
+});
 
 router.post(
   "/write",

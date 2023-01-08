@@ -23,9 +23,9 @@ function Board(props) {
       {isLoading && <p>Loading!</p>}
       {error && <p>Error!</p>}
       {data && (
-        <div>
+        <div className={cx("container")}>
           <Filter />
-          <ul>
+          <ul className={cx("postWrap")}>
             {data.map((item) => (
               <BoardPost key={item.id} value={item} />
             ))}

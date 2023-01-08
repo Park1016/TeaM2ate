@@ -6,14 +6,14 @@ import { httpSelector } from "state/http";
 import CommentApi from "api/comment";
 import PostApi from "api/post";
 
-function UpdateDelBtn({ type, id, setEdit }) {
+function UpdateDelBtn({ type, id, setEdit, setData }) {
   const [show, setShow] = useState(false);
 
   const http = useRecoilValue(httpSelector);
 
   const navigate = useNavigate();
 
-  const onUpdate = () => {
+  const onUpdate = async () => {
     switch (type) {
       case "post":
         navigate(`/post/update/${id}`);
@@ -41,6 +41,8 @@ function UpdateDelBtn({ type, id, setEdit }) {
         break;
       case "comment":
         await new CommentApi(http).deleteComment(id);
+        const res = await new CommentApi(http).getCommentByPostId(id);
+        setData(res);
         alert("댓글이 삭제되었습니다");
         break;
       default:

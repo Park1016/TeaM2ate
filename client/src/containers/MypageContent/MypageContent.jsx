@@ -4,18 +4,23 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 import { httpSelector } from "state/http";
+import { authState } from "state/auth";
 import UserApi from "api/user";
 import PostApi from "api/post";
 import CommentApi from "api/comment";
 
 const MypageContent = (props) => {
   const http = useRecoilValue(httpSelector);
-
+  const auth = useRecoilValue(authState);
   const navigate = useNavigate();
   const [data, setData] = useState();
 
   const { data: user } = useQuery(["mypageAuth"], async () => {
-    return await new UserApi(http).me();
+    if (auth) {
+      return await new UserApi(http).me();
+    } else {
+      return false;
+    }
   });
   const { data: post } = useQuery(["mypagePost"], async () => {
     return await new PostApi(http).getPostByUsername(user.username);
@@ -31,7 +36,7 @@ const MypageContent = (props) => {
     if (post) {
       setData(post);
     }
-  }, []);
+  }, [user, post]);
 
   return (
     <>

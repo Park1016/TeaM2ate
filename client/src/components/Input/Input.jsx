@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
 
-const Input = ({ type, name, id, value, form, setForm }) => {
+const Input = ({ type, name, id, value, form, setForm, readOnly }) => {
   const onChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
@@ -12,6 +12,7 @@ const Input = ({ type, name, id, value, form, setForm }) => {
       id={id}
       value={value}
       onChange={(e) => onChange(e)}
+      readOnly={readOnly}
     />
   );
 };

@@ -5,6 +5,7 @@ import { body, param } from "express-validator";
 import { isAuth } from "../middleware/auth.js";
 import { validate } from "../middleware/validation.js";
 import * as userController from "../controller/user.js";
+import * as emailController from "../controller/email.js";
 import * as photoController from "../controller/photo.js";
 
 const router = express.Router();
@@ -56,6 +57,10 @@ router.post("/login", validateLogin, userController.login);
 
 router.post("/logout", userController.logout);
 
+router.post("/email", emailController.sendEmail);
+
+router.post("/checkAuthNum", emailController.checkAuthNum);
+
 router.get("/post/:username", [isAuth], userController.getPostByBookmark);
 
 router.put(
@@ -71,16 +76,6 @@ router.put(
   userController.update
 );
 
-router.delete(
-  "/delete/:id",
-  [
-    isAuth,
-    param("id")
-      .isLength({ min: 3 })
-      .withMessage("유저 고유아이디를 입력해주세요"),
-    validate,
-  ],
-  userController.remove
-);
+router.delete("/delete/:id", [isAuth, validate], userController.remove);
 
 export default router;

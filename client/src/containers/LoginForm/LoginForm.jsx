@@ -8,7 +8,7 @@ import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
 
-const LoginForm = (props) => {
+const LoginForm = ({ location }) => {
   const navigate = useNavigate();
   const http = useRecoilValue(httpSelector);
   const setAuth = useSetRecoilState(authState);
@@ -16,6 +16,7 @@ const LoginForm = (props) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    // console.log(location.state);
 
     const username = form.id;
     const password = form.pw;
@@ -26,7 +27,11 @@ const LoginForm = (props) => {
       const res = await new UserApi(http).login(formData);
       setAuth(res.id);
       setForm({ id: "", pw: "" });
-      navigate("/");
+      if (location.state) {
+        navigate(location.state.page);
+      } else {
+        navigate("/");
+      }
     } catch (err) {
       console.warn(err);
     }

@@ -1,10 +1,14 @@
-$header-height: 74px;
+// width
+$scroll-width: 10px;
+$page-width: calc(100vw - #{$scroll-width});
+
+// height
+$header-height: 5rem;
 $footer-height: 18.5rem;
+$min-page-height: calc(100vh - #{$header-height});
 
 
 // color
-
-//text
 $text_black: #181818;
 $text_gray1: #414141;
 $text_gray2: #848484;
@@ -19,9 +23,6 @@ $gray5: #e9ecef;
 $gray6: #f1f3f5;
 
 $readOnly: #f5f6f8;
-
-$border_gray1 : #868e96;
-$border_gray2: #ced4da;
 
 $blue: #009ae6;
 $skyblue: #eff7fc;

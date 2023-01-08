@@ -12,7 +12,12 @@ function CommentContent({ http, id, setData, item, index }) {
   return (
     <li key={index}>
       {item.userId === auth && !edit && (
-        <UpdateDelBtn type={"comment"} id={item.id} setEdit={setEdit} />
+        <UpdateDelBtn
+          type={"comment"}
+          id={item.id}
+          setEdit={setEdit}
+          setData={setData}
+        />
       )}
       <p>{item.username}</p>
       <p>{item.createdAt}</p>

@@ -18,13 +18,15 @@ const Header = () => {
   const setAuth = useSetRecoilState(authState);
 
   const onLogout = async () => {
-    const res = await new UserApi(http).logout();
-    setAuth(false);
-    alert(res);
+    const logout = await new UserApi(http).logout();
+    if (logout) {
+      setAuth(false);
+      alert(logout);
+    }
   };
 
   return (
-    <header>
+    <header className={cx("container")}>
       <Link to={"/"}>로고</Link>
       <HeaderSearch />
       <Link to={"post/write"}>글쓰기</Link>

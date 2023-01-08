@@ -19,8 +19,7 @@ const Bookmark = ({ id, http, user }) => {
   };
 
   useEffect(() => {
-    console.log(user.bookmark.includes(id));
-    if (user.bookmark.includes(id)) {
+    if (user.bookmark.includes(parseInt(id))) {
       setBookmark(true);
     } else {
       setBookmark(false);

@@ -1,4 +1,5 @@
 import CheckPw from "components/CheckPw/CheckPw";
+import DeleteUser from "containers/DeleteUser/DeleteUser";
 import UpdatePw from "containers/UpdatePw/UpdatePw";
 import React, { useState } from "react";
 
@@ -8,7 +9,12 @@ const Security = (props) => {
   return (
     <>
       {!show && <CheckPw setShow={setShow} />}
-      {show && <UpdatePw />}
+      {show && (
+        <>
+          <UpdatePw />
+          <DeleteUser />
+        </>
+      )}
     </>
   );
 };

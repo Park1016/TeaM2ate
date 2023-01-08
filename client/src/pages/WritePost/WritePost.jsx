@@ -1,7 +1,13 @@
-﻿import React, { useState } from "react";
+﻿import React, { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+
+import { authState } from "state/auth";
+import useCheckAuth from "hooks/useCheckAuth";
 import FrameWrite from "containers/FrameWrite/FrameWrite";
 
 const WritePost = (props) => {
+  const auth = useRecoilValue(authState);
+  const [checkAuth] = useCheckAuth({ auth, page: "/post/write" });
   const [form, setForm] = useState({
     title: "",
     text: "",
@@ -10,7 +16,11 @@ const WritePost = (props) => {
     progress: "ing",
   });
 
-  return <FrameWrite form={form} setForm={setForm} />;
+  useEffect(() => {
+    checkAuth();
+  }, [auth]);
+
+  return <>{auth && <FrameWrite form={form} setForm={setForm} />}</>;
 };
 
 export default WritePost;

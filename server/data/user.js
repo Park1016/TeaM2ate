@@ -14,6 +14,12 @@ export async function getByUsername(username) {
     .then((result) => result[0][0]);
 }
 
+export async function getByEmail(email) {
+  return db
+    .execute("SELECT * FROM user WHERE email=?", [email]) //
+    .then((result) => result[0][0]);
+}
+
 export async function signUp(user) {
   const { username, password, name, email, url } = user;
   return db
@@ -90,6 +96,10 @@ export async function removeList(userId, column, value) {
 export async function getPostByBookmark(username) {
   const user = await getByUsername(username);
   const bookmark = user.bookmark;
+
+  if (bookmark.length === 0) {
+    return false;
+  }
 
   const sql = "SELECT * FROM post WHERE id IN(?)";
   const res = await db.query(sql, [bookmark], (err, result) => {

@@ -52,10 +52,10 @@ export default class UserApi {
 
   async checkPw(params) {
     try {
-      const res = await this.user.put("checkPw", params);
+      const res = await this.user.post("checkPw", params);
       return res;
     } catch (error) {
-      alert(error.response.data.message);
+      console.warn(error.response.data.message);
     }
   }
 
@@ -75,6 +75,24 @@ export default class UserApi {
     } catch (error) {
       alert(error.response.data.message);
       // console.log(error.response);
+    }
+  }
+
+  async certEmail(formData) {
+    try {
+      const res = await this.user.post("email", formData);
+      return res;
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  }
+
+  async checkAuthNum(formData) {
+    try {
+      const res = await this.user.post("checkAuthNum", formData);
+      return res;
+    } catch (error) {
+      alert(error.response.data.message);
     }
   }
 
@@ -121,7 +139,9 @@ export default class UserApi {
   async delete(id, params) {
     try {
       const res = await this.user.delete(`delete/${id}`, params);
-      console.log(res);
+      if (res) {
+        return res;
+      }
     } catch (error) {
       alert(error.response.data.message);
       // console.log(error.response);

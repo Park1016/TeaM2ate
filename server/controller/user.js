@@ -63,10 +63,18 @@ export async function remove(req, res) {
 export async function signup(req, res) {
   const { name, username, password, email, url } = req.body;
   // 사용자가 기존에 이미 있는지 없는지 확인
-  const found = await userRepository.getByUsername(username);
+  const foundUsername = await userRepository.getByUsername(username);
+  const foundEmail = await userRepository.getByEmail(email);
   // 이미 있는 username이면 return
-  if (found) {
-    return res.status(409).json({ message: `${username} already exists` });
+  if (foundUsername) {
+    return res
+      .status(409)
+      .json({ message: `${username}은(는) 이미 존재하는 아이디입니다.` });
+  }
+  if (foundEmail) {
+    return res
+      .status(409)
+      .json({ message: `${email}은 이미 회원가입된 이메일입니다` });
   }
   // 비밀번호 hashing해서 보안처리
   const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
@@ -134,12 +142,16 @@ export async function updatePw(req, res) {
 export async function checkPw(req, res) {
   const { id, pw } = req.body;
   const user = await userRepository.getById(id);
-  const isValidPassword = await bcrypt.compare(pw, user.password);
 
-  if (isValidPassword) {
-    return res.status(200).json(isValidPassword);
-  } else {
-    return res.status(401).json({ message: "잘못된 비밀번호입니다" });
+  try {
+    const isValidPassword = await bcrypt.compare(pw, user.password);
+    if (isValidPassword) {
+      return res.status(200).json(isValidPassword);
+    } else {
+      return res.status(401).json({ message: "비밀번호가 일치하지 않습니다" });
+    }
+  } catch (err) {
+    return res.response.data.message;
   }
 }
 

@@ -1,8 +1,13 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import classNames from "classnames/bind";
+
+import styles from "./BoardPost.module.scss";
+
 import FramePost from "containers/FramePost/FramePost";
 
 function BoardPost({ value }) {
+  const cx = classNames.bind(styles);
   const navigate = useNavigate();
 
   const onGoToPost = () => {
@@ -10,7 +15,7 @@ function BoardPost({ value }) {
   };
 
   return (
-    <li onClick={onGoToPost}>
+    <li className={cx("box")} onClick={onGoToPost}>
       <FramePost value={value} />
     </li>
   );

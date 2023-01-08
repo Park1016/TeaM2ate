@@ -28,6 +28,15 @@ export default class PostApi {
     }
   }
 
+  async photo(formData) {
+    try {
+      const res = await this.post.post("photo", formData);
+      return res.data;
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+
   async writePost(formData) {
     try {
       const res = await this.post.post("write", formData);
