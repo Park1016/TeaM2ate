@@ -5,10 +5,10 @@ import * as emailRepository from "../data/email.js";
 import * as userRepository from "../data/user.js";
 
 export async function sendEmail(req, res) {
-  const { email } = req.body;
+  const { email, checkDup } = req.body;
 
-  const checkDupEmail = await userRepository.getByEmail(email);
-  if (checkDupEmail) {
+  const user = await userRepository.getByEmail(email);
+  if (user && JSON.parse(checkDup)) {
     res.status(409).json({ message: "이미 회원가입된 이메일입니다." });
     return;
   }
@@ -40,7 +40,7 @@ export async function sendEmail(req, res) {
       ? await emailRepository.update(email, hashed)
       : await emailRepository.create(email, hashed);
     if (data) {
-      res.status(200).json(data);
+      res.status(200).json(user);
     } else {
       res.status(401).json({ message: "이메일 인증번호 요청 실패" });
     }

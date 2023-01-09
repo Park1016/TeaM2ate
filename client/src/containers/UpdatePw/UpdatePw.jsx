@@ -11,20 +11,16 @@ const UpdatePw = (props) => {
   const auth = useRecoilValue(authState);
   const setAuth = useSetRecoilState(authState);
   const http = useRecoilValue(httpSelector);
-  const [form, setForm] = useState({ pw: "", newPw: "" });
+  const [form, setForm] = useState({ newPw: "", checkPw: "" });
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (form.pw.length === 0) {
-      alert("비밀번호를 입력해주세요");
-      return;
-    }
     if (form.newPw.length === 0) {
       alert("새로운 비밀번호를 입력해주세요");
       return;
     }
-    if (form.pw !== form.newPw) {
+    if (form.checkPw !== form.newPw) {
       alert("비밀번호가 서로 일치하지 않습니다");
       return;
     }
@@ -47,17 +43,17 @@ const UpdatePw = (props) => {
     <form onSubmit={(e) => onSubmit(e)}>
       <Input
         type={"password"}
-        name={"pw"}
-        id={"pw"}
-        value={form.pw}
+        name={"newPw"}
+        id={"newPw"}
+        value={form.newPw}
         form={form}
         setForm={setForm}
       />
       <Input
         type={"password"}
-        name={"newPw"}
-        id={"newPw"}
-        value={form.newPw}
+        name={"checkPw"}
+        id={"checkPw"}
+        value={form.checkPw}
         form={form}
         setForm={setForm}
       />

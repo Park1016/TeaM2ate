@@ -68,6 +68,15 @@ export default class UserApi {
     }
   }
 
+  async findPw(params) {
+    try {
+      const res = await this.user.put("findPw", params);
+      return res;
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  }
+
   async photo(params) {
     try {
       const res = await this.user.post("photo", params);
@@ -83,7 +92,7 @@ export default class UserApi {
       const res = await this.user.post("email", formData);
       return res;
     } catch (error) {
-      console.log(error.response.data);
+      alert(error.response.data.message);
     }
   }
 
@@ -93,6 +102,7 @@ export default class UserApi {
       return res;
     } catch (error) {
       alert(error.response.data.message);
+      return error.response;
     }
   }
 

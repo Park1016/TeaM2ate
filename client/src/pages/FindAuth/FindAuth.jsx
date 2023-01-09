@@ -1,30 +1,24 @@
-﻿import Input from "components/Input/Input";
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-function FindAuth(props) {
-  const [form, setForm] = useState({ email: "" });
+import FindPw from "containers/FindPw/FindPw";
+import CertEmail from "components/CertEmail/CertEmail";
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(form);
-    setForm("");
-  };
+function FindAuth(props) {
+  const [form, setForm] = useState({ email: "", username: "" });
+  const [checkEmail, setCheckEmail] = useState(false);
 
   return (
     <section>
-      <form onSubmit={(e) => onSubmit(e)}>
-        <label htmlFor="email">이메일</label>
-        <Input
-          type={"email"}
-          name={"email"}
-          id={"email"}
-          value={form.email}
+      {!checkEmail && (
+        <CertEmail
           form={form}
           setForm={setForm}
+          setCheckEmail={setCheckEmail}
+          checkDup={false}
         />
-        <button type="submit">계정찾기</button>
-      </form>
+      )}
+      {checkEmail && <FindPw user={form} />}
       <Link to={"/login"}>취소</Link>
     </section>
   );

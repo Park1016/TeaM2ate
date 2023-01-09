@@ -6,11 +6,11 @@ import { httpSelector } from "state/http";
 import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
+import CertEmail from "components/CertEmail/CertEmail";
 
 const SignUpForm = (props) => {
   const navigate = useNavigate();
-
-  const [checkAuthNum, setCheckAuthNum] = useState(false);
+  const [checkEmail, setCheckEmail] = useState(false);
 
   const [form, setForm] = useState({
     name: "",
@@ -35,32 +35,13 @@ const SignUpForm = (props) => {
     console.log(res);
   };
 
-  const onAuthNum = async () => {
-    const email = form.email;
-    const authNum = form.authNum;
-    const formData = makeFormData({ email, authNum });
-    const res = await new UserApi(http).checkAuthNum(formData);
-    if (res) {
-      alert("인증이 완료되었습니다");
-
-      // 회원가입
-      try {
-        const res = await new UserApi(http).signup(formData);
-        if (res) {
-          alert("회원가입이 완료되었습니다");
-          setForm({ name: "", username: "", password: "", email: "", url: "" });
-          navigate("/login");
-        }
-      } catch (err) {
-        console.warn(err);
-      }
-    } else {
-      setForm({ ...form, authNum: "" });
-    }
-  };
-
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    if (!checkEmail) {
+      alert("이메일 인증을 완료해주세요.");
+      return;
+    }
 
     if (form.url) {
       await onSubmitPhoto();
@@ -75,12 +56,14 @@ const SignUpForm = (props) => {
     const formData = makeFormData({ name, username, password, email, url });
 
     try {
-      const res = await new UserApi(http).certEmail(formData);
+      const res = await new UserApi(http).signup(formData);
       if (res) {
-        setCheckAuthNum(true);
+        alert("회원가입이 완료되었습니다");
+        setForm({ name: "", username: "", password: "", email: "", url: "" });
+        navigate("/login");
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.warn(err);
     }
   };
 
@@ -117,32 +100,12 @@ const SignUpForm = (props) => {
         form={form}
         setForm={setForm}
       />
-      <label htmlFor="email">이메일</label>
-      <Input
-        type={"email"}
-        name={"email"}
-        id={"email"}
-        value={form.email}
+      <CertEmail
         form={form}
         setForm={setForm}
-        readOnly={checkAuthNum && true}
+        setCheckEmail={setCheckEmail}
+        checkDup={true}
       />
-      {checkAuthNum && (
-        <>
-          <label htmlFor="authNum">인증번호</label>
-          <Input
-            type={"text"}
-            name={"authNum"}
-            id={"authNum"}
-            value={form.authNum}
-            form={form}
-            setForm={setForm}
-          />
-          <button type="button" onClick={onAuthNum}>
-            인증확인
-          </button>
-        </>
-      )}
       <label htmlFor="url">프로필 사진</label>
       <input
         type="file"

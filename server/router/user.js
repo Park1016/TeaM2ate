@@ -4,6 +4,7 @@ import multer from "multer";
 import { body, param } from "express-validator";
 import { isAuth } from "../middleware/auth.js";
 import { validate } from "../middleware/validation.js";
+import { sendEmaillimiter, authNumlimiter } from "../middleware/rateLimit.js";
 import * as userController from "../controller/user.js";
 import * as emailController from "../controller/email.js";
 import * as photoController from "../controller/photo.js";
@@ -43,6 +44,8 @@ router.post("/checkPw", isAuth, userController.checkPw);
 
 router.put("/updatePw", isAuth, userController.updatePw);
 
+router.put("/findPw", userController.findPw);
+
 router.post("/photo", upload.single("url"), (req, res) =>
   console.log(req.file)
 );
@@ -57,9 +60,9 @@ router.post("/login", validateLogin, userController.login);
 
 router.post("/logout", userController.logout);
 
-router.post("/email", emailController.sendEmail);
+router.post("/email", sendEmaillimiter, emailController.sendEmail);
 
-router.post("/checkAuthNum", emailController.checkAuthNum);
+router.post("/checkAuthNum", authNumlimiter, emailController.checkAuthNum);
 
 router.get("/post/:username", [isAuth], userController.getPostByBookmark);
 

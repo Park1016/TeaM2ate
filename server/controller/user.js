@@ -139,6 +139,17 @@ export async function updatePw(req, res) {
   }
 }
 
+export async function findPw(req, res) {
+  const { email, password } = req.body;
+  const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
+  const response = await userRepository.findPw(email, hashed);
+  if (response) {
+    res.status(200).json(response);
+  } else {
+    res.status(401).json({ message: "비밀번호 변경에 실패했습니다" });
+  }
+}
+
 export async function checkPw(req, res) {
   const { id, pw } = req.body;
   const user = await userRepository.getById(id);

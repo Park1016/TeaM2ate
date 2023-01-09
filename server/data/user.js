@@ -76,6 +76,12 @@ export async function updatePw(id, password) {
     .then(async () => await getById(id));
 }
 
+export async function findPw(email, password) {
+  return db
+    .execute(`UPDATE user SET password=? WHERE email=?`, [password, email])
+    .then(async () => await getByEmail(email));
+}
+
 export async function remove(id) {
   db.execute("DELETE FROM user WHERE id=?", [id]);
 }
