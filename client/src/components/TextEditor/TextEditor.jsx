@@ -15,7 +15,6 @@ const TextEditor = ({ http, name, form, setForm }) => {
 
   const onChange = () => {
     const data = editorRef.current.getInstance().getHTML();
-    console.log(data);
     setForm({ ...form, [name]: data });
   };
 

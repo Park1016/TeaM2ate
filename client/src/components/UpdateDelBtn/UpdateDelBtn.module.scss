@@ -1,1 +1,41 @@
-﻿
+﻿@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+@import '../../static/stylesheets/Root.scss';
+
+.container {
+    position: relative;
+    width: 1.5rem;
+    height: auto;
+}
+
+.button {
+    svg {
+        @include icon;
+        cursor: pointer;
+    }
+}
+
+.toggle {
+    position: absolute;
+    top:2rem;
+    right: 0;
+    @include border2;
+    background-color: #fff;
+    box-shadow: $box-shadow;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 10;
+    li {
+        @include text;
+        width: 3rem;
+        padding: 0.25rem 0;
+        text-align: center;
+    }
+    li:first-child {
+        border-bottom: 1px solid $gray3;
+    }
+    li:hover {
+        color: $blue;
+    }
+}

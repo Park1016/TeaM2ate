@@ -44,6 +44,7 @@ const CertEmail = ({ form, setForm, setCheckEmail, checkDup }) => {
     <>
       <label htmlFor="email">이메일</label>
       <Input
+        placeholder={"이메일을 입력하세요"}
         type={"email"}
         name={"email"}
         id={"email"}
@@ -59,6 +60,7 @@ const CertEmail = ({ form, setForm, setCheckEmail, checkDup }) => {
         <>
           <label htmlFor="authNum">인증번호</label>
           <Input
+            placeholder={"인증번호를 입력하세요"}
             type={"text"}
             name={"authNum"}
             id={"authNum"}

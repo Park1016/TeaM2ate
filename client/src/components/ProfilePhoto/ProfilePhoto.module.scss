@@ -1,0 +1,15 @@
+@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+@import '../../static/stylesheets/Root.scss';
+
+.nonePhoto {
+    @include flexRow;
+    @include border2;
+    @include text;
+    color: $text-gray3;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: $gray6;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}

@@ -45,6 +45,7 @@ const UpdateProfile = ({ http, user }) => {
         <li>
           <label htmlFor="username">닉네임</label>
           <Input
+            placeholder={"아이디를 입력하세요"}
             type={"text"}
             name={"username"}
             id={"username"}

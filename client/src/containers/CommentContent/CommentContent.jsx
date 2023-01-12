@@ -1,16 +1,22 @@
 ﻿import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
+import classNames from "classnames/bind";
+
+import styles from "./CommentContent.module.scss";
 
 import { authState } from "state/auth";
 import UpdateDelBtn from "components/UpdateDelBtn/UpdateDelBtn";
 import CommentWrite from "containers/CommentWrite/CommentWrite";
+import ProfilePhoto from "components/ProfilePhoto/ProfilePhoto";
+import Time from "components/Time/Time";
 
 function CommentContent({ http, id, setData, item, index }) {
+  const cx = classNames.bind(styles);
   const auth = useRecoilValue(authState);
   const [edit, setEdit] = useState(false);
 
   return (
-    <li key={index}>
+    <li className={cx("list")} key={index}>
       {item.userId === auth && !edit && (
         <UpdateDelBtn
           type={"comment"}
@@ -19,19 +25,25 @@ function CommentContent({ http, id, setData, item, index }) {
           setData={setData}
         />
       )}
-      <p>{item.username}</p>
-      <p>{item.createdAt}</p>
-      {edit ? (
-        <CommentWrite
-          http={http}
-          id={id}
-          setData={setData}
-          value={item}
-          setEdit={setEdit}
-        />
-      ) : (
-        <p>{item.text}</p>
-      )}
+      <ProfilePhoto url={item.url} username={item.username} />
+      <div className={cx("right")}>
+        <div className={cx("rightTop")}>
+          <p>{item.username}</p>
+          <div className={cx("line")}></div>
+          <Time createdAt={item.createdAt} />
+        </div>
+        {edit ? (
+          <CommentWrite
+            http={http}
+            id={id}
+            setData={setData}
+            value={item}
+            setEdit={setEdit}
+          />
+        ) : (
+          <p>{item.text}</p>
+        )}
+      </div>
     </li>
   );
 }

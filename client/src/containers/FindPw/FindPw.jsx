@@ -38,6 +38,7 @@ const FindPw = ({ user }) => {
         <p>{`회원님의 아이디는 ${user.username}입니다.`}</p>
         <p>비밀번호를 변경해주세요</p>
         <Input
+          placeholder={"새로운 비밀번호를 입력하세요"}
           type={"password"}
           name={"pw"}
           id={"pw"}
@@ -46,6 +47,7 @@ const FindPw = ({ user }) => {
           setForm={setForm}
         />
         <Input
+          placeholder={"비밀번호를 한번 더 입력하세요"}
           type={"password"}
           name={"checkPw"}
           id={"checkPw"}

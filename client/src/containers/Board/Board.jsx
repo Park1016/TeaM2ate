@@ -1,4 +1,4 @@
-﻿import React from "react";
+﻿import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRecoilValue } from "recoil";
 import classNames from "classnames/bind";
@@ -23,14 +23,18 @@ function Board(props) {
       {isLoading && <p>Loading!</p>}
       {error && <p>Error!</p>}
       {data && (
-        <div className={cx("container")}>
-          <Filter />
-          <ul className={cx("postWrap")}>
-            {data.map((item) => (
-              <BoardPost key={item.id} value={item} />
-            ))}
-          </ul>
-        </div>
+        <>
+          <aside className={cx("aside")}></aside>
+          <article className={cx("article")}>
+            {/* <Filter /> */}
+            <ul className={cx("postWrap")}>
+              {data.map((item) => (
+                <BoardPost key={item.id} value={item} />
+              ))}
+            </ul>
+          </article>
+          <aside className={cx("aside")}></aside>
+        </>
       )}
     </>
   );

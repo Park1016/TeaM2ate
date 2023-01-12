@@ -1,12 +1,17 @@
 ﻿import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
+import classNames from "classnames/bind";
+
+import styles from "./UpdateDelBtn.module.scss";
+import { FiMoreVertical } from "react-icons/fi";
 
 import { httpSelector } from "state/http";
 import CommentApi from "api/comment";
 import PostApi from "api/post";
 
 function UpdateDelBtn({ type, id, setEdit, setData }) {
+  const cx = classNames.bind(styles);
   const [show, setShow] = useState(false);
 
   const http = useRecoilValue(httpSelector);
@@ -51,22 +56,23 @@ function UpdateDelBtn({ type, id, setEdit, setData }) {
     setShow(false);
   };
 
-  const onBlur = () => {
-    setShow(false);
-  };
-
   return (
-    <>
-      <button type="button" onMouseDown={() => setShow(!show)} onBlur={onBlur}>
-        ...
+    <div className={cx("container")}>
+      <button
+        className={cx("button")}
+        type="button"
+        onMouseDown={() => setShow(!show)}
+        onBlur={() => setShow(false)}
+      >
+        <FiMoreVertical />
       </button>
       {show && (
-        <ul>
+        <ul className={cx("toggle")}>
           <li onMouseDown={onUpdate}>수정</li>
           <li onMouseDown={onDelete}>삭제</li>
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

@@ -10,7 +10,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, button {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -25,6 +25,12 @@ footer, header, hgroup, menu, nav, section {
 } */
 body {
 	line-height: 1.5;
+	caret-color: transparent;
+}
+
+button {
+	background-color: transparent;
+	outline: none;
 }
 ol, ul {
 	list-style: none;
@@ -41,6 +47,27 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+input,
+textarea,
+select {
+	caret-color: #414141;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	outline: 0;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+	text-decoration: none;
+}
+
 
 ::-webkit-scrollbar {
     width: 10px;

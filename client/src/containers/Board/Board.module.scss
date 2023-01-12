@@ -2,14 +2,24 @@
 @import '../../static/stylesheets/lib/mixin';
 @import '../../static/stylesheets/Root.scss';
 
-.container {
+.article {
     @include flexColumn;
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    background-color: #fff;
+}
+
+.aside {
+    width: 15%;
+    height: 100vh;
+    background-color: beige;
 }
 
 .postWrap {
+    margin-top: 2rem;
     display: grid;
     grid-gap: 1.5rem;
-    grid-template-columns: repeat(4, 15rem);
+    grid-template-columns: repeat(2, 23rem);
+    li:hover {
+        transform: scale(1.01);
+    }
 }

@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
+import classNames from "classnames/bind";
+
+import styles from "./Bookmark.module.scss";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
 import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
 
 const Bookmark = ({ id, http, user }) => {
+  const cx = classNames.bind(styles);
   const [bookmark, setBookmark] = useState(false);
 
   const column = "bookmark";
@@ -26,8 +31,8 @@ const Bookmark = ({ id, http, user }) => {
     }
   }, []);
   return (
-    <button type="button" onClick={onClick}>
-      {bookmark ? "북마크됨" : "북마크안됨"}
+    <button type="button" onClick={onClick} className={cx("button")}>
+      {bookmark ? <FaBookmark /> : <FaRegBookmark />}
     </button>
   );
 };

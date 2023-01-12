@@ -15,12 +15,22 @@ export async function getById(id) {
     .then((result) => result[0][0]);
 }
 
-export async function create(cate, username, title, text, userId, tag, type) {
+export async function create(
+  cate,
+  url,
+  username,
+  title,
+  text,
+  userId,
+  tag,
+  type
+) {
   return db
     .execute(
-      "INSERT INTO post (title, username, text, createdAt, cate, userId, view, tag, type, progress, report) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO post (title, url, username, text, createdAt, cate, userId, view, tag, type, progress, report) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         title,
+        url,
         username,
         text,
         new Date(),

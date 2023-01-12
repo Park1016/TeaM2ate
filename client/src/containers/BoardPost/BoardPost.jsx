@@ -16,7 +16,7 @@ function BoardPost({ value }) {
 
   return (
     <li className={cx("box")} onClick={onGoToPost}>
-      <FramePost value={value} />
+      <FramePost value={value} board={true} />
     </li>
   );
 }

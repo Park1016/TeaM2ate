@@ -75,6 +75,7 @@ const SignUpForm = (props) => {
     >
       <label htmlFor="name">이름</label>
       <Input
+        placeholder={"이름을 입력하세요"}
         type={"text"}
         name={"name"}
         id={"name"}
@@ -84,6 +85,7 @@ const SignUpForm = (props) => {
       />
       <label htmlFor="username">아이디</label>
       <Input
+        placeholder={"아이디를 입력하세요"}
         type={"text"}
         name={"username"}
         id={"username"}
@@ -93,6 +95,7 @@ const SignUpForm = (props) => {
       />
       <label htmlFor="password">비밀번호</label>
       <Input
+        placeholder={"비밀번호를 입력하세요"}
         type={"password"}
         name={"password"}
         id={"password"}

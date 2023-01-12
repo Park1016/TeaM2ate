@@ -42,6 +42,7 @@ const UpdatePw = (props) => {
   return (
     <form onSubmit={(e) => onSubmit(e)}>
       <Input
+        placeholder={"새로운 비밀번호를 입력하세요"}
         type={"password"}
         name={"newPw"}
         id={"newPw"}
@@ -50,6 +51,7 @@ const UpdatePw = (props) => {
         setForm={setForm}
       />
       <Input
+        placeholder={"비밀번호를 한번 더 입력하세요"}
         type={"password"}
         name={"checkPw"}
         id={"checkPw"}

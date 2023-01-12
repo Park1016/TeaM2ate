@@ -1,1 +1,28 @@
-﻿
+﻿@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+@import '../../static/stylesheets/Root.scss';
+
+.container {
+    width: 25rem;
+    height: auto;
+    position: relative;
+    @include flexRow;
+    justify-content: flex-start;
+    border-radius: 5px;
+    @include border2;
+    &.focus {
+        border: 2px solid $blue;
+    }
+    svg {
+        color: $blue;
+        @include icon;
+        position: absolute;
+        top: calc(#{$input-height}/2 - #{$icon-height}/2);
+        right: 1rem;
+    }
+}
+
+.inputBox {
+    width: 90%;
+    height: $input-height;
+}

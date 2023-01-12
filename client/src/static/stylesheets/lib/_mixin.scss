@@ -30,6 +30,15 @@
     text-overflow: ellipsis;
 }
 
+@mixin twoLineDots {
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 @mixin modal {
     position: fixed;
     top: 0;
@@ -53,9 +62,21 @@
 }
 
 @mixin container {
-    width: $page-width;
+    width: calc(#{$page-width} - #{$basic_space}*2);
     min-height: $min-page-height;
+    padding: 0 $basic_space;
     background-color: #fff;
+}
+
+@mixin text {
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: $text_gray1;
 }
 
 @mixin border1 {
@@ -64,4 +85,13 @@
 
 @mixin border2 {
     border: 1px solid $gray3;
+}
+
+@mixin icon {
+    width: $icon-width;
+    height: $icon-height;
+}
+
+@mixin borderBlue {
+    border: 1px solid $blue;
 }

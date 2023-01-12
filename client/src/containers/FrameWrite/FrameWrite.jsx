@@ -17,7 +17,6 @@ import SelectTag from "components/SelectTag/SelectTag";
 import PlusBtn from "components/PlusBtn/PlusBtn";
 import ChooseBox from "components/ChooseBox/ChooseBox";
 import Input from "components/Input/Input";
-import Textarea from "components/Textarea/Textarea";
 import TextEditor from "components/TextEditor/TextEditor";
 
 const FrameWrite = ({ form, setForm, editId }) => {
@@ -62,8 +61,14 @@ const FrameWrite = ({ form, setForm, editId }) => {
     let res;
     if (editId) {
       res = await new PostApi(http).updatePost(formData, editId);
+      if (res) {
+        alert("글 수정이 완료되었습니다");
+      }
     } else {
       res = await new PostApi(http).writePost(formData);
+      if (res) {
+        alert("글 작성이 완료되었습니다");
+      }
     }
 
     navigate(`/post/${res.id}`);
@@ -74,6 +79,7 @@ const FrameWrite = ({ form, setForm, editId }) => {
       <form onSubmit={(e) => onSubmit(e)}>
         <label htmlFor="title">제목</label>
         <Input
+          placeholder={"제목을 입력하세요"}
           type={"text"}
           name={"title"}
           id={"title"}
@@ -82,13 +88,6 @@ const FrameWrite = ({ form, setForm, editId }) => {
           setForm={setForm}
         />
         <label htmlFor="text">내용</label>
-        {/* <Textarea
-          name={"text"}
-          id={"text"}
-          value={form.text}
-          form={form}
-          setForm={setForm}
-        /> */}
         <TextEditor
           http={http}
           name={"text"}

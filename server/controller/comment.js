@@ -23,6 +23,7 @@ export async function write(req, res) {
   const comment = await commentRepository.create(
     postId,
     text,
+    req.url,
     req.userId,
     req.username
   );

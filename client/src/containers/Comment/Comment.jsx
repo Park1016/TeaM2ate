@@ -2,6 +2,9 @@
 import { useRecoilValue } from "recoil";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import classNames from "classnames/bind";
+
+import styles from "./Comment.module.scss";
 
 import { httpSelector } from "state/http";
 import CommentApi from "api/comment";
@@ -9,6 +12,7 @@ import CommentWrite from "containers/CommentWrite/CommentWrite";
 import CommentContent from "containers/CommentContent/CommentContent";
 
 function Comment(props) {
+  const cx = classNames.bind(styles);
   const http = useRecoilValue(httpSelector);
   const { id } = useParams();
   const [data, setData] = useState();
@@ -24,10 +28,10 @@ function Comment(props) {
   }, [comment]);
 
   return (
-    <>
+    <article className={cx("container")}>
       <CommentWrite http={http} id={id} setData={setData} value={undefined} />
       {data && (
-        <ul>
+        <ul className={cx("content")}>
           {data.map((item, index) => (
             <CommentContent
               key={index}
@@ -40,7 +44,7 @@ function Comment(props) {
           ))}
         </ul>
       )}
-    </>
+    </article>
   );
 }
 

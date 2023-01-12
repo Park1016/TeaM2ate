@@ -1,1 +1,67 @@
-﻿
+﻿@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+@import '../../static/stylesheets/Root.scss';
+
+.article {
+    margin-bottom: 0.5rem;
+}
+
+.top {
+    @include flexRow;
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.topRight {
+    @include flexRow;
+}
+
+.name {
+    @include text;
+}
+
+.line {
+    width: 1px;
+    height: 1rem;
+    background-color: $gray3;
+    margin: 0 1rem;
+}
+
+.title {
+    @include text;
+    text-align: start;
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    font-weight: 700;
+    &.board {
+        @include twoLineDots;
+    }
+}
+
+.tag {
+    @include flexRow;
+    p {
+        padding: 0 0.5rem;
+        margin: 0.25rem;
+        @include border2;
+        border-radius: 5px;
+    }
+}
+
+.editor {
+    margin-top: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid $gray3;
+    border-bottom: 1px solid $gray3;
+}
+
+.type {
+    padding: 1rem 0;
+    @include text;
+}
+
+.typeTitle {
+    text-align: start;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}

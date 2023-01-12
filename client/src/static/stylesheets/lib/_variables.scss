@@ -1,12 +1,17 @@
 // width
 $scroll-width: 10px;
 $page-width: calc(100vw - #{$scroll-width});
+$icon-width: 1.5rem;
 
 // height
-$header-height: 5rem;
+$header-height: 4rem;
 $footer-height: 18.5rem;
 $min-page-height: calc(100vh - #{$header-height});
+$input-height: 2.2rem;
+$icon-height: 1.5rem;
 
+// space
+$basic_space: 10rem;
 
 // color
 $text_black: #181818;
@@ -27,4 +32,9 @@ $readOnly: #f5f6f8;
 $blue: #009ae6;
 $skyblue: #eff7fc;
 $red: #ff5d5d;
+
+$hoverBlue: #0288c9;
+
+// etc
+$box-shadow: 3px 3px 5px $gray4;
 

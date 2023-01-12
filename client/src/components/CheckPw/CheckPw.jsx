@@ -35,6 +35,7 @@ const CheckPw = ({ setShow }) => {
   return (
     <form onSubmit={(e) => onSubmit(e)}>
       <Input
+        placeholder={"비밀번호를 입력하세요"}
         type={"password"}
         name={"password"}
         id={"password"}

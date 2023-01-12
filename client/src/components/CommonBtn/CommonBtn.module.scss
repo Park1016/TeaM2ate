@@ -1,0 +1,33 @@
+@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+@import '../../static/stylesheets/Root.scss';
+
+.container {
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    &.color {
+        a {
+            @include borderBlue;
+            background-color: $blue;
+            color: #fff;
+        }
+        a:hover {
+            background-color: $hoverBlue;
+        }
+    }
+    a {
+        @include border2;
+        border-radius: 5px;
+        display: block;
+        width: 5rem;
+        height: $input-height;
+        background-color: #fff;
+        @include text;
+        @include flexRow;
+        color: $text_gray2;
+    }
+    a:hover {
+        background-color: $gray6;
+    }
+}

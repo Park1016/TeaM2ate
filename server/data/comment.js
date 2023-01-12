@@ -36,11 +36,11 @@ export async function getById(id) {
     .then((result) => result[0][0]);
 }
 
-export async function create(postId, text, userId, username) {
+export async function create(postId, text, url, userId, username) {
   return db
     .execute(
-      "INSERT INTO comment (postId, text, createdAt, userId, username) VALUES(?,?,?,?,?)",
-      [postId, text, new Date(), userId, username]
+      "INSERT INTO comment (postId, text, createdAt, url, userId, username) VALUES(?,?,?,?,?,?)",
+      [postId, text, new Date(), url, userId, username]
     )
     .then(async (result) => await getById(result[0].insertId));
 }

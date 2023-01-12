@@ -4,7 +4,56 @@
 
 .container {
     @include flexRow;
-    width: $page-width;
+    justify-content: space-between;
+    width: calc(#{$page-width} - #{$basic_space}*2);
     height: $header-height;
+    padding: 0 $basic_space;
     background-color: #fff;
+    border-bottom: 1px solid $gray3;
+}
+
+.logo,
+.rightBtns {
+    width: 12rem;
+} 
+
+.logo {
+    @include flexRow;
+    justify-content: flex-start;
+}
+
+.icon {
+    @include icon;
+    padding: 0.5rem;
+    color: $gray1;
+    &.profile {
+
+    }
+}
+
+.rightBtns {
+    @include flexRow;
+    justify-content: end;
+    border-radius: none;
+    li {
+        position: relative;
+        @include flexRow;
+        margin-left: 0.5rem;
+    }
+    &.auth {
+        li > button {
+            border-radius: 50%;
+            overflow: hidden;
+        }
+    }
+}
+
+.iconBox {
+    width: auto;
+    height: auto;
+    @include flexRow;
+    :hover {
+        background-color: $gray6;
+        cursor: pointer;
+    }
 }

@@ -1,1 +1,30 @@
-﻿
+﻿@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+@import '../../static/stylesheets/Root.scss';
+
+.container {
+    width: 100%;
+    @include flexRow;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.list {
+    @include text;
+    @include border2;
+    width: 6rem;
+    margin: 0.25rem;
+    padding: 0.25rem 0;
+    border-radius: 5px;
+    &.done {
+        background-color: $gray6;
+    }
+}
+
+.type {
+    @include flexColumn;
+}
+
+.number {
+    @include flexRow;
+}

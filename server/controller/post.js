@@ -21,6 +21,7 @@ export async function write(req, res) {
   const { cate, title, text, tag, type } = req.body;
   const post = await postRepository.create(
     cate,
+    req.url,
     req.username,
     title,
     text,

@@ -41,6 +41,7 @@ const LoginForm = ({ location }) => {
     <form onSubmit={(e) => onSubmit(e)}>
       <label htmlFor="id">Id</label>
       <Input
+        placeholder={"아이디를 입력하세요"}
         type={"text"}
         name={"id"}
         id={"id"}
@@ -50,6 +51,7 @@ const LoginForm = ({ location }) => {
       />
       <label htmlFor="pw">Password</label>
       <Input
+        placeholder={"비밀번호를 입력하세요"}
         type={"password"}
         name={"pw"}
         id={"pw"}
