@@ -4,7 +4,7 @@ export const sendEmail = async (http, formData) => {
   try {
     const res = await new UserApi(http).certEmail(formData);
     if (res) {
-      return res.data;
+      return res;
     } else {
       return false;
     }

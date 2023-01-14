@@ -1,5 +1,4 @@
 ﻿import axios from "axios";
-import { makeFormData } from "hooks/makeFormData";
 
 export default class UserApi {
   constructor(http) {

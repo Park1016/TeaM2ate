@@ -8,16 +8,10 @@
 
 .content {
     @include modalWrap;
-    position: relative;
-    width: 23rem;
-    height: auto;
-    background-color: #fff;
-    margin-top: $content-margin-top;
-    padding: 2rem 0;
     svg {
         position: absolute;
         top: 2rem;
-        right: 0;
+        right: 2rem;
         cursor: pointer;
     }
 }

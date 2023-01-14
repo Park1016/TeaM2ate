@@ -11,7 +11,8 @@
 
 .bottom {
     @include flexRow;
-    a {
+    p {
         margin: 0 0.5rem;
+        cursor: pointer;
     }
 }

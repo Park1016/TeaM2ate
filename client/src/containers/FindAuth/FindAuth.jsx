@@ -1,18 +1,22 @@
 ﻿import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import classNames from "classnames/bind";
+
+import styles from "./FindAuth.module.scss";
 
 import FindPw from "containers/FindPw/FindPw";
 import CertEmail from "components/CertEmail/CertEmail";
 import { modalState } from "state/modal";
 import { useSetRecoilState } from "recoil";
+import CommonBtn from "components/CommonBtn/CommonBtn";
 
 function FindAuth(props) {
+  const cx = classNames.bind(styles);
   const setModal = useSetRecoilState(modalState);
   const [form, setForm] = useState({ email: "", username: "" });
   const [checkEmail, setCheckEmail] = useState(false);
 
   return (
-    <section>
+    <section className={cx("container")}>
       {!checkEmail && (
         <CertEmail
           form={form}
@@ -22,7 +26,8 @@ function FindAuth(props) {
         />
       )}
       {checkEmail && <FindPw user={form} />}
-      <p
+      <div
+        className={cx("cancelBtn")}
         onClick={() =>
           setModal({
             login: true,
@@ -31,8 +36,8 @@ function FindAuth(props) {
           })
         }
       >
-        취소
-      </p>
+        <CommonBtn type={"button"} color={"white"} text={"취소"} />
+      </div>
     </section>
   );
 }

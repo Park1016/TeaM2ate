@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import { useRecoilValue } from "recoil";
-import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import classNames from "classnames/bind";
+
+import styles from "./SignUpForm.module.scss";
 
 import { httpSelector } from "state/http";
+import { modalState } from "state/modal";
 import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
 import CertEmail from "components/CertEmail/CertEmail";
+import CommonBtn from "components/CommonBtn/CommonBtn";
 
 const SignUpForm = (props) => {
-  const navigate = useNavigate();
+  const cx = classNames.bind(styles);
+  const setModal = useSetRecoilState(modalState);
   const [checkEmail, setCheckEmail] = useState(false);
 
   const [form, setForm] = useState({
@@ -60,7 +65,11 @@ const SignUpForm = (props) => {
       if (res) {
         alert("회원가입이 완료되었습니다");
         setForm({ name: "", username: "", password: "", email: "", url: "" });
-        navigate("/login");
+        setModal({
+          login: true,
+          signup: false,
+          find: false,
+        });
       }
     } catch (err) {
       console.warn(err);
@@ -69,55 +78,63 @@ const SignUpForm = (props) => {
 
   return (
     <form
+      className={cx("container")}
       onSubmit={(e) => onSubmit(e)}
       encType="multipart/form-data"
       method="post"
     >
-      <label htmlFor="name">이름</label>
-      <Input
-        placeholder={"이름을 입력하세요"}
-        type={"text"}
-        name={"name"}
-        id={"name"}
-        value={form.name}
-        form={form}
-        setForm={setForm}
-      />
-      <label htmlFor="username">아이디</label>
-      <Input
-        placeholder={"아이디를 입력하세요"}
-        type={"text"}
-        name={"username"}
-        id={"username"}
-        value={form.username}
-        form={form}
-        setForm={setForm}
-      />
-      <label htmlFor="password">비밀번호</label>
-      <Input
-        placeholder={"비밀번호를 입력하세요"}
-        type={"password"}
-        name={"password"}
-        id={"password"}
-        value={form.password}
-        form={form}
-        setForm={setForm}
-      />
+      <article className={cx("inputBox")}>
+        <label htmlFor="name">이름</label>
+        <Input
+          placeholder={"이름을 입력하세요"}
+          type={"text"}
+          name={"name"}
+          id={"name"}
+          value={form.name}
+          form={form}
+          setForm={setForm}
+        />
+      </article>
+      <article className={cx("inputBox")}>
+        <label htmlFor="username">아이디</label>
+        <Input
+          placeholder={"아이디를 입력하세요"}
+          type={"text"}
+          name={"username"}
+          id={"username"}
+          value={form.username}
+          form={form}
+          setForm={setForm}
+        />
+      </article>
+      <article className={cx("inputBox")}>
+        <label htmlFor="password">비밀번호</label>
+        <Input
+          placeholder={"비밀번호를 입력하세요"}
+          type={"password"}
+          name={"password"}
+          id={"password"}
+          value={form.password}
+          form={form}
+          setForm={setForm}
+        />
+      </article>
       <CertEmail
         form={form}
         setForm={setForm}
+        checkEmail={checkEmail}
         setCheckEmail={setCheckEmail}
         checkDup={true}
       />
-      <label htmlFor="url">프로필 사진</label>
+      {/* <label htmlFor="url">프로필 사진</label>
       <input
         type="file"
         name="url"
         id="url"
         accept="imgae/*"
         onChange={(e) => onPhoto(e)}
-      />
-      <button type="submit">회원가입</button>
+      /> */}
+      <CommonBtn type={"submit"} color={"blue"} text={"회원가입"} />
     </form>
   );
 };
