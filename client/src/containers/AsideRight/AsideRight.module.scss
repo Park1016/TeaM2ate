@@ -3,11 +3,6 @@
 @import '../../static/stylesheets/Root.scss';
 
 .container {
-    @include text;
-    @include flexRow;
-    width: 100%;
-    justify-content: flex-start;
-    button {
-        margin-left: 0.25rem;
-    }
+    width: $side-width;
+    background-color: red;
 }

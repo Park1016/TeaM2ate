@@ -1,0 +1,15 @@
+@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+@import '../../static/stylesheets/Root.scss';
+
+.container {
+    position: fixed;
+    top: $header-height;
+    left: calc(#{$pc}/2 - #{$pc-width}/2);
+    width: $pc-width;
+    min-height: $min-page-height;
+    margin-top: $content-margin-top;
+    @include flexRow;
+    align-items: flex-start;
+    justify-content: space-between;
+}

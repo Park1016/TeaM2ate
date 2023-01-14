@@ -6,28 +6,30 @@
     width: auto;
     height: auto;
     background-color: transparent;
+    cursor: pointer;
     &.color {
-        a {
+        a, p {
             @include borderBlue;
             background-color: $blue;
             color: #fff;
         }
-        a:hover {
+        a:hover,
+        p:hover {
             background-color: $hoverBlue;
         }
     }
-    a {
+    a, p {
         @include border2;
+        @include text;
+        @include flexRow;
         border-radius: 5px;
-        display: block;
         width: 5rem;
         height: $input-height;
         background-color: #fff;
-        @include text;
-        @include flexRow;
         color: $text_gray2;
     }
-    a:hover {
+    a:hover,
+    p:hover {
         background-color: $gray6;
     }
 }

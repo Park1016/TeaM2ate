@@ -40,14 +40,16 @@ const Post = (props) => {
 
   return (
     <section className={cx("container")}>
-      {user && <Bookmark id={id} http={http} user={user} />}
-      {post && (
-        <>
-          {post.userId === auth && <UpdateDelBtn type={"post"} id={id} />}
-          <FramePost value={post} board={false} />
-          <Comment id={id} />
-        </>
-      )}
+      <div className={cx("content")}>
+        {user && <Bookmark id={id} http={http} user={user} />}
+        {post && (
+          <>
+            {post.userId === auth && <UpdateDelBtn type={"post"} id={id} />}
+            <FramePost value={post} board={false} />
+            <Comment id={id} />
+          </>
+        )}
+      </div>
     </section>
   );
 };

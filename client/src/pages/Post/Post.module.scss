@@ -4,5 +4,8 @@
 
 .container {
     @include container;
-    margin-top: 3rem;
+}
+
+.content {
+    @include content;
 }

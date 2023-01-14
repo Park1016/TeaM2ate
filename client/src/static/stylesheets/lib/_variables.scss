@@ -1,7 +1,10 @@
 // width
 $scroll-width: 10px;
-$page-width: calc(100vw - #{$scroll-width});
 $icon-width: 1.5rem;
+$side-width: 11rem;
+$pc: calc(100vw - #{$scroll-width});
+$pc-width: 75rem;
+$content-width: 50rem;
 
 // height
 $header-height: 4rem;
@@ -10,8 +13,8 @@ $min-page-height: calc(100vh - #{$header-height});
 $input-height: 2.2rem;
 $icon-height: 1.5rem;
 
-// space
-$basic_space: 10rem;
+// margin
+$content-margin-top: 1.5rem;
 
 // color
 $text_black: #181818;

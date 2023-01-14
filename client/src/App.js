@@ -3,10 +3,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Outlet } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 
-// import { Reset } from "styled-reset";
 import "./App.css";
 
 import Header from "containers/Header/Header";
+import Aside from "containers/Aside/Aside";
 import Loading from "components/Loading/Loading";
 
 const queryClient = new QueryClient({
@@ -23,8 +23,8 @@ const App = (props) => {
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <Suspense fallback={<Loading />}>
-          {/* <Reset /> */}
           <Header />
+          <Aside />
           <Outlet />
         </Suspense>
       </RecoilRoot>

@@ -22,7 +22,6 @@
     "react-select": "^5.7.0",
     "recoil": "^0.7.6",
     "recoil-persist": "^4.2.0",
-    "styled-reset": "^4.4.4",
     "use-immer": "^0.8.1",
     "web-vitals": "^2.1.4"
   },

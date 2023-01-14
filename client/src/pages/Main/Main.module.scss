@@ -4,6 +4,4 @@
 
 .container {
     @include container; 
-    @include flexRow;
-    align-items: flex-start;
 }

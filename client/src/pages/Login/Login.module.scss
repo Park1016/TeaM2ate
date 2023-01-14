@@ -1,1 +1,38 @@
-﻿
+﻿@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+@import '../../static/stylesheets/Root.scss';
+
+.container {
+    @include modal;
+    background-color: #fff;
+}
+
+.content {
+    @include modalWrap;
+    position: relative;
+    width: 23rem;
+    height: auto;
+    background-color: #fff;
+    margin-top: $content-margin-top;
+    padding: 2rem 0;
+    svg {
+        position: absolute;
+        top: 2rem;
+        right: 0;
+        cursor: pointer;
+    }
+}
+
+.line {
+    width: 90%;
+    height: 3px;
+    background-color: $gray5;
+    margin-bottom: 1rem;
+}
+
+.bottom {
+    @include flexRow;
+    a {
+        margin: 0 0.5rem;
+    }
+}

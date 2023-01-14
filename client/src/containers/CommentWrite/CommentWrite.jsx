@@ -6,6 +6,7 @@ import styles from "./CommentWrite.module.scss";
 import { makeFormData } from "hooks/makeFormData";
 import CommentApi from "api/comment";
 import Textarea from "components/Textarea/Textarea";
+import CommonBtn from "components/CommonBtn/CommonBtn";
 
 function CommentWrite({ http, id, setData, value, setEdit }) {
   const cx = classNames.bind(styles);
@@ -43,17 +44,11 @@ function CommentWrite({ http, id, setData, value, setEdit }) {
         form={form}
         setForm={setForm}
       />
-      <button className={cx("subminBtn")} type="submit">
-        등록
-      </button>
+      <CommonBtn type={"submit"} color={"blue"} text={"등록"} />
       {value && (
-        <button
-          className={cx("calcelBtn")}
-          type="button"
-          onClick={() => setEdit(false)}
-        >
-          취소
-        </button>
+        <div onClick={() => setEdit(false)}>
+          <CommonBtn type={"button"} color={"white"} text={"취소"} />
+        </div>
       )}
     </form>
   );

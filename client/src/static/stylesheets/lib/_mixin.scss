@@ -62,10 +62,18 @@
 }
 
 @mixin container {
-    width: calc(#{$page-width} - #{$basic_space}*2);
+    width: $pc;
+    margin-top: $header-height;
     min-height: $min-page-height;
-    padding: 0 $basic_space;
     background-color: #fff;
+    @include flexRow;
+}
+
+@mixin content {
+    width: $content-width;
+    margin-top: $content-margin-top;
+    margin-bottom: 5rem;
+    z-index: 1;
 }
 
 @mixin text {

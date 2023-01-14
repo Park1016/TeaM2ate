@@ -4,14 +4,8 @@
 
 .article {
     @include flexColumn;
-    width: 70%;
+    @include content;
     background-color: #fff;
-}
-
-.aside {
-    width: 15%;
-    height: 100vh;
-    background-color: beige;
 }
 
 .postWrap {

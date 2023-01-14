@@ -3,13 +3,20 @@
 @import '../../static/stylesheets/Root.scss';
 
 .container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    @include container;
+    margin-top: 0;
+    min-height: $header-height;
+    border-bottom: 1px solid $gray3;
+    z-index: 100;
+}
+
+.content {
+    width: $pc-width;
     @include flexRow;
     justify-content: space-between;
-    width: calc(#{$page-width} - #{$basic_space}*2);
-    height: $header-height;
-    padding: 0 $basic_space;
-    background-color: #fff;
-    border-bottom: 1px solid $gray3;
 }
 
 .logo,

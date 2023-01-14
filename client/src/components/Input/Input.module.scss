@@ -3,7 +3,7 @@
 @import '../../static/stylesheets/Root.scss';
 
 .container {
-    width: calc(100% - 2rem);
+    width: calc(100% - 2rem - 2px);
     height: 100%;
     padding: 0 1rem;
     border-radius: 5px;

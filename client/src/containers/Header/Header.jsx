@@ -28,39 +28,51 @@ const Header = () => {
 
   return (
     <header className={cx("container")}>
-      <button className={cx("logo")}>
-        <Logo />
-      </button>
-      <HeaderSearch />
-      <ul className={cx("rightBtns", { auth })}>
-        <li>
-          {auth ? (
-            <button type="button" className={cx("iconBox")}>
-              <BsPencilSquare
-                className={cx("icon", { profile: false })}
-                onClick={() => navigate("/post/write")}
+      <article className={cx("content")}>
+        <button className={cx("logo")}>
+          <Logo />
+        </button>
+        <HeaderSearch />
+        <ul className={cx("rightBtns", { auth })}>
+          <li>
+            {auth ? (
+              <button type="button" className={cx("iconBox")}>
+                <BsPencilSquare
+                  className={cx("icon", { profile: false })}
+                  onClick={() => navigate("/post/write")}
+                />
+              </button>
+            ) : (
+              <CommonBtn
+                type={"button"}
+                color={"blue"}
+                text={"글쓰기"}
+                path={"post/write"}
               />
-            </button>
-          ) : (
-            <CommonBtn color={"blue"} path={"post/write"} text={"글쓰기"} />
-          )}
-        </li>
-        <li>
-          {auth ? (
-            <button
-              type="button"
-              className={cx("iconBox")}
-              onMouseDown={() => setShow(!show)}
-              onBlur={() => setShow(false)}
-            >
-              <FaUserCircle className={cx("icon", { profile: true })} />
-            </button>
-          ) : (
-            <CommonBtn color={"white"} path={"login"} text={"로그인"} />
-          )}
-          {show && <ProfileToggle http={http} />}
-        </li>
-      </ul>
+            )}
+          </li>
+          <li>
+            {auth ? (
+              <button
+                type="button"
+                className={cx("iconBox")}
+                onMouseDown={() => setShow(!show)}
+                onBlur={() => setShow(false)}
+              >
+                <FaUserCircle className={cx("icon", { profile: true })} />
+              </button>
+            ) : (
+              <CommonBtn
+                type={"button"}
+                color={"white"}
+                text={"로그인"}
+                path={"login"}
+              />
+            )}
+            {show && <ProfileToggle http={http} />}
+          </li>
+        </ul>
+      </article>
     </header>
   );
 };
