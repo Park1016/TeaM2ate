@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import { modalState } from "state/modal";
+import { httpSelector } from "state/http";
 import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
-import { httpSelector } from "state/http";
 import Input from "components/Input/Input";
 
 const FindPw = ({ user }) => {
-  const navigate = useNavigate();
   const [form, setForm] = useState({ pw: "", checkPw: "" });
   const http = useRecoilValue(httpSelector);
+  const setModal = useSetRecoilState(modalState);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +24,11 @@ const FindPw = ({ user }) => {
     const res = await new UserApi(http).findPw(formData);
     if (res) {
       alert("비밀번호가 변경되었습니다. 변경된 비밀번호로 로그인해주세요.");
-      navigate("/login");
+      setModal({
+        login: true,
+        signup: false,
+        find: false,
+      });
     }
   };
 

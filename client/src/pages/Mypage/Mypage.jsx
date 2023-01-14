@@ -7,7 +7,7 @@ import MypageContent from "containers/MypageContent/MypageContent";
 
 const Mypage = (props) => {
   const auth = useRecoilValue(authState);
-  const [checkAuth] = useCheckAuth({ auth, page: "/mypage" });
+  const [checkAuth] = useCheckAuth({ auth });
 
   useEffect(() => {
     checkAuth();

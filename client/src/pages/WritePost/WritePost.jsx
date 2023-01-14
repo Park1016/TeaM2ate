@@ -7,7 +7,7 @@ import FrameWrite from "containers/FrameWrite/FrameWrite";
 
 const WritePost = (props) => {
   const auth = useRecoilValue(authState);
-  const [checkAuth] = useCheckAuth({ auth, page: "/post/write" });
+  const [checkAuth] = useCheckAuth({ auth });
   const [form, setForm] = useState({
     title: "",
     text: "",

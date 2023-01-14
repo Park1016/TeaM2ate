@@ -9,9 +9,6 @@ import Post from "pages/Post/Post";
 import Mypage from "pages/Mypage/Mypage";
 import WritePost from "pages/WritePost/WritePost";
 import UpdatePost from "pages/UpdatePost/UpdatePost";
-import Login from "pages/Login/Login";
-import SignUp from "pages/SignUp/SignUp";
-import FindAuth from "pages/FindAuth/FindAuth";
 import Setting from "pages/Setting/Setting";
 
 const router = createBrowserRouter([
@@ -21,9 +18,6 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { index: true, element: <Main /> },
-      { path: "login", element: <Login /> },
-      { path: "signup", element: <SignUp /> },
-      { path: "find", element: <FindAuth /> },
       { path: "post/:id", element: <Post /> },
       { path: "mypage", element: <Mypage /> },
       { path: "settings", element: <Setting /> },

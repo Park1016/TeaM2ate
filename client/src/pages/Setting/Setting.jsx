@@ -7,7 +7,7 @@ import SettingContent from "containers/SettingContent/SettingContent";
 
 const Setting = (props) => {
   const auth = useRecoilValue(authState);
-  const [checkAuth] = useCheckAuth({ auth, page: "/settings" });
+  const [checkAuth] = useCheckAuth({ auth });
 
   useEffect(() => {
     checkAuth();

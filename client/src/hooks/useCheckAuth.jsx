@@ -1,16 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { modalState } from "state/modal";
 
-const useCheckAuth = ({ auth, page }) => {
-  const navigate = useNavigate();
+const useCheckAuth = ({ auth }) => {
+  const setModal = useSetRecoilState(modalState);
 
   const checkAuth = () => {
     if (!auth) {
       alert("로그인 후 접근 가능한 페이지입니다");
-      navigate("/login", {
-        state: {
-          page,
-        },
-      });
+      setModal({ login: true, signup: false, find: false });
     }
   };
 
