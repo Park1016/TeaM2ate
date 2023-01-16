@@ -31,7 +31,7 @@ const Bookmark = ({ id, http, user }) => {
     }
   }, []);
   return (
-    <button type="button" onClick={onClick} className={cx("button")}>
+    <button className={cx("button")} type="button" onClick={onClick}>
       {bookmark ? <FaBookmark /> : <FaRegBookmark />}
     </button>
   );

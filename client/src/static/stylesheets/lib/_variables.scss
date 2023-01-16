@@ -2,7 +2,8 @@
 $scroll-width: 10px;
 $icon-width: 1.5rem;
 $side-width: 11rem;
-$pc: calc(100vw - #{$scroll-width});
+// $pc: calc(100vw - #{$scroll-width});
+$pc: 100vw;
 $pc-width: 75rem;
 $content-width: 50rem;
 
@@ -29,15 +30,18 @@ $gray3: #ced4da;
 $gray4: #dee2e6;
 $gray5: #e9ecef;
 $gray6: #f1f3f5;
+$gray7: #F7F7F7;
 
 $readOnly: #f5f6f8;
 
 $blue: #009ae6;
 $skyblue: #eff7fc;
 $red: #ff5d5d;
+$yellow: #FFA000;
 
 $hoverBlue: #0288c9;
 
 // etc
 $box-shadow: 3px 3px 5px $gray4;
+$border: 1px solid $gray3;
 

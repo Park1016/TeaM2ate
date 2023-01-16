@@ -10,4 +10,12 @@
 
 .loginBtn {
     cursor: pointer;
+    span {
+        color: $red;
+        border-bottom: 1px solid $red;
+        cursor: pointer;
+    }
+    span:hover {
+        font-weight: 600;
+    }
 }

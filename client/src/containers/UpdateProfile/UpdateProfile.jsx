@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
+import classNames from "classnames/bind";
+
+import styles from "./UpdateProfile.module.scss";
 
 import { tagSelector } from "state/local";
 import UserApi from "api/user";
@@ -8,8 +11,11 @@ import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
 import Textarea from "components/Textarea/Textarea";
 import SelectTag from "components/SelectTag/SelectTag";
+import ProfilePhoto from "components/ProfilePhoto/ProfilePhoto";
+import CommonBtn from "components/CommonBtn/CommonBtn";
 
 const UpdateProfile = ({ http, user }) => {
+  const cx = classNames.bind(styles);
   const _tag = useRecoilValue(tagSelector);
   const { id, url, username, introduce, alert, tag } = user;
   const [form, setForm] = useState({ url, username, introduce, alert, tag });
@@ -36,26 +42,29 @@ const UpdateProfile = ({ http, user }) => {
   };
 
   return (
-    <form onSubmit={(e) => onSubmit(e)}>
-      <ul>
-        <li>
-          <p>프로필 사진</p>
-          <p>{user.url}</p>
+    <form className={cx("container")} onSubmit={(e) => onSubmit(e)}>
+      <ul className={cx("content")}>
+        <li className={cx("top")}>
+          <ProfilePhoto url={form.url} username={form.username} mypage={true} />
+          <div>
+            <label className={cx("title")} htmlFor="username">
+              아이디
+            </label>
+            <Input
+              placeholder={"아이디를 입력하세요"}
+              type={"text"}
+              name={"username"}
+              id={"username"}
+              value={form.username}
+              form={form}
+              setForm={setForm}
+            />
+          </div>
         </li>
         <li>
-          <label htmlFor="username">닉네임</label>
-          <Input
-            placeholder={"아이디를 입력하세요"}
-            type={"text"}
-            name={"username"}
-            id={"username"}
-            value={form.username}
-            form={form}
-            setForm={setForm}
-          />
-        </li>
-        <li>
-          <label htmlFor="introduce">자기소개</label>
+          <label className={cx("title")} htmlFor="introduce">
+            자기소개
+          </label>
           <Textarea
             name={"introduce"}
             id={"introduce"}
@@ -64,12 +73,17 @@ const UpdateProfile = ({ http, user }) => {
             setForm={setForm}
           />
         </li>
+        <li>
+          <p className={cx("title")}>태그</p>
+          <SelectTag data={_tag} form={form} setForm={setForm} />
+        </li>
       </ul>
-      <SelectTag data={_tag} form={form} setForm={setForm} />
-      <button type="button" onClick={() => navigate("/mypage")}>
-        취소
-      </button>
-      <button type="submit">완료</button>
+      <article className={cx("buttons")}>
+        <div onClick={() => navigate("/mypage")}>
+          <CommonBtn type={"button"} color={"white"} text={"취소"} />
+        </div>
+        <CommonBtn type={"submit"} color={"blue"} text={"저장"} />
+      </article>
     </form>
   );
 };

@@ -3,13 +3,16 @@
 @import '../../static/stylesheets/Root.scss';
 
 .container {
-    width: calc(100% - 2rem - 2px);
-    height: 100%;
-    padding: 0 1rem;
-    border-radius: 5px;
     @include text;
-    text-align: start;
+    @include input;
     ::placeholder {
         color: $text_gray4;
+    }
+    &:read-only {
+        background-color: $readOnly;
+        caret-color: transparent;
+    }
+    &:focus {
+        border: 1px solid $blue;
     }
 }

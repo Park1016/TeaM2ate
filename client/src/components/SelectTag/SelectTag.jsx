@@ -1,7 +1,11 @@
 ﻿import React, { useEffect, useState } from "react";
 import Select from "react-select";
+import classNames from "classnames/bind";
+
+import styles from "./SelectTag.module.scss";
 
 const SelectTag = ({ data, form, setForm }) => {
+  const cx = classNames.bind(styles);
   const [defaultvalue, setDefaultValue] = useState(null);
   const onChange = (e) => {
     setForm({ ...form, tag: e.map((item) => item.value) });
@@ -13,7 +17,7 @@ const SelectTag = ({ data, form, setForm }) => {
   }, []);
 
   return (
-    <div>
+    <div className={cx("container")}>
       {defaultvalue && (
         <Select
           onChange={(e) => onChange(e)}

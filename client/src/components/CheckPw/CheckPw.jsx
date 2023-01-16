@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
+import classNames from "classnames/bind";
+
+import styles from "./CheckPw.module.scss";
 
 import { authState } from "state/auth";
 import { httpSelector } from "state/http";
 import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
+import CommonBtn from "components/CommonBtn/CommonBtn";
 
 const CheckPw = ({ setShow }) => {
+  const cx = classNames.bind(styles);
   const auth = useRecoilValue(authState);
   const http = useRecoilValue(httpSelector);
   const [form, setForm] = useState({ password: "" });
@@ -33,7 +38,7 @@ const CheckPw = ({ setShow }) => {
   };
 
   return (
-    <form onSubmit={(e) => onSubmit(e)}>
+    <form className={cx("container")} onSubmit={(e) => onSubmit(e)}>
       <Input
         placeholder={"비밀번호를 입력하세요"}
         type={"password"}
@@ -43,7 +48,7 @@ const CheckPw = ({ setShow }) => {
         form={form}
         setForm={setForm}
       />
-      <button type="submit">확인</button>
+      <CommonBtn type={"submit"} color={"blue"} text={"확인"} />
     </form>
   );
 };

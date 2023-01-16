@@ -13,7 +13,7 @@
     display: grid;
     grid-gap: 1.5rem;
     grid-template-columns: repeat(2, 23rem);
-    li:hover {
-        transform: scale(1.01);
+    > li:hover {
+        transform: scale(1.007);
     }
 }

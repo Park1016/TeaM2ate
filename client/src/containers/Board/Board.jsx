@@ -1,4 +1,4 @@
-﻿import React from "react";
+﻿import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRecoilValue } from "recoil";
 import classNames from "classnames/bind";
@@ -17,6 +17,7 @@ function Board(props) {
   const { isLoading, error, data } = useQuery(["board"], async () => {
     return await new BoardApi(http).getBoard();
   });
+  const [check, setCheck] = useState(true);
 
   return (
     <>
@@ -25,11 +26,13 @@ function Board(props) {
       {data && (
         <>
           <article className={cx("article")}>
-            <Filter />
+            <Filter check={check} setCheck={setCheck} />
             <ul className={cx("postWrap")}>
-              {data.map((item) => (
-                <BoardPost key={item.id} value={item} />
-              ))}
+              {check
+                ? data
+                    .filter((x) => x.progress === "ing")
+                    .map((item) => <BoardPost key={item.id} value={item} />)
+                : data.map((item) => <BoardPost key={item.id} value={item} />)}
             </ul>
           </article>
         </>

@@ -1,19 +1,32 @@
-﻿import React from 'react';
+﻿import React from "react";
+import classNames from "classnames/bind";
 
-function SelectBox({value, data, defaultValue, disabled}) {
+import styles from "./SelectBox.module.scss";
+import { TiArrowSortedDown } from "react-icons/ti";
 
-    const onChange = (target) => {
-        data(target);
-    }
+const SelectBox = ({ value, data, defaultValue, disabled }) => {
+  const cx = classNames.bind(styles);
+  const onChange = (target) => {
+    data(target);
+  };
 
-    return (
-        <select onChange={(e)=>onChange(e.target.value)} disabled={disabled}>
-            {defaultValue && <option defaultValue={""} hidden>{defaultValue}</option>}
-            {value.map((item, index)=>(
-                <option key={index} value={item.value}>{item.name}</option>
-            ))}
-        </select>
-    );
-}
+  return (
+    <div className={cx("container")}>
+      <select onChange={(e) => onChange(e.target.value)} disabled={disabled}>
+        {defaultValue && (
+          <option defaultValue={""} hidden>
+            {defaultValue}
+          </option>
+        )}
+        {value.map((item, index) => (
+          <option key={index} value={item.value}>
+            {item.name}
+          </option>
+        ))}
+      </select>
+      <TiArrowSortedDown />
+    </div>
+  );
+};
 
 export default SelectBox;

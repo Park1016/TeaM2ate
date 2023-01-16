@@ -25,4 +25,12 @@
 .inputBox {
     width: 90%;
     height: $input-height;
+    input {
+        border: none;
+        height: 100%;
+        margin-top: 0;
+    }
+    input:focus {
+        border: none;
+    }
 }

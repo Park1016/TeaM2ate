@@ -5,6 +5,8 @@ import classNames from "classnames/bind";
 
 import styles from "./UpdateDelBtn.module.scss";
 import { FiMoreVertical } from "react-icons/fi";
+import { FaPencilAlt } from "react-icons/fa";
+import { RiDeleteBin2Line } from "react-icons/ri";
 
 import { httpSelector } from "state/http";
 import CommentApi from "api/comment";
@@ -48,7 +50,7 @@ function UpdateDelBtn({ type, id, setEdit, setData }) {
         await new CommentApi(http).deleteComment(id);
         const res = await new CommentApi(http).getCommentByPostId(id);
         setData(res);
-        alert("댓글이 삭제되었습니다");
+        // alert("댓글이 삭제되었습니다");
         break;
       default:
         break;
@@ -68,8 +70,14 @@ function UpdateDelBtn({ type, id, setEdit, setData }) {
       </button>
       {show && (
         <ul className={cx("toggle")}>
-          <li onMouseDown={onUpdate}>수정</li>
-          <li onMouseDown={onDelete}>삭제</li>
+          <li onMouseDown={onUpdate}>
+            <FaPencilAlt />
+            <p>수정</p>
+          </li>
+          <li onMouseDown={onDelete}>
+            <RiDeleteBin2Line />
+            <p>삭제</p>
+          </li>
         </ul>
       )}
     </div>

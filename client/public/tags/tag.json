@@ -103,6 +103,7 @@
         { "value": "ubuntu", "label": "ubuntu" },
         { "value": "unity", "label": "unity" },
         { "value": "vue", "label": "vue" },
+        { "value": "vue.js", "label": "vue.js" },
         { "value": "vscode", "label": "vscode" },
         { "value": "vr", "label": "vr" },
         { "value": "vc++", "label": "vc++" },

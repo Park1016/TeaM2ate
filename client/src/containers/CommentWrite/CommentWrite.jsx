@@ -10,7 +10,7 @@ import CommonBtn from "components/CommonBtn/CommonBtn";
 
 function CommentWrite({ http, id, setData, value, setEdit }) {
   const cx = classNames.bind(styles);
-  const [form, setForm] = useState({ comment: "" });
+  const [form, setForm] = useState({ comment: value ? value.text : "" });
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -36,14 +36,16 @@ function CommentWrite({ http, id, setData, value, setEdit }) {
 
   return (
     <form className={cx("container")} onSubmit={(e) => onSubmit(e)}>
-      <Textarea
-        name={"comment"}
-        id={"comment"}
-        value={form.comment}
-        placeholder={"댓글을 입력하세요"}
-        form={form}
-        setForm={setForm}
-      />
+      <div className={cx("textarea")}>
+        <Textarea
+          name={"comment"}
+          id={"comment"}
+          value={form.comment}
+          placeholder={"댓글을 입력하세요"}
+          form={form}
+          setForm={setForm}
+        />
+      </div>
       <CommonBtn type={"submit"} color={"blue"} text={"등록"} />
       {value && (
         <div onClick={() => setEdit(false)}>

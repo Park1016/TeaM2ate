@@ -15,4 +15,13 @@
         margin: 0 0.5rem;
         cursor: pointer;
     }
+    p:first-child {
+        color: $red;
+    }
+    p:last-child {
+        color: $gray1;
+    }
+    p:hover {
+        font-weight: 600;
+    }
 }

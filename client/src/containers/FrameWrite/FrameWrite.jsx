@@ -1,6 +1,9 @@
 ﻿import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
+import classNames from "classnames/bind";
+
+import styles from "./FrameWrite.module.scss";
 
 import {
   progressState,
@@ -18,8 +21,10 @@ import PlusBtn from "components/PlusBtn/PlusBtn";
 import ChooseBox from "components/ChooseBox/ChooseBox";
 import Input from "components/Input/Input";
 import TextEditor from "components/TextEditor/TextEditor";
+import CommonBtn from "components/CommonBtn/CommonBtn";
 
 const FrameWrite = ({ form, setForm, editId }) => {
+  const cx = classNames.bind(styles);
   const navigate = useNavigate();
 
   const t = useRecoilValue(typeSelector);
@@ -75,49 +80,76 @@ const FrameWrite = ({ form, setForm, editId }) => {
   };
 
   return (
-    <section>
-      <form onSubmit={(e) => onSubmit(e)}>
-        <label htmlFor="title">제목</label>
-        <Input
-          placeholder={"제목을 입력하세요"}
-          type={"text"}
-          name={"title"}
-          id={"title"}
-          value={form.title}
-          form={form}
-          setForm={setForm}
-        />
-        <label htmlFor="text">내용</label>
-        <TextEditor
-          http={http}
-          name={"text"}
-          id={"text"}
-          value={form.text}
-          form={form}
-          setForm={setForm}
-        />
+    <section className={cx("container")}>
+      <form className={cx("content")} onSubmit={(e) => onSubmit(e)}>
         <article>
-          <p>태그</p>
+          <label className={cx("title")} htmlFor="title">
+            제목
+          </label>
+          <Input
+            placeholder={"제목을 입력하세요"}
+            type={"text"}
+            name={"title"}
+            id={"title"}
+            value={form.title}
+            form={form}
+            setForm={setForm}
+          />
+        </article>
+        <article>
+          <label className={cx("title")} htmlFor="text">
+            내용
+          </label>
+          <TextEditor
+            http={http}
+            name={"text"}
+            id={"text"}
+            value={form.text}
+            form={form}
+            setForm={setForm}
+          />
+        </article>
+        <article>
+          <p className={cx("title")}>태그</p>
           <SelectTag data={tag} form={form} setForm={setForm} />
         </article>
         <article>
-          <p>유형</p>
-          <PlusBtn setShow={setShow} />
-          {show && (
-            <Type form={form} setForm={setForm} setShow={setShow} t={t} n={n} />
-          )}
+          <div className={cx("typeTop")}>
+            <p>모집유형</p>
+            <button type="button" onClick={() => setShow(!show)}>
+              모집유형 선택하기
+            </button>
+            {/* <PlusBtn setShow={setShow} /> */}
+          </div>
           {form.type.length !== 0 && (
-            <FrameType type={form.type} form={form} setForm={setForm} />
+            <div className={cx("typeBottom")}>
+              <FrameType type={form.type} form={form} setForm={setForm} />
+            </div>
           )}
         </article>
         {editId && (
-          <article>
+          <article className={cx("progress")}>
             <p>진행 상황</p>
             <ChooseBox form={form} setForm={setForm} data={progress} />
           </article>
         )}
-        <button type="submit">작성하기</button>
+        <div className={cx("line")}></div>
+        <CommonBtn
+          type={"submit"}
+          color={"blue"}
+          text={editId ? "수정하기" : "작성하기"}
+        />
       </form>
+      {show && (
+        <Type
+          form={form}
+          setForm={setForm}
+          setShow={setShow}
+          t={t}
+          n={n}
+          editId={editId}
+        />
+      )}
     </section>
   );
 };

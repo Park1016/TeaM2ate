@@ -27,7 +27,8 @@ export async function getPostByComment(username) {
     if (err) throw err;
     result;
   });
-  return res[0];
+  const data = { post: res[0], comment };
+  return data;
 }
 
 export async function getById(id) {

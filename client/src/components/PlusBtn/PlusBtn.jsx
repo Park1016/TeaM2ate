@@ -1,10 +1,16 @@
-﻿import React from 'react';
+﻿import React from "react";
+import { BsPlusSquareDotted } from "react-icons/bs";
+import classNames from "classnames/bind";
 
-function PlusBtn({setShow}) {
+import styles from "./PlusBtn.module.scss";
 
-    return (
-        <button type="button" onClick={()=>setShow(true)}>더보기</button>
-    );
+function PlusBtn({ setShow }) {
+  const cx = classNames.bind(styles);
+  return (
+    <button className={cx("icon")}>
+      <BsPlusSquareDotted onClick={() => setShow(true)} />
+    </button>
+  );
 }
 
 export default PlusBtn;

@@ -2,6 +2,8 @@
 import classNames from "classnames/bind";
 
 import styles from "./FrameType.module.scss";
+import { TiDelete } from "react-icons/ti";
+
 import EditType from "containers/EditType/EditType";
 
 function FrameType({ type, form, setForm }) {
@@ -25,13 +27,14 @@ function FrameType({ type, form, setForm }) {
   return (
     <>
       {type.length !== 0 && (
-        <div className={cx("container")}>
+        <ul className={cx("container")}>
           {type.map((item, index) => (
-            <div
+            <li
               className={cx("list", {
                 done:
                   Object.values(item)[0].num ===
                   Object.values(item)[0].totalNum,
+                write: form,
               })}
               key={index}
             >
@@ -43,10 +46,15 @@ function FrameType({ type, form, setForm }) {
                   <p>{Object.values(item)[0].totalNum}</p>
                 </div>
               </div>
-              {form && <p onClick={() => onDelete(item)}>삭제</p>}
-            </div>
+              {form && (
+                <TiDelete
+                  className={cx("delIcon")}
+                  onClick={() => onDelete(item)}
+                />
+              )}
+            </li>
           ))}
-        </div>
+        </ul>
       )}
       {data.show && (
         <EditType form={form} setForm={setForm} data={data} setData={setData} />

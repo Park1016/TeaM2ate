@@ -9,7 +9,7 @@
     @include container;
     margin-top: 0;
     min-height: $header-height;
-    border-bottom: 1px solid $gray3;
+    border-bottom: $border;
     z-index: 100;
 }
 

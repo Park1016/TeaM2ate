@@ -2,8 +2,7 @@
 @import '../../static/stylesheets/lib/mixin';
 @import '../../static/stylesheets/Root.scss';
 
-.container {
-    width: $side-width;
-    // background-color: red;
-    border-left: $border;
+.timer {
+    @include text;
+    color: $red;
 }

@@ -1,9 +1,17 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import classNames from "classnames/bind";
 
 import styles from "./Textarea.module.scss";
 
-const Textarea = ({ name, id, value, placeholder, form, setForm }) => {
+const Textarea = ({
+  name,
+  id,
+  value,
+  placeholder,
+  form,
+  setForm,
+  readOnly,
+}) => {
   const cx = classNames.bind(styles);
   const textarea = useRef(null);
   const onChange = (e) => {
@@ -14,9 +22,16 @@ const Textarea = ({ name, id, value, placeholder, form, setForm }) => {
     if (textarea.current) {
       textarea.current.style.height = "auto";
       let height = textarea.current.scrollHeight;
-      textarea.current.style.height = `${height + 16}px`;
+      textarea.current.style.height = `${height}px`;
     }
   };
+
+  useEffect(() => {
+    if (readOnly) {
+      autoResizeTextarea();
+    }
+  }, []);
+
   return (
     <textarea
       ref={textarea}
@@ -25,12 +40,12 @@ const Textarea = ({ name, id, value, placeholder, form, setForm }) => {
       id={id}
       value={value}
       placeholder={placeholder}
-      defaultValue={value ? value.text : ""}
       maxLength="1200"
-      className={cx("textarea")}
+      className={cx("textarea", { readOnly })}
       onKeyDown={autoResizeTextarea}
       onKeyUp={autoResizeTextarea}
       onChange={(e) => onChange(e)}
+      readOnly={readOnly}
     />
   );
 };

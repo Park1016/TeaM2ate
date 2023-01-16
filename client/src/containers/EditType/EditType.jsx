@@ -6,6 +6,7 @@ import styles from "./EditType.module.scss";
 
 import { numSelector, typeSelector } from "state/local";
 import SelectBox from "components/SelectBox/SelectBox";
+import CommonBtn from "components/CommonBtn/CommonBtn";
 
 function EditType({ form, setForm, data, setData }) {
   const cx = classNames.bind(styles);
@@ -60,7 +61,14 @@ function EditType({ form, setForm, data, setData }) {
               defaultValue={num}
             />
           </li>
-          <li onClick={onFinish}>완료</li>
+          <li className={cx("buttons")}>
+            <div onClick={() => setData({ ...data, show: false })}>
+              <CommonBtn type={"button"} color={"white"} text={"취소"} />
+            </div>
+            <div onClick={onFinish}>
+              <CommonBtn type={"button"} color={"blue"} text={"수정완료"} />
+            </div>
+          </li>
         </ul>
       )}
     </>

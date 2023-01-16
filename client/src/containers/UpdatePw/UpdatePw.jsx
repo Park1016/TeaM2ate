@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import classNames from "classnames/bind";
+
+import styles from "./UpdatePw.module.scss";
+import { BsKeyFill } from "react-icons/bs";
 
 import { authState } from "state/auth";
 import { httpSelector } from "state/http";
@@ -7,8 +11,10 @@ import { modalState } from "state/modal";
 import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
+import CommonBtn from "components/CommonBtn/CommonBtn";
 
 const UpdatePw = (props) => {
+  const cx = classNames.bind(styles);
   const auth = useRecoilValue(authState);
   const http = useRecoilValue(httpSelector);
   const setAuth = useSetRecoilState(authState);
@@ -45,7 +51,11 @@ const UpdatePw = (props) => {
   };
 
   return (
-    <form onSubmit={(e) => onSubmit(e)}>
+    <form className={cx("container")} onSubmit={(e) => onSubmit(e)}>
+      <div>
+        <BsKeyFill />
+        <p>비밀번호 변경</p>
+      </div>
       <Input
         placeholder={"새로운 비밀번호를 입력하세요"}
         type={"password"}
@@ -64,7 +74,7 @@ const UpdatePw = (props) => {
         form={form}
         setForm={setForm}
       />
-      <button type="submit">완료</button>
+      <CommonBtn type={"submit"} color={"blue"} text={"완료"} />
     </form>
   );
 };

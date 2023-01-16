@@ -91,12 +91,22 @@
     color: $text_gray1;
 }
 
+
 @mixin border1 {
     border: 1px solid $gray1;
 }
 
 @mixin border2 {
-    border: 1px solid $gray3;
+    border: $border;
+}
+
+@mixin input {
+    width: calc(100% - 2rem - 2px);
+    height: $input-height;
+    padding: 0 1rem;
+    border: $border;
+    border-radius: 5px;
+    text-align: start;
 }
 
 @mixin icon {

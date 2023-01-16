@@ -23,7 +23,9 @@
         @include text;
         @include flexRow;
         border-radius: 5px;
-        width: 5rem;
+        padding: 0 1rem;
+        min-width: 3rem;
+        width: auto;
         height: $input-height;
         background-color: #fff;
         color: $text_gray2;

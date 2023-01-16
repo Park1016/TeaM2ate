@@ -5,9 +5,11 @@
 .container {
     width: 100%;
     height: auto;
-    margin: 2rem 0 1.5rem 0;
+    margin: 2rem 0 1rem 0;
+    padding-bottom: 1rem;
     @include flexColumn;
     @include text;
+    border-bottom: $border;
 }
 
 .inputBox {
@@ -15,9 +17,4 @@
     @include flexColumn;
     align-items: flex-start;
     margin-bottom: 1rem;
-    input {
-        @include border2;
-        height: 2.5rem;
-        margin-top: 0.25rem;
-    }
 }

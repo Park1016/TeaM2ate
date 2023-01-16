@@ -24,6 +24,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 } */
 body {
+	overflow-x: hidden;
 	line-height: 1.5;
 	caret-color: transparent;
 }
@@ -86,6 +87,10 @@ a:active {
 
 .toastui-editor-mode-switch {
 	display: none !important;
+}
+
+.toastui-editor-ww-container {
+	caret-color: #000;
 }
 
 /* 이미지 업로드 해결될때까지 임시 */

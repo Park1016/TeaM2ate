@@ -12,8 +12,6 @@ import PostApi from "api/post";
 import UserApi from "api/user";
 import FramePost from "containers/FramePost/FramePost";
 import Comment from "containers/Comment/Comment";
-import UpdateDelBtn from "components/UpdateDelBtn/UpdateDelBtn";
-import Bookmark from "components/Bookmark/Bookmark";
 
 const Post = (props) => {
   const cx = classNames.bind(styles);
@@ -41,11 +39,16 @@ const Post = (props) => {
   return (
     <section className={cx("container")}>
       <div className={cx("content")}>
-        {user && <Bookmark id={id} http={http} user={user} />}
         {post && (
           <>
-            {post.userId === auth && <UpdateDelBtn type={"post"} id={id} />}
-            <FramePost value={post} board={false} />
+            <FramePost
+              value={post}
+              board={false}
+              auth={auth}
+              postId={id}
+              http={http}
+              user={user}
+            />
             <Comment id={id} />
           </>
         )}

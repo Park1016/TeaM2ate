@@ -5,8 +5,13 @@
 .container {
     width: 100%;
     @include flexColumn;
+    margin-top: 2rem;
 }
 
 .cancelBtn {
     margin-top: 1rem;
+    // padding-top: 1rem;
+    width: 100%;
+    @include flexRow;
+    // border-top: $border;
 }

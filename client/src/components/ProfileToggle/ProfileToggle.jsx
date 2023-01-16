@@ -22,7 +22,7 @@ const ProfileToggle = ({ http }) => {
       const logout = await new UserApi(http).logout();
       if (logout) {
         setAuth(false);
-        alert(logout);
+        // alert(logout);
       }
     }
   };
@@ -31,7 +31,7 @@ const ProfileToggle = ({ http }) => {
     <article className={cx("container")}>
       <div onMouseDown={() => navigate("/mypage")}>
         <CgProfile />
-        <p>내 프로필</p>
+        <p>마이페이지</p>
       </div>
       <p className={cx("line")}></p>
       <div onMouseDown={onLogout}>

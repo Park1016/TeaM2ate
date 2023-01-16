@@ -9,9 +9,11 @@
 }
 
 .button {
+    @include flexRow;
     svg {
         @include icon;
         cursor: pointer;
+        color: $gray1;
     }
 }
 
@@ -27,13 +29,27 @@
     cursor: pointer;
     z-index: 10;
     li {
+        @include flexRow;
         @include text;
-        width: 3rem;
+        width: 5rem;
         padding: 0.25rem 0;
         text-align: center;
+        svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
     }
     li:first-child {
-        border-bottom: 1px solid $gray3;
+        border-bottom: $border;
+        svg {
+            color: $gray1;
+        }
+    }
+    li:last-child {
+        svg {
+            color: $red;
+        }
     }
     li:hover {
         color: $blue;

@@ -3,6 +3,7 @@
 @import '../../static/stylesheets/Root.scss';
 
 .button {
+    @include flexRow;
     svg {
         @include icon;
         color: $blue;

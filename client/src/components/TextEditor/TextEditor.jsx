@@ -28,22 +28,20 @@ const TextEditor = ({ http, name, form, setForm }) => {
   };
 
   return (
-    <article>
-      <Editor
-        initialValue={form.text}
-        previewStyle="vertical"
-        height="600px"
-        initialEditType="wysiwyg"
-        useCommandShortcut={false}
-        language="ko-KR"
-        ref={editorRef}
-        onChange={onChange}
-        plugins={[colorSyntax]}
-        hooks={{
-          addImageBlobHook: onUploadImage,
-        }}
-      />
-    </article>
+    <Editor
+      initialValue={form.text}
+      previewStyle="vertical"
+      height="auto"
+      initialEditType="wysiwyg"
+      useCommandShortcut={false}
+      language="ko-KR"
+      ref={editorRef}
+      onChange={onChange}
+      plugins={[colorSyntax]}
+      hooks={{
+        addImageBlobHook: onUploadImage,
+      }}
+    />
   );
 };
 

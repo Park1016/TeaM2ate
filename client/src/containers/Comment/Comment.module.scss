@@ -4,13 +4,13 @@
 
 .container {
     width: 100%;
-    border-top: 1px solid $gray3;
+    border-top: $border;
     padding-top: 2rem;
 }
 
 .content {
     li {
-        border-top: 1px solid $gray3;
+        border-top: $border;
     }
     li:first-child {
         border: none;

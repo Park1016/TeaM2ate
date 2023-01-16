@@ -1,11 +1,16 @@
-import UserApi from "api/user";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
+import classNames from "classnames/bind";
+
+import styles from "./DeleteUser.module.scss";
+
 import { authState } from "state/auth";
 import { httpSelector } from "state/http";
+import UserApi from "api/user";
 
 const DeleteUser = (props) => {
+  const cx = classNames.bind(styles);
   const auth = useRecoilValue(authState);
   const setAuth = useSetRecoilState(authState);
   const http = useRecoilValue(httpSelector);
@@ -26,7 +31,7 @@ const DeleteUser = (props) => {
     }
   };
   return (
-    <button type="button" onClick={onClick}>
+    <button className={cx("button")} type="button" onClick={onClick}>
       회원탈퇴
     </button>
   );
