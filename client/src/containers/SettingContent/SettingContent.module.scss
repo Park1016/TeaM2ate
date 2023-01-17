@@ -33,3 +33,31 @@
     padding: 0 2rem;
     border-left: $border;
 }
+
+@media screen and (max-width: 768px) {
+    .content {
+        @include flexColumn;
+    }
+    .cate {
+        width: auto;
+        @include flexRow;
+    }
+    .cateText {
+        margin: 0;
+        position: relative;
+        &.focus {
+            background-color: transparent;
+            color: $blue;
+            font-weight: 600;
+            &::after {
+                @include after;
+            }
+        }
+    }
+    .box {
+        border-left: none;
+        border-top: $border;
+        padding: 1rem 0;
+        width: $res-width;
+    }
+}

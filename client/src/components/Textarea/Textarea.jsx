@@ -22,18 +22,29 @@ const Textarea = ({
     if (textarea.current) {
       textarea.current.style.height = "auto";
       let height = textarea.current.scrollHeight;
+      textarea.current.style.height = `calc(${height}px + 3rem)`;
+    }
+  };
+
+  const autoReadOnly = () => {
+    if (textarea.current) {
+      textarea.current.style.height = "auto";
+      let height = textarea.current.scrollHeight;
       textarea.current.style.height = `${height}px`;
     }
   };
 
   useEffect(() => {
     if (readOnly) {
+      autoReadOnly();
+    } else {
       autoResizeTextarea();
     }
   }, []);
 
   return (
     <textarea
+      className={cx("textarea", { readOnly })}
       ref={textarea}
       type="text"
       name={name}
@@ -41,7 +52,6 @@ const Textarea = ({
       value={value}
       placeholder={placeholder}
       maxLength="1200"
-      className={cx("textarea", { readOnly })}
       onKeyDown={autoResizeTextarea}
       onKeyUp={autoResizeTextarea}
       onChange={(e) => onChange(e)}

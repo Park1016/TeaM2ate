@@ -5,7 +5,7 @@
 .container {
     @include text;
     @include input;
-    ::placeholder {
+    &::placeholder {
         color: $text_gray4;
     }
     &:read-only {
@@ -14,5 +14,13 @@
     }
     &:focus {
         border: 1px solid $blue;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .container {
+        &::placeholder {
+            font-size: 0.9rem;
+        }
     }
 }

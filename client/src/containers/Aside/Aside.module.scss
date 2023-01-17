@@ -13,3 +13,16 @@
     align-items: flex-start;
     justify-content: space-between;
 }
+
+@media screen and (max-width: 1250px) {
+    .container {
+        width: $res-width;
+        left: calc(#{$pc}/2 - #{$res-width}/2);
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        display: none;
+    }
+}

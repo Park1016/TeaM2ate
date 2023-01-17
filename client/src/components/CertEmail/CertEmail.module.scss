@@ -37,10 +37,24 @@
     height: $input-height;
     background-color: #fff;
     @include border2;
-    border-radius: 5px;
     cursor: pointer;
 }
 
 .button:hover {
     background-color: $gray6;
+}
+
+@media screen and (max-width: 420px) {
+    .inputBox {
+        @include flexColumn;
+        input {
+            width: calc(100% - 2rem);
+        }
+        button {
+            margin: 0.5rem 0 0 0;
+        }
+    }
+    .timer {
+        right: 1rem;
+    }
 }

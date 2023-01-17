@@ -78,6 +78,28 @@
     margin-top: $content-margin-top;
     margin-bottom: 5rem;
     z-index: 1;
+    @media screen and (max-width: 1250px) {
+        width: calc(#{$res-width} - #{$side-width}*2);
+    }
+    @media screen and (max-width: 1024px) {
+        width: $res-width;
+    }
+}
+
+@mixin spaceContent {
+    width: $content-width;
+    margin-top: $content-margin-top;
+    margin-bottom: 5rem;
+    z-index: 1;
+    @media screen and (max-width: 1250px) {
+        width: calc(#{$res-width} - #{$side-width}*2 - 2rem);
+    }
+    @media screen and (max-width: 1024px) {
+        width: $post-width;
+    }
+    @media screen and (max-width: 768px) {
+        width: calc(100vw - 10vw);
+    }
 }
 
 @mixin text {
@@ -98,6 +120,7 @@
 
 @mixin border2 {
     border: $border;
+    border-radius: 5px;
 }
 
 @mixin input {
@@ -116,4 +139,14 @@
 
 @mixin borderBlue {
     border: 1px solid $blue;
+}
+
+@mixin after {
+    content: "";
+    position: absolute;
+    bottom: -1.5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: $blue;
 }

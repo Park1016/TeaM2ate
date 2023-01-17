@@ -9,8 +9,8 @@ const Security = (props) => {
 
   return (
     <>
-      {/* {!show && <CheckPw setShow={setShow} />} */}
-      {!show && (
+      {!show && <CheckPw setShow={setShow} />}
+      {show && (
         <>
           <UpdatePw />
           <DeleteUser />

@@ -37,7 +37,7 @@ const Header = () => {
           <button className={cx("logo")}>
             <Logo />
           </button>
-          <HeaderSearch />
+          <HeaderSearch auth={auth} />
           <ul className={cx("rightBtns", { auth })}>
             <li>
               {auth ? (

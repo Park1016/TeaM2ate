@@ -93,7 +93,24 @@ a:active {
 	caret-color: #000;
 }
 
+.toastui-editor-dropdown-toolbar {
+	flex-wrap: wrap;
+	height: auto !important;
+}
+
+/* react-select */
+.css-3w2yfm-ValueContainer {
+	padding: 0.5rem !important;
+}
+
 /* 이미지 업로드 해결될때까지 임시 */
 .toastui-editor-toolbar-icons.image {
 	display: none !important;
+}
+
+/* 반응형 */
+@media screen and (max-width: 768px) {
+	::-webkit-scrollbar {
+		display: none;
+	}
 }

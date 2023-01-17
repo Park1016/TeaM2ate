@@ -15,3 +15,13 @@
         cursor: pointer;
     }
 }
+
+@media screen and (max-width: 480px) {
+    .container {
+        background-color: #fff;
+    }
+    .content {
+        margin-top: 0;
+        width: calc(#{$pc} - 4rem);
+    }
+}

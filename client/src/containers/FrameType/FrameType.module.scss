@@ -16,7 +16,6 @@
     width: 6rem;
     margin: 0.25rem;
     padding: 0.25rem 0;
-    border-radius: 5px;
     background-color: #fff;
     &.done {
         background-color: $gray6;
@@ -43,4 +42,10 @@
     width: 1.3rem;
     height: 1.3rem;
     cursor: pointer;
+}
+
+@media screen and (max-width: 320px) {
+    .container {
+        justify-content: center;
+    }
 }

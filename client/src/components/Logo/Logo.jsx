@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 
 import styles from "./Logo.module.scss";
-import { GiSteampunkGoggles } from "react-icons/gi";
 
 const Logo = (props) => {
   const cx = classNames.bind(styles);
@@ -11,9 +10,13 @@ const Logo = (props) => {
   return (
     <div className={cx("logo")}>
       <Link to={"/"}>
-        {/* <GiSteampunkGoggles /> */}
         <p>
-          Tea<span>M2</span>ate
+          <span>Tea</span>
+          <span>
+            <span>M</span>
+            <span>2</span>
+          </span>
+          <span>ate</span>
         </p>
       </Link>
     </div>

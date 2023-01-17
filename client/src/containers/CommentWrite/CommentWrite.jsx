@@ -36,7 +36,7 @@ function CommentWrite({ http, id, setData, value, setEdit }) {
 
   return (
     <form className={cx("container")} onSubmit={(e) => onSubmit(e)}>
-      <div className={cx("textarea")}>
+      <article className={cx("textarea")}>
         <Textarea
           name={"comment"}
           id={"comment"}
@@ -45,13 +45,15 @@ function CommentWrite({ http, id, setData, value, setEdit }) {
           form={form}
           setForm={setForm}
         />
-      </div>
-      <CommonBtn type={"submit"} color={"blue"} text={"등록"} />
-      {value && (
-        <div onClick={() => setEdit(false)}>
-          <CommonBtn type={"button"} color={"white"} text={"취소"} />
-        </div>
-      )}
+      </article>
+      <article className={cx("button")}>
+        <CommonBtn type={"submit"} color={"blue"} text={"등록"} />
+        {value && (
+          <div onClick={() => setEdit(false)}>
+            <CommonBtn type={"button"} color={"white"} text={"취소"} />
+          </div>
+        )}
+      </article>
     </form>
   );
 }

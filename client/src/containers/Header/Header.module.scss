@@ -21,7 +21,7 @@
 
 .logo,
 .rightBtns {
-    width: 12rem;
+    width: 11rem;
 } 
 
 .logo {
@@ -63,4 +63,17 @@
         background-color: $gray6;
         cursor: pointer;
     }
+}
+
+@media screen and (max-width: 1250px) {
+    .content {
+        width: $res-width;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .logo,
+    .rightBtns {
+        width: auto;
+    } 
 }

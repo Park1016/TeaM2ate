@@ -3,6 +3,7 @@
 @import '../../static/stylesheets/Root.scss';
 
 .article {
+    width: 100%;
     margin-bottom: 0.5rem;
 }
 
@@ -38,8 +39,8 @@
 }
 
 .title {
+    width: 100%;
     @include text;
-    text-align: start;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
     font-weight: 700;
@@ -55,8 +56,8 @@
         color: $gray1;
         padding: 0.15rem 0.5rem;
         margin: 0.25rem;
-        border-radius: 10px;
         @include border2;
+        border-radius: 10px;
         background-color: $gray7;
     }
 }
@@ -77,4 +78,7 @@
     text-align: start;
     margin-bottom: 0.5rem;
     font-weight: 700;
+}
+
+@media screen and (max-width: 320px) {
 }

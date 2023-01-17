@@ -5,7 +5,6 @@
 .container {
     @include flexColumn;
     @include border2;
-    border-radius: 5px;
     width: 8.5rem;
     height: auto;
     position: absolute;

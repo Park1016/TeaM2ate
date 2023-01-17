@@ -6,6 +6,9 @@ import classNames from "classnames/bind";
 
 import styles from "./MypageContent.module.scss";
 import { TfiCommentAlt } from "react-icons/tfi";
+import { IoSettingsSharp } from "react-icons/io5";
+import { FaBookmark } from "react-icons/fa";
+import { BsFileText, BsChatDots } from "react-icons/bs";
 
 import { httpSelector } from "state/http";
 import { authState } from "state/auth";
@@ -64,12 +67,16 @@ const MypageContent = (props) => {
                     <li>{user.email}</li>
                   </ul>
                 </div>
-                <div onClick={() => navigate("/settings")}>
+                <div
+                  className={cx("setting")}
+                  onClick={() => navigate("/settings")}
+                >
                   <CommonBtn
                     type={"button"}
                     color={"white"}
                     text={"프로필 수정"}
                   />
+                  <IoSettingsSharp />
                 </div>
               </div>
               {user.tag.length !== 0 && (
@@ -88,7 +95,8 @@ const MypageContent = (props) => {
                 className={cx("filterList", { focus: data.type === "post" })}
                 onClick={() => setData({ post, type: "post", comment: [] })}
               >
-                내가 쓴 글
+                <p>내가 쓴 글</p>
+                <BsFileText />
               </li>
               <li
                 className={cx("filterList", { focus: data.type === "comment" })}
@@ -100,7 +108,8 @@ const MypageContent = (props) => {
                   })
                 }
               >
-                내가 쓴 댓글
+                <p>내가 쓴 댓글</p>
+                <BsChatDots />
               </li>
               <li
                 className={cx("filterList", {
@@ -110,7 +119,8 @@ const MypageContent = (props) => {
                   setData({ post: bookmark, type: "bookmark", comment: [] })
                 }
               >
-                북마크
+                <p>북마크</p>
+                <FaBookmark />
               </li>
             </ul>
             {data.post && data.post.length !== 0 && data.type !== "comment" && (
