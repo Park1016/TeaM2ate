@@ -60,6 +60,8 @@ router.post("/login", validateLogin, userController.login);
 
 router.post("/logout", userController.logout);
 
+router.post("/checkExist", userController.checkExist);
+
 router.post("/email", sendEmaillimiter, emailController.sendEmail);
 
 router.post("/checkAuthNum", authNumlimiter, emailController.checkAuthNum);

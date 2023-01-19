@@ -60,6 +60,16 @@ export async function remove(req, res) {
   res.sendStatus(204);
 }
 
+export async function checkExist(req, res) {
+  const { email } = req.body;
+  const foundEmail = await userRepository.getByEmail(email);
+  if (foundEmail) {
+    res.status(204).json(foundEmail);
+  } else {
+    res.status(409).json({ message: "회원가입 되어있지 않은 이메일입니다" });
+  }
+}
+
 export async function signup(req, res) {
   const { name, username, password, email, url } = req.body;
   // 사용자가 기존에 이미 있는지 없는지 확인

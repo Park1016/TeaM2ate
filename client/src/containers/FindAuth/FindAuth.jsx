@@ -36,7 +36,7 @@ function FindAuth(props) {
           })
         }
       >
-        <CommonBtn type={"button"} color={"blue"} text={"취소"} />
+        <CommonBtn type={"button"} color={"white"} text={"취소"} />
       </div>
     </section>
   );

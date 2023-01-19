@@ -38,6 +38,9 @@
     background-color: #fff;
     @include border2;
     cursor: pointer;
+    &.checkEmail {
+        cursor: not-allowed;
+    }
 }
 
 .button:hover {

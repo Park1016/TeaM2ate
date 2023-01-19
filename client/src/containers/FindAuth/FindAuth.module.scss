@@ -9,9 +9,9 @@
 }
 
 .cancelBtn {
+    border-top: 3px solid $gray5;
     margin-top: 1rem;
-    // padding-top: 1rem;
-    width: 100%;
+    padding-top: 1rem;
+    width: 90%;
     @include flexRow;
-    // border-top: $border;
 }

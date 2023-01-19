@@ -1,0 +1,15 @@
+@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+ 
+
+.container {
+    width: 100%;
+    @include flexColumn;
+    margin-bottom: 1rem;
+    input {
+        margin-top: 0.5rem;
+    }
+    button {
+        margin-top: 1rem;
+    }
+}

@@ -1,11 +1,13 @@
-﻿import CsrfApi from "api/csrf";
-import { createContext } from "react";
-import { atom, selector, useSetRecoilState } from "recoil";
+﻿import { atom, selector } from "recoil";
 import { recoilPersist } from "recoil-persist";
+import CsrfApi from "api/csrf";
+
+const { persistAtom } = recoilPersist();
 
 export const csrfState = atom({
   key: "csrfState",
   default: null,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const httpSelector = selector({

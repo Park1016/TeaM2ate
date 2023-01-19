@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import classNames from "classnames/bind";
+
+import styles from "./FindPw.module.scss";
 
 import { modalState } from "state/modal";
 import { httpSelector } from "state/http";
@@ -7,8 +10,10 @@ import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
 import useHttp from "hooks/useHttp";
+import CommonBtn from "components/CommonBtn/CommonBtn";
 
 const FindPw = ({ user }) => {
+  const cx = classNames.bind(styles);
   const [form, setForm] = useState({ pw: "", checkPw: "" });
   const http = useRecoilValue(httpSelector);
   const [makeHttp] = useHttp({ http });
@@ -37,11 +42,12 @@ const FindPw = ({ user }) => {
   useEffect(() => {
     // 새로고침 시 이메일인증 다시해야된다고 알림
     makeHttp();
+    console.log(user);
   }, [http]);
 
   return (
     <>
-      <form onSubmit={(e) => onSubmit(e)}>
+      <form className={cx("container")} onSubmit={(e) => onSubmit(e)}>
         <p>{`회원님의 아이디는 ${user.username}입니다.`}</p>
         <p>비밀번호를 변경해주세요</p>
         <Input
@@ -62,7 +68,7 @@ const FindPw = ({ user }) => {
           form={form}
           setForm={setForm}
         />
-        <button type="submit">변경하기</button>
+        <CommonBtn type={"submit"} color={"blue"} text={"변경하기"} />
       </form>
     </>
   );

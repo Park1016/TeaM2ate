@@ -49,6 +49,16 @@ export default class UserApi {
     }
   }
 
+  async checkExist(params) {
+    try {
+      const res = await this.user.post("checkExist", params);
+      return res;
+    } catch (error) {
+      console.warn(error.response.data.message);
+      // console.log(error.response);
+    }
+  }
+
   async checkPw(params) {
     try {
       const res = await this.user.post("checkPw", params);

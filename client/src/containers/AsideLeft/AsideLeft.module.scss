@@ -2,9 +2,8 @@
 @import '../../static/stylesheets/lib/mixin';
  
 
-
 .container {
     width: $side_width;
-    // background-color: blue;
-    border-right: $border;
+    height: 70vh;
+    background-color: $gray6;
 }
