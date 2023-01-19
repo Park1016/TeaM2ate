@@ -4,7 +4,7 @@ export default class BoardApi {
   constructor(http) {
     this.board = axios.create({
       ...http,
-      baseURL: "http://localhost:8080/board",
+      baseURL: `${process.env.REACT_APP_BASE_URL}/board`,
     });
   }
 

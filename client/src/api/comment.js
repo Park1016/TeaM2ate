@@ -4,7 +4,7 @@ export default class CommentApi {
   constructor(http) {
     this.comment = axios.create({
       ...http,
-      baseURL: "http://localhost:8080/comment",
+      baseURL: `${process.env.REACT_APP_BASE_URL}/comment`,
     });
   }
 

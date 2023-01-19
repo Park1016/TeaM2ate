@@ -4,7 +4,7 @@ export default class PostApi {
   constructor(http) {
     this.post = axios.create({
       ...http,
-      baseURL: "http://localhost:8080/post",
+      baseURL: `${process.env.REACT_APP_BASE_URL}/post`,
     });
   }
 

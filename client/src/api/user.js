@@ -4,7 +4,7 @@ export default class UserApi {
   constructor(http) {
     this.user = axios.create({
       ...http,
-      baseURL: "http://localhost:8080/user",
+      baseURL: `${process.env.REACT_APP_BASE_URL}/user`,
     });
   }
 
