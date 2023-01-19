@@ -8,10 +8,12 @@ import PostApi from "api/post";
 import { httpSelector } from "state/http";
 import { authState } from "state/auth";
 import FrameWrite from "containers/FrameWrite/FrameWrite";
+import useHttp from "hooks/useHttp";
 
 const UpdatePost = (props) => {
   const { id } = useParams();
   const http = useRecoilValue(httpSelector);
+  const [makeHttp] = useHttp({ http });
   const auth = useRecoilValue(authState);
   const navigate = useNavigate();
   const { data } = useQuery(["post", id], async () => {
@@ -35,6 +37,10 @@ const UpdatePost = (props) => {
       });
     }
   }, [data]);
+
+  useEffect(() => {
+    makeHttp();
+  }, [http]);
 
   return (
     <>{form && <FrameWrite form={form} setForm={setForm} editId={id} />}</>

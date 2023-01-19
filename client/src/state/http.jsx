@@ -1,14 +1,24 @@
-﻿import { createContext } from "react";
-import { atom, selector } from "recoil";
+﻿import CsrfApi from "api/csrf";
+import { createContext } from "react";
+import { atom, selector, useSetRecoilState } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
-import UserApi from "api/user";
+export const csrfState = atom({
+  key: "csrfState",
+  default: null,
+});
 
 export const httpSelector = selector({
   key: "httpSelector",
-  get: async () => {
+  get: async ({ get }) => {
+    const csrf = get(csrfState);
     try {
-      const data = await new UserApi().csrfToken();
+      let data;
+      if (csrf) {
+        data = await new CsrfApi().csrfToken();
+      } else {
+        data = csrf;
+      }
       const http = {
         credentials: "include",
         withCredentials: true,

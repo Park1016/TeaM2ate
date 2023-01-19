@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import classNames from "classnames/bind";
 
@@ -9,10 +9,12 @@ import { makeFormData } from "hooks/makeFormData";
 import { httpSelector } from "state/http";
 import Input from "components/Input/Input";
 import Timer from "components/Timer/Timer";
+import useHttp from "hooks/useHttp";
 
 const CertEmail = ({ form, setForm, checkEmail, setCheckEmail, checkDup }) => {
   const cx = classNames.bind(styles);
   const http = useRecoilValue(httpSelector);
+  const [makeHttp] = useHttp({ http });
   const [reStart, setReStart] = useState(false);
   const [checkAuthNum, setCheckAuthNum] = useState(false);
 
@@ -50,6 +52,10 @@ const CertEmail = ({ form, setForm, checkEmail, setCheckEmail, checkDup }) => {
       setForm({ ...form, authNum: "" });
     }
   };
+
+  useEffect(() => {
+    makeHttp();
+  }, [http]);
 
   return (
     <>

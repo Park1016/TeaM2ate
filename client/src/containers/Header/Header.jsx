@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
@@ -17,11 +17,13 @@ import CommonBtn from "components/CommonBtn/CommonBtn";
 import Logo from "components/Logo/Logo";
 import ProfileToggle from "components/ProfileToggle/ProfileToggle";
 import Modal from "components/Modal/Modal";
+import useHttp from "hooks/useHttp";
 
 const Header = () => {
   const cx = classNames.bind(styles);
 
   const http = useRecoilValue(httpSelector);
+  const [makeHttp] = useHttp({ http });
   const auth = useRecoilValue(authState);
   const modal = useRecoilValue(modalState);
   const setModal = useSetRecoilState(modalState);
@@ -29,6 +31,10 @@ const Header = () => {
   const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    makeHttp();
+  }, [http]);
 
   return (
     <>

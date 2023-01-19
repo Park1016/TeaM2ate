@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import classNames from "classnames/bind";
 
@@ -12,11 +12,13 @@ import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
 import CommonBtn from "components/CommonBtn/CommonBtn";
+import useHttp from "hooks/useHttp";
 
 const UpdatePw = (props) => {
   const cx = classNames.bind(styles);
   const auth = useRecoilValue(authState);
   const http = useRecoilValue(httpSelector);
+  const [makeHttp] = useHttp({ http });
   const setAuth = useSetRecoilState(authState);
   const setModal = useSetRecoilState(modalState);
   const [form, setForm] = useState({ newPw: "", checkPw: "" });
@@ -49,6 +51,10 @@ const UpdatePw = (props) => {
       console.log(res.data);
     }
   };
+
+  useEffect(() => {
+    makeHttp();
+  }, [http]);
 
   return (
     <form className={cx("container")} onSubmit={(e) => onSubmit(e)}>

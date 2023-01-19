@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
@@ -22,6 +22,7 @@ import ChooseBox from "components/ChooseBox/ChooseBox";
 import Input from "components/Input/Input";
 import TextEditor from "components/TextEditor/TextEditor";
 import CommonBtn from "components/CommonBtn/CommonBtn";
+import useHttp from "hooks/useHttp";
 
 const FrameWrite = ({ form, setForm, editId }) => {
   const cx = classNames.bind(styles);
@@ -32,6 +33,7 @@ const FrameWrite = ({ form, setForm, editId }) => {
   const tag = useRecoilValue(tagSelector);
   const progress = useRecoilValue(progressState);
   const http = useRecoilValue(httpSelector);
+  const [makeHttp] = useHttp({ http });
 
   const [show, setShow] = useState(false);
 
@@ -78,6 +80,10 @@ const FrameWrite = ({ form, setForm, editId }) => {
 
     navigate(`/post/${res.id}`);
   };
+
+  useEffect(() => {
+    makeHttp();
+  }, [http]);
 
   return (
     <section className={cx("container")}>

@@ -18,10 +18,12 @@ import CommentApi from "api/comment";
 import ProfilePhoto from "components/ProfilePhoto/ProfilePhoto";
 import CommonBtn from "components/CommonBtn/CommonBtn";
 import Time from "components/Time/Time";
+import useHttp from "hooks/useHttp";
 
 const MypageContent = (props) => {
   const cx = classNames.bind(styles);
   const http = useRecoilValue(httpSelector);
+  const [makeHttp] = useHttp({ http });
   const auth = useRecoilValue(authState);
   const navigate = useNavigate();
   const [data, setData] = useState({ post: [], type: "", comment: [] });
@@ -48,6 +50,10 @@ const MypageContent = (props) => {
       setData({ ...data, post, type: "post" });
     }
   }, [user, post]);
+
+  useEffect(() => {
+    makeHttp();
+  }, [http]);
 
   return (
     <>

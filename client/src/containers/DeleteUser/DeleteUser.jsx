@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
@@ -8,12 +8,14 @@ import styles from "./DeleteUser.module.scss";
 import { authState } from "state/auth";
 import { httpSelector } from "state/http";
 import UserApi from "api/user";
+import useHttp from "hooks/useHttp";
 
 const DeleteUser = (props) => {
   const cx = classNames.bind(styles);
   const auth = useRecoilValue(authState);
   const setAuth = useSetRecoilState(authState);
   const http = useRecoilValue(httpSelector);
+  const [makeHttp] = useHttp({ http });
   const navigate = useNavigate();
   const onClick = async () => {
     const check = window.confirm("회원을 탈퇴하시겠습니까?");
@@ -30,6 +32,11 @@ const DeleteUser = (props) => {
       }
     }
   };
+
+  useEffect(() => {
+    makeHttp();
+  }, [http]);
+
   return (
     <button className={cx("button")} type="button" onClick={onClick}>
       회원탈퇴

@@ -6,10 +6,12 @@ import { httpSelector } from "state/http";
 import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
+import useHttp from "hooks/useHttp";
 
 const FindPw = ({ user }) => {
   const [form, setForm] = useState({ pw: "", checkPw: "" });
   const http = useRecoilValue(httpSelector);
+  const [makeHttp] = useHttp({ http });
   const setModal = useSetRecoilState(modalState);
 
   const onSubmit = async (e) => {
@@ -34,7 +36,8 @@ const FindPw = ({ user }) => {
 
   useEffect(() => {
     // 새로고침 시 이메일인증 다시해야된다고 알림
-  }, []);
+    makeHttp();
+  }, [http]);
 
   return (
     <>

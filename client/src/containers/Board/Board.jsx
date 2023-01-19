@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRecoilValue } from "recoil";
 import classNames from "classnames/bind";
@@ -10,14 +10,20 @@ import BoardApi from "api/board";
 
 import BoardPost from "containers/BoardPost/BoardPost";
 import Filter from "components/Filter/Filter";
+import useHttp from "hooks/useHttp";
 
 function Board(props) {
   const cx = classNames.bind(styles);
   const http = useRecoilValue(httpSelector);
+  const [makeHttp] = useHttp({ http });
   const { isLoading, error, data } = useQuery(["board"], async () => {
     return await new BoardApi(http).getBoard();
   });
   const [check, setCheck] = useState(true);
+
+  useEffect(() => {
+    makeHttp();
+  }, [http]);
 
   return (
     <>

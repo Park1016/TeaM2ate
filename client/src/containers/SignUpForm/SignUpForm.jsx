@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import classNames from "classnames/bind";
 
@@ -11,6 +11,7 @@ import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
 import CertEmail from "components/CertEmail/CertEmail";
 import CommonBtn from "components/CommonBtn/CommonBtn";
+import useHttp from "hooks/useHttp";
 
 const SignUpForm = (props) => {
   const cx = classNames.bind(styles);
@@ -27,6 +28,7 @@ const SignUpForm = (props) => {
   });
 
   const http = useRecoilValue(httpSelector);
+  const [makeHttp] = useHttp({ http });
 
   const onPhoto = (e) => {
     const image = e.target.files[0];
@@ -75,6 +77,10 @@ const SignUpForm = (props) => {
       console.warn(err);
     }
   };
+
+  useEffect(() => {
+    makeHttp();
+  }, [http]);
 
   return (
     <form

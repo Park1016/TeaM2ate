@@ -10,10 +10,12 @@ import { httpSelector } from "state/http";
 import CommentApi from "api/comment";
 import CommentWrite from "containers/CommentWrite/CommentWrite";
 import CommentContent from "containers/CommentContent/CommentContent";
+import useHttp from "hooks/useHttp";
 
 function Comment(props) {
   const cx = classNames.bind(styles);
   const http = useRecoilValue(httpSelector);
+  const [makeHttp] = useHttp({ http });
   const { id } = useParams();
   const [data, setData] = useState();
 
@@ -26,6 +28,10 @@ function Comment(props) {
       setData(comment);
     }
   }, [comment]);
+
+  useEffect(() => {
+    makeHttp();
+  }, [http]);
 
   return (
     <article className={cx("container")}>
