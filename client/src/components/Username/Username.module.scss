@@ -1,0 +1,7 @@
+@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+ 
+.name {
+    @include text;
+    cursor: pointer;
+}

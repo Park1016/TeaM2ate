@@ -9,7 +9,7 @@
 }
 
 .content {
-    @include content;
+    @include spaceContent;
     @include flexColumn;
     article {
         width: 100%;

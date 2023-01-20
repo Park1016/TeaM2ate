@@ -10,6 +10,7 @@ import CommentWrite from "containers/CommentWrite/CommentWrite";
 import ProfilePhoto from "components/ProfilePhoto/ProfilePhoto";
 import Time from "components/Time/Time";
 import Textarea from "components/Textarea/Textarea";
+import Username from "components/Username/Username";
 
 function CommentContent({ http, id, setData, item, index }) {
   const cx = classNames.bind(styles);
@@ -28,10 +29,10 @@ function CommentContent({ http, id, setData, item, index }) {
           />
         )}
       </div>
-      <ProfilePhoto url={item.url} username={item.username} />
+      <ProfilePhoto url={item.url} username={item.username} id={item.userId} />
       <div className={cx("right")}>
         <div className={cx("rightTop")}>
-          <p>{item.username}</p>
+          <Username username={item.username} id={item.userId} />
           <div className={cx("line")}></div>
           <Time createdAt={item.createdAt} />
         </div>

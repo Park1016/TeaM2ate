@@ -3,7 +3,7 @@ import { config } from "../config.js";
 import { createAccessJwtToken, setAccessToken } from "../controller/user.js";
 import * as userRepository from "../data/user.js";
 
-const AUTH_ERROR = { message: "Authentication Error" };
+const AUTH_ERROR = { message: "유저 인증 오류" };
 
 export const isAuth = async (req, res, next) => {
   let token;
@@ -27,16 +27,16 @@ export const isAuth = async (req, res, next) => {
     token = createAccessJwtToken(id);
     setAccessToken(res, token);
   } else if (!token && !refresh) {
-    return res.status(401).json({ message: "Authentication Error 1" });
+    return res.status(401).json(AUTH_ERROR);
   }
 
   jwt.verify(token, config.jwt.secretKey, async (error, decoded) => {
     if (error) {
-      return res.status(401).json({ message: "Authentication Error 2" });
+      return res.status(401).json(AUTH_ERROR);
     }
     const user = await userRepository.getById(decoded.id);
     if (!user) {
-      return res.status(401).json({ message: "Authentication Error 3" });
+      return res.status(401).json(AUTH_ERROR);
     }
     req.userId = user.id;
     req.username = user.username;

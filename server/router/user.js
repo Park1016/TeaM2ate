@@ -38,6 +38,8 @@ const validateSignup = [
 
 router.get("/me", isAuth, userController.me);
 
+router.get("/getById/:id", userController.getbyId);
+
 router.get("/csrf-token", userController.csrfToken);
 
 router.post("/checkPw", isAuth, userController.checkPw);
@@ -66,7 +68,7 @@ router.post("/email", sendEmaillimiter, emailController.sendEmail);
 
 router.post("/checkAuthNum", authNumlimiter, emailController.checkAuthNum);
 
-router.get("/post/:username", [isAuth], userController.getPostByBookmark);
+router.get("/post/:username", isAuth, userController.getPostByBookmark);
 
 router.put(
   "/update/:id",

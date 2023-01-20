@@ -9,13 +9,13 @@ import { makeFormData } from "hooks/makeFormData";
 import { httpSelector } from "state/http";
 import Input from "components/Input/Input";
 import Timer from "components/Timer/Timer";
-import useHttp from "hooks/useHttp";
+// import useHttp from "hooks/useHttp";
 import UserApi from "api/user";
 
 const CertEmail = ({ form, setForm, checkEmail, setCheckEmail, checkDup }) => {
   const cx = classNames.bind(styles);
   const http = useRecoilValue(httpSelector);
-  const [makeHttp] = useHttp({ http });
+  // const [makeHttp] = useHttp({ http });
   const [reStart, setReStart] = useState(false);
   const [checkAuthNum, setCheckAuthNum] = useState(false);
 
@@ -64,9 +64,9 @@ const CertEmail = ({ form, setForm, checkEmail, setCheckEmail, checkDup }) => {
     }
   };
 
-  useEffect(() => {
-    makeHttp();
-  }, [http]);
+  // useEffect(() => {
+  //   makeHttp();
+  // }, [http]);
 
   return (
     <>

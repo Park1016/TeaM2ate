@@ -111,16 +111,22 @@
     letter-spacing: normal;
     text-align: center;
     color: $text_gray1;
+    word-break: keep-all;
 }
 
 
 @mixin border1 {
     border: 1px solid $gray1;
+    border-radius: 5px;
 }
 
 @mixin border2 {
     border: $border;
     border-radius: 5px;
+}
+
+@mixin borderBlue {
+    border: 1px solid $blue;
 }
 
 @mixin input {
@@ -135,10 +141,6 @@
 @mixin icon {
     width: $icon-width;
     height: $icon-height;
-}
-
-@mixin borderBlue {
-    border: 1px solid $blue;
 }
 
 @mixin after {

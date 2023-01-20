@@ -17,4 +17,14 @@ export default class BoardApi {
       console.log(error.response);
     }
   }
+
+  async getBoardByAmount(cate, start, amount) {
+    try {
+      const res = await this.board.get(`/${cate}/${start}/${amount}`);
+      return res.data;
+    } catch (error) {
+      alert(error.response.data.message);
+      console.log(error.response);
+    }
+  }
 }

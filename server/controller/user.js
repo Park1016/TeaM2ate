@@ -12,6 +12,16 @@ export async function me(req, res) {
   res.status(200).json(user);
 }
 
+export async function getbyId(req, res) {
+  console.log(">>>>id>>>>", req.params.id);
+  const user = await userRepository.getById(req.params.id);
+  console.log(">>>user>>>", user);
+  if (!user) {
+    return res.status(404).json({ message: "사용자를 찾을 수 없습니다" });
+  }
+  res.status(200).json(user);
+}
+
 export async function update(req, res) {
   const id = req.params.id;
   const { username, url, introduce, alert, tag } = req.body;

@@ -12,14 +12,14 @@ import PostApi from "api/post";
 import UserApi from "api/user";
 import FramePost from "containers/FramePost/FramePost";
 import Comment from "containers/Comment/Comment";
-import useHttp from "hooks/useHttp";
+// import useHttp from "hooks/useHttp";
 
 const Post = (props) => {
   const cx = classNames.bind(styles);
   const navigate = useNavigate();
   const { id } = useParams();
   const http = useRecoilValue(httpSelector);
-  const [makeHttp] = useHttp({ http });
+  // const [makeHttp] = useHttp({ http });
   const auth = useRecoilValue(authState);
   const { data: post } = useQuery(["post", id], async () => {
     return await new PostApi(http).getPostById(id);
@@ -38,9 +38,9 @@ const Post = (props) => {
     }
   }, [post]);
 
-  useEffect(() => {
-    makeHttp();
-  }, [http]);
+  // useEffect(() => {
+  //   makeHttp();
+  // }, [http]);
 
   return (
     <section className={cx("container")}>

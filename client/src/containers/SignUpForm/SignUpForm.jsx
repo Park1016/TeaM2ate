@@ -11,7 +11,7 @@ import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
 import CertEmail from "components/CertEmail/CertEmail";
 import CommonBtn from "components/CommonBtn/CommonBtn";
-import useHttp from "hooks/useHttp";
+// import useHttp from "hooks/useHttp";
 
 const SignUpForm = (props) => {
   const cx = classNames.bind(styles);
@@ -28,7 +28,7 @@ const SignUpForm = (props) => {
   });
 
   const http = useRecoilValue(httpSelector);
-  const [makeHttp] = useHttp({ http });
+  // const [makeHttp] = useHttp({ http });
 
   const onPhoto = (e) => {
     const image = e.target.files[0];
@@ -78,9 +78,9 @@ const SignUpForm = (props) => {
     }
   };
 
-  useEffect(() => {
-    makeHttp();
-  }, [http]);
+  // useEffect(() => {
+  //   makeHttp();
+  // }, [http]);
 
   return (
     <form

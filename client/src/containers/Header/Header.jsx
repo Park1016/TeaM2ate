@@ -17,13 +17,13 @@ import CommonBtn from "components/CommonBtn/CommonBtn";
 import Logo from "components/Logo/Logo";
 import ProfileToggle from "components/ProfileToggle/ProfileToggle";
 import Modal from "components/Modal/Modal";
-import useHttp from "hooks/useHttp";
+// import useHttp from "hooks/useHttp";
 
 const Header = () => {
   const cx = classNames.bind(styles);
 
   const http = useRecoilValue(httpSelector);
-  const [makeHttp] = useHttp({ http });
+  // const [makeHttp] = useHttp({ http });
   const auth = useRecoilValue(authState);
   const modal = useRecoilValue(modalState);
   const setModal = useSetRecoilState(modalState);
@@ -32,9 +32,9 @@ const Header = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    makeHttp();
-  }, [http]);
+  // useEffect(() => {
+  //   makeHttp();
+  // }, [http]);
 
   return (
     <>

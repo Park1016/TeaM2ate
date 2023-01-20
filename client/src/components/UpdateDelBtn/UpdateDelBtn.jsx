@@ -8,7 +8,7 @@ import { FiMoreVertical } from "react-icons/fi";
 import { FaPencilAlt } from "react-icons/fa";
 import { RiDeleteBin2Line } from "react-icons/ri";
 
-import useHttp from "hooks/useHttp";
+// import useHttp from "hooks/useHttp";
 import { httpSelector } from "state/http";
 import CommentApi from "api/comment";
 import PostApi from "api/post";
@@ -18,7 +18,7 @@ function UpdateDelBtn({ type, id, setEdit, setData }) {
   const [show, setShow] = useState(false);
 
   const http = useRecoilValue(httpSelector);
-  const [makeHttp] = useHttp({ http });
+  // const [makeHttp] = useHttp({ http });
 
   const navigate = useNavigate();
 
@@ -60,9 +60,9 @@ function UpdateDelBtn({ type, id, setEdit, setData }) {
     setShow(false);
   };
 
-  useEffect(() => {
-    makeHttp();
-  }, [http]);
+  // useEffect(() => {
+  //   makeHttp();
+  // }, [http]);
 
   return (
     <div className={cx("container")}>

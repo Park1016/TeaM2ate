@@ -7,11 +7,13 @@ import styles from "./WritePost.module.scss";
 import { authState } from "state/auth";
 import useCheckAuth from "hooks/useCheckAuth";
 import FrameWrite from "containers/FrameWrite/FrameWrite";
+import Alert from "components/Alert/Alert";
 
 const WritePost = (props) => {
   const cx = classNames.bind(styles);
   const auth = useRecoilValue(authState);
-  const [checkAuth] = useCheckAuth({ auth });
+  const [check, setCheck] = useState(false);
+  const [checkAuth] = useCheckAuth({ auth, setCheck, type: "alert" });
   const [form, setForm] = useState({
     title: "",
     text: "",
@@ -24,7 +26,9 @@ const WritePost = (props) => {
     checkAuth();
   }, [auth]);
 
-  return <>{auth && <FrameWrite form={form} setForm={setForm} />}</>;
+  return (
+    <>{check ? <FrameWrite form={form} setForm={setForm} /> : <Alert />}</>
+  );
 };
 
 export default WritePost;

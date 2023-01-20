@@ -11,6 +11,7 @@ import ProfilePhoto from "components/ProfilePhoto/ProfilePhoto";
 import Time from "components/Time/Time";
 import Bookmark from "components/Bookmark/Bookmark";
 import UpdateDelBtn from "components/UpdateDelBtn/UpdateDelBtn";
+import Username from "components/Username/Username";
 
 const FramePost = ({ value, board, auth, postId, http, user }) => {
   const cx = classNames.bind(styles);
@@ -25,6 +26,7 @@ const FramePost = ({ value, board, auth, postId, http, user }) => {
     tag,
     progress,
     username,
+    userId,
   } = value;
 
   return (
@@ -33,9 +35,9 @@ const FramePost = ({ value, board, auth, postId, http, user }) => {
         <p className={cx("title", { board })}>{title}</p>
         <div className={cx("top")}>
           <div className={cx("topLeft")}>
-            <ProfilePhoto url={url} username={username} />
+            <ProfilePhoto url={url} username={username} id={userId} />
             <div>
-              <p className={cx("name")}>{username}</p>
+              <Username username={username} id={userId} />
               <div className={cx("line")}></div>
               <Time createdAt={createdAt} />
             </div>

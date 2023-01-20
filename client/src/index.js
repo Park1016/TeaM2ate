@@ -10,6 +10,7 @@ import Mypage from "pages/Mypage/Mypage";
 import WritePost from "pages/WritePost/WritePost";
 import UpdatePost from "pages/UpdatePost/UpdatePost";
 import Setting from "pages/Setting/Setting";
+import User from "pages/User/User";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: "settings", element: <Setting /> },
       { path: "post/write", element: <WritePost /> },
       { path: "post/update/:id", element: <UpdatePost /> },
+      { path: "user/:id", element: <User /> },
     ],
   },
 ]);

@@ -6,7 +6,7 @@ import styles from "./CheckPw.module.scss";
 
 import { authState } from "state/auth";
 import { httpSelector } from "state/http";
-import useHttp from "hooks/useHttp";
+// import useHttp from "hooks/useHttp";
 import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
@@ -16,7 +16,7 @@ const CheckPw = ({ setShow }) => {
   const cx = classNames.bind(styles);
   const auth = useRecoilValue(authState);
   const http = useRecoilValue(httpSelector);
-  const [makeHttp] = useHttp({ http });
+  // const [makeHttp] = useHttp({ http });
   const [form, setForm] = useState({ password: "" });
 
   const onSubmit = async (e) => {
@@ -39,9 +39,9 @@ const CheckPw = ({ setShow }) => {
     }
   };
 
-  useEffect(() => {
-    makeHttp();
-  }, [http]);
+  // useEffect(() => {
+  //   makeHttp();
+  // }, [http]);
 
   return (
     <form className={cx("container")} onSubmit={(e) => onSubmit(e)}>

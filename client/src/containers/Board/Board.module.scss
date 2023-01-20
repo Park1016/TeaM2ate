@@ -9,19 +9,32 @@
 }
 
 .postWrap {
+    position: relative;
     margin-top: 2rem;
     display: grid;
     grid-gap: 1.5rem;
     grid-template-columns: repeat(2, 23rem);
     > li:hover {
-        transform: scale(1.007);
+        // transform: scale(1.007);
+        @include borderBlue;
     }
+}
+
+.noResult {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    @include flexRow;
+    @include text;
+    color: $text_gray2;
+    font-size: 1.2rem;
 }
 
 @media screen and (max-width: 1250px) {
     .postWrap {
         grid-gap: 0.5rem;
-        grid-template-columns: repeat(2, 25vw);
+        grid-template-columns: repeat(2, 28vw);
     }
 }
 

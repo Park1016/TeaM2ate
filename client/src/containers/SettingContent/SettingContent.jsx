@@ -10,13 +10,13 @@ import { authState } from "state/auth";
 import UserApi from "api/user";
 import UpdateProfile from "containers/UpdateProfile/UpdateProfile";
 import Security from "containers/Security/Security";
-import useHttp from "hooks/useHttp";
+// import useHttp from "hooks/useHttp";
 
 const SettingContent = (props) => {
   const cx = classNames.bind(styles);
   const auth = useRecoilValue(authState);
   const http = useRecoilValue(httpSelector);
-  const [makeHttp] = useHttp({ http });
+  // const [makeHttp] = useHttp({ http });
   const [show, setShow] = useState("profile");
   const { data: user } = useQuery(["settingAuth"], async () => {
     if (auth) {
@@ -26,9 +26,9 @@ const SettingContent = (props) => {
     }
   });
 
-  useEffect(() => {
-    makeHttp();
-  }, [http]);
+  // useEffect(() => {
+  //   makeHttp();
+  // }, [http]);
 
   return (
     <>

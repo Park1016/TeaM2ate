@@ -18,6 +18,16 @@ export default class UserApi {
     }
   }
 
+  async getById(id) {
+    console.log(id);
+    try {
+      const res = await this.user.get(`getById/${id}`);
+      return res.data;
+    } catch (error) {
+      // alert(error.response.data.message);
+    }
+  }
+
   async login(params) {
     try {
       const res = await this.user.post("login", params);

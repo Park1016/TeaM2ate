@@ -11,12 +11,12 @@ import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
 import CommonBtn from "components/CommonBtn/CommonBtn";
-import useHttp from "hooks/useHttp";
+// import useHttp from "hooks/useHttp";
 
 const LoginForm = (props) => {
   const cx = classNames.bind(styles);
   const http = useRecoilValue(httpSelector);
-  const [makeHttp] = useHttp({ http });
+  // const [makeHttp] = useHttp({ http });
   const setAuth = useSetRecoilState(authState);
   const setModal = useSetRecoilState(modalState);
   const [form, setForm] = useState({ id: "", pw: "" });
@@ -43,9 +43,9 @@ const LoginForm = (props) => {
     }
   };
 
-  useEffect(() => {
-    makeHttp();
-  }, [http]);
+  // useEffect(() => {
+  //   makeHttp();
+  // }, [http]);
 
   return (
     <form className={cx("container")} onSubmit={(e) => onSubmit(e)}>

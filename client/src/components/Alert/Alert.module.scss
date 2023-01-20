@@ -1,0 +1,18 @@
+@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+
+.container {
+    @include container;
+    flex-direction: column;
+    svg {
+        width: 5rem;
+        height: 5rem;
+        color: $yellow;
+        // color: $red;
+        margin-bottom: 0.5rem;
+    }
+    p {
+        @include text;
+        font-size: 1.5rem;
+    }
+}

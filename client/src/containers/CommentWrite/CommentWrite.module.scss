@@ -24,3 +24,19 @@
     @include flexRow;
     justify-content: flex-end;
 }
+
+.readOnly {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    @include border2;
+    span {
+        @include text;
+    }
+    span:first-child {
+        text-decoration: underline;
+        color: $blue;
+        font-weight: 600;
+        margin-right: 0.5rem;
+        cursor: pointer;
+    }
+}
