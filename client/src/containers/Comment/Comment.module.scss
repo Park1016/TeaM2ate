@@ -12,7 +12,7 @@
     li {
         border-top: $border;
     }
-    li:first-child {
+    > li:first-child {
         border: none;
     }
 }

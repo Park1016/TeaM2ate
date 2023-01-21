@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
 
@@ -10,11 +10,14 @@ import { RiDeleteBin2Line } from "react-icons/ri";
 
 // import useHttp from "hooks/useHttp";
 import { httpSelector } from "state/http";
+import { replyState } from "state/reply";
 import CommentApi from "api/comment";
 import PostApi from "api/post";
+import ReplycommApi from "api/replycomm";
 
-function UpdateDelBtn({ type, id, setEdit, setData }) {
+function UpdateDelBtn({ type, id, setEdit, setData, deleteId }) {
   const cx = classNames.bind(styles);
+  const setReply = useSetRecoilState(replyState);
   const [show, setShow] = useState(false);
 
   const http = useRecoilValue(httpSelector);
@@ -28,6 +31,7 @@ function UpdateDelBtn({ type, id, setEdit, setData }) {
         navigate(`/post/update/${id}`);
         break;
       case "comment":
+      case "replycomm":
         setEdit(true);
         break;
       default:
@@ -37,7 +41,9 @@ function UpdateDelBtn({ type, id, setEdit, setData }) {
 
   const onDelete = async () => {
     const check = window.confirm(
-      `${type === "post" ? "게시글을" : "댓글을"} 삭제하시겠습니까?`
+      `${
+        type === "post" ? "게시글을" : type === "comment" ? "댓글을" : "답글을"
+      } 삭제하시겠습니까?`
     );
     if (!check) {
       return;
@@ -49,9 +55,20 @@ function UpdateDelBtn({ type, id, setEdit, setData }) {
         navigate("/");
         break;
       case "comment":
-        await new CommentApi(http).deleteComment(id);
-        const res = await new CommentApi(http).getCommentByPostId(id);
-        setData(res);
+        await new CommentApi(http).deleteComment(deleteId);
+        const comment = await new CommentApi(http).getCommentByPostId(id);
+        // console.log(">>>", comment, "!!!", id);
+        setData(comment);
+        // alert("댓글이 삭제되었습니다");
+        break;
+      case "replycomm":
+        await new ReplycommApi(http).deleteReplycomm(deleteId);
+        const replycomm = await new ReplycommApi(http).getReplyCommByCommentId(
+          id
+        );
+        // console.log(">>>222>>>", replycomm, "!!!", id);
+        // setData(replycomm);
+        setReply(replycomm);
         // alert("댓글이 삭제되었습니다");
         break;
       default:

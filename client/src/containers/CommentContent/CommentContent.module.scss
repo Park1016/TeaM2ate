@@ -5,10 +5,18 @@
 .list {
     position: relative;
     width: 100%;
-    @include flexRow;
+    @include flexColumn;
     align-items: flex-start;
     justify-content: flex-start;
     padding: 1rem 0;
+}
+
+.user {
+    position: relative;
+    width: calc(100% - 2rem);
+    @include flexRow;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .right {
@@ -42,4 +50,28 @@
     position: absolute;
     top: 1rem;
     right: 0;
+}
+
+.buttons {
+    margin-left: 2rem;
+    button:first-child {
+        margin-right: 0.25rem;
+    }
+    &.replycomm {
+        margin-left: 0;
+    }
+}
+
+.reply {
+    padding: 0.25rem 0.5rem;
+    @include border2;
+    @include text;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.replyArea {
+    width: 100%;
+    @include flexColumn;
+    align-items: flex-end;
 }

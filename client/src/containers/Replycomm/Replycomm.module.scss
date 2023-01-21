@@ -1,0 +1,18 @@
+@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+ 
+
+.container {
+    width: calc(100% - 2rem);
+    padding: 2rem 0 0 1rem;
+    border-left: 3px solid $gray6;
+}
+
+// .content {
+//     li {
+//         border-top: $border;
+//     }
+//     li:first-child {
+//         border: none;
+//     }
+// }

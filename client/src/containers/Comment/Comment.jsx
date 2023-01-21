@@ -57,10 +57,10 @@ function Comment(props) {
             <CommentContent
               key={index}
               http={http}
-              id={id}
+              postId={id}
               setData={setData}
               item={item}
-              index={index}
+              commentId={item.id}
             />
           ))}
         </ul>

@@ -1,7 +1,6 @@
 ﻿import express from "express";
 import "express-async-errors";
 import { db } from "../db/database.js";
-import * as userRepository from "./user.js";
 
 export async function getByUsername(username) {
   return db
@@ -11,7 +10,7 @@ export async function getByUsername(username) {
 
 export async function getByPostId(postId) {
   return db
-    .execute("SELECT * FROM comment WHERE postId=?", [postId]) //
+    .execute("SELECT * FROM comment WHERE postId=? order by id desc", [postId]) //
     .then((result) => result[0]);
 }
 

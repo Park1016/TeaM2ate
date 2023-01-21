@@ -14,7 +14,7 @@ export default class UserApi {
       return res.data;
     } catch (error) {
       // alert(error.response.data.message);
-      alert(error.response.data.message);
+      console.warn(error.response.data.message);
     }
   }
 

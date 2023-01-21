@@ -31,7 +31,7 @@ router.get(
 );
 
 router.post("/photo", upload.single("blob"), (req, res) => {
-  console.log("------------", req);
+  // console.log("------------", req);
 });
 
 router.post(

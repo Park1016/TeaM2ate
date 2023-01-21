@@ -1,0 +1,29 @@
+@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+ 
+
+.container {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    // border-top: 1px solid $gray5;
+    @include text;
+    @include flexColumn;
+    position: relative;
+    width: 100%;
+    justify-content: flex-start;
+    button {
+        margin-left: 0.25rem;
+    }
+}
+
+.textarea {
+    width: 100%;
+}
+
+.button {
+    position: absolute;
+    bottom: 1rem;
+    right: 0.5rem;
+    @include flexRow;
+    justify-content: flex-end;
+}

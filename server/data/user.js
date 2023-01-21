@@ -24,7 +24,7 @@ export async function signUp(user) {
   const { username, password, name, email, url } = user;
   return db
     .execute(
-      "INSERT INTO user (username, password, name, email, url, type, introduce, tag, bookmark, post, comment, follower, following, report, alert, send_offer, get_offer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO user (username, password, name, email, url, type, introduce, tag, bookmark, post, comment, replycomm, follower, following, report, alert, send_offer, get_offer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         username,
         password,
@@ -33,6 +33,7 @@ export async function signUp(user) {
         url,
         "gen",
         "",
+        JSON.stringify([]),
         JSON.stringify([]),
         JSON.stringify([]),
         JSON.stringify([]),
@@ -55,7 +56,11 @@ export async function addList(userId, column, value) {
       ? [value, ...user.post]
       : column === "comment"
       ? [value, ...user.comment]
+      : column === "replycomm"
+      ? [value, ...user.replycomm]
       : [value, ...user.bookmark];
+
+  console.log("???????", column, value);
   return db
     .execute(`UPDATE user SET ${column}=? WHERE id=?`, [arr, userId])
     .then(async () => await getById(userId));
@@ -93,6 +98,8 @@ export async function removeList(userId, column, value) {
       ? user.post.filter((x) => x !== value)
       : column === "comment"
       ? user.comment.filter((x) => x !== value)
+      : column === "replycomm"
+      ? user.replycomm.filter((x) => x !== value)
       : user.bookmark.filter((x) => x !== value);
   return db
     .execute(`UPDATE user SET ${column}=? WHERE id=?`, [arr, userId])
