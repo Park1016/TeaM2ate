@@ -8,11 +8,11 @@ import { IoAlertCircleOutline } from "react-icons/io5";
 const Alert = (props) => {
   const cx = classNames.bind(styles);
   return (
-    <secion className={cx("container")}>
+    <section className={cx("container")}>
       <RiAlertFill />
       {/* <IoAlertCircleOutline /> */}
       <p>로그인 후 이용 가능합니다</p>
-    </secion>
+    </section>
   );
 };
 

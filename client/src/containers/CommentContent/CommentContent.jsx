@@ -1,10 +1,11 @@
-﻿import React, { useEffect, useState } from "react";
+﻿import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import classNames from "classnames/bind";
 
 import styles from "./CommentContent.module.scss";
 
 import { authState } from "state/auth";
+import { replyState } from "state/comment";
 import UpdateDelBtn from "components/UpdateDelBtn/UpdateDelBtn";
 import CommentWrite from "containers/CommentWrite/CommentWrite";
 import ProfilePhoto from "components/ProfilePhoto/ProfilePhoto";
@@ -14,12 +15,13 @@ import Username from "components/Username/Username";
 import Replycomm from "containers/Replycomm/Replycomm";
 import ReplycommWrite from "containers/ReplycommWrite/ReplycommWrite";
 
-function CommentContent({ http, postId, setData, item, replycomm, commentId }) {
+function CommentContent({ http, postId, item, replycomm, commentId }) {
   const cx = classNames.bind(styles);
   const auth = useRecoilValue(authState);
   const [edit, setEdit] = useState(false);
   const [showReply, setShowReply] = useState(false);
   const [showReplyWrite, setShowReplyWrite] = useState(false);
+  const reply = useRecoilValue(replyState);
 
   return (
     <li className={cx("list")}>
@@ -29,7 +31,6 @@ function CommentContent({ http, postId, setData, item, replycomm, commentId }) {
             type={replycomm ? "replycomm" : "comment"}
             id={replycomm ? commentId : postId}
             setEdit={setEdit}
-            setData={!replycomm && setData}
             deleteId={item.id}
           />
         )}
@@ -61,7 +62,6 @@ function CommentContent({ http, postId, setData, item, replycomm, commentId }) {
                 <CommentWrite
                   http={http}
                   id={postId}
-                  setData={setData}
                   value={item}
                   setEdit={setEdit}
                 />
@@ -75,7 +75,7 @@ function CommentContent({ http, postId, setData, item, replycomm, commentId }) {
         </div>
       </article>
       <article className={cx("buttons", { replycomm })}>
-        {!replycomm && (
+        {!replycomm && reply && reply.find((x) => x.commentId === item.id) && (
           <button
             onClick={() => setShowReply(!showReply)}
             className={cx("reply")}
@@ -98,6 +98,7 @@ function CommentContent({ http, postId, setData, item, replycomm, commentId }) {
             http={http}
             commentId={commentId}
             value={undefined}
+            replycomm={replycomm}
             setShowReply={setShowReply}
             setShowReplyWrite={setShowReplyWrite}
           />

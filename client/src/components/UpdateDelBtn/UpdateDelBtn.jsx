@@ -10,14 +10,15 @@ import { RiDeleteBin2Line } from "react-icons/ri";
 
 // import useHttp from "hooks/useHttp";
 import { httpSelector } from "state/http";
-import { replyState } from "state/reply";
+import { commentState, replyState } from "state/comment";
 import CommentApi from "api/comment";
 import PostApi from "api/post";
 import ReplycommApi from "api/replycomm";
 
-function UpdateDelBtn({ type, id, setEdit, setData, deleteId }) {
+function UpdateDelBtn({ type, id, setEdit, deleteId }) {
   const cx = classNames.bind(styles);
   const setReply = useSetRecoilState(replyState);
+  const setComment = useSetRecoilState(commentState);
   const [show, setShow] = useState(false);
 
   const http = useRecoilValue(httpSelector);
@@ -57,19 +58,14 @@ function UpdateDelBtn({ type, id, setEdit, setData, deleteId }) {
       case "comment":
         await new CommentApi(http).deleteComment(deleteId);
         const comment = await new CommentApi(http).getCommentByPostId(id);
-        // console.log(">>>", comment, "!!!", id);
-        setData(comment);
-        // alert("댓글이 삭제되었습니다");
+        setComment(comment);
         break;
       case "replycomm":
         await new ReplycommApi(http).deleteReplycomm(deleteId);
         const replycomm = await new ReplycommApi(http).getReplyCommByCommentId(
           id
         );
-        // console.log(">>>222>>>", replycomm, "!!!", id);
-        // setData(replycomm);
         setReply(replycomm);
-        // alert("댓글이 삭제되었습니다");
         break;
       default:
         break;

@@ -22,7 +22,6 @@ const ProfileToggle = ({ http }) => {
       const logout = await new UserApi(http).logout();
       if (logout) {
         setAuth(false);
-        // alert(logout);
       }
     }
   };

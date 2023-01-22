@@ -1,6 +1,5 @@
 import express from "express";
 import "express-async-errors";
-import * as userRepository from "./user.js";
 import { db } from "../db/database.js";
 
 export async function create(email, authNum) {

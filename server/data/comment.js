@@ -1,5 +1,6 @@
 ﻿import express from "express";
 import "express-async-errors";
+import * as replyRepository from "./replycomm.js";
 import { db } from "../db/database.js";
 
 export async function getByUsername(username) {
@@ -10,23 +11,31 @@ export async function getByUsername(username) {
 
 export async function getByPostId(postId) {
   return db
-    .execute("SELECT * FROM comment WHERE postId=? order by id desc", [postId]) //
+    .execute("SELECT * FROM comment WHERE postId=?", [postId]) //
     .then((result) => result[0]);
 }
 
 export async function getPostByComment(username) {
   const comment = await getByUsername(username);
+  const reply = await replyRepository.getByUsername(username);
   if (comment.length === 0) {
     return false;
   }
-  const postId = comment.map((x) => x.postId);
+
+  const arr = [...comment, ...reply];
+  const postId = arr.map((x) => x.postId);
 
   const sql = "SELECT * FROM post WHERE id IN(?)";
   const res = await db.query(sql, [postId], (err, result) => {
     if (err) throw err;
     result;
   });
-  const data = { post: res[0], comment };
+  const data = { post: res[0], comment: arr };
+
+  console.log("reply", reply);
+  console.log("arr", arr);
+  console.log("res", res);
+  console.log("data", data);
   return data;
 }
 

@@ -6,14 +6,16 @@ import styles from "./CommentWrite.module.scss";
 
 import { makeFormData } from "hooks/makeFormData";
 import CommentApi from "api/comment";
+import { commentState } from "state/comment";
 import { modalState } from "state/modal";
 import Textarea from "components/Textarea/Textarea";
 import CommonBtn from "components/CommonBtn/CommonBtn";
 
-function CommentWrite({ http, id, setData, value, setEdit, readOnly }) {
+function CommentWrite({ http, id, value, setEdit, readOnly }) {
   const cx = classNames.bind(styles);
   const [form, setForm] = useState({ comment: value ? value.text : "" });
   const setModal = useSetRecoilState(modalState);
+  const setComment = useSetRecoilState(commentState);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +35,7 @@ function CommentWrite({ http, id, setData, value, setEdit, readOnly }) {
       await new CommentApi(http).writeComment(formData);
     }
     const res = await new CommentApi(http).getCommentByPostId(id);
-    setData(res);
+    setComment(res);
     setForm({ comment: "" });
   };
 

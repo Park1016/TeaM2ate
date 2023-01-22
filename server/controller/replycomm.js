@@ -14,7 +14,6 @@ export async function getPostByReply(req, res) {
 
 export async function getByCommentId(req, res) {
   const commentId = req.params.commentId;
-  console.log(">>>>>>>>", commentId);
   const data = await replycommRepository.getByCommentId(commentId);
   res.status(200).json(data);
 }

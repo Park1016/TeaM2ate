@@ -5,9 +5,10 @@ import classNames from "classnames/bind";
 import styles from "./Replycomm.module.scss";
 
 import ReplycommApi from "api/replycomm";
-import { replyState } from "state/reply";
+import { replyState } from "state/comment";
 import { httpSelector } from "state/http";
 import CommentContent from "containers/CommentContent/CommentContent";
+import ReplycommWrite from "containers/ReplycommWrite/ReplycommWrite";
 
 function Replycomm({ postId, commentId, item }) {
   const cx = classNames.bind(styles);
@@ -25,10 +26,10 @@ function Replycomm({ postId, commentId, item }) {
     if (item) {
       onGetData();
     }
-  }, []);
-
-  useEffect(() => {
-    if (reply && reply[0].commentId === data[0].commentId) {
+    if (!reply || !data || reply.length === 0 || data.length === 0) {
+      return;
+    }
+    if (reply[0].commentId === data[0].commentId) {
       setData(reply);
     }
   }, [reply]);

@@ -14,11 +14,15 @@ export async function getById(id) {
     .then((result) => result[0][0]);
 }
 
+export async function getByPostId(id) {
+  return db
+    .execute("SELECT * FROM replycomm WHERE postId=?", [id]) //
+    .then((result) => result[0]);
+}
+
 export async function getByCommentId(commentId) {
   return db
-    .execute("SELECT * FROM replycomm WHERE commentId=? order by id desc", [
-      commentId,
-    ]) //
+    .execute("SELECT * FROM replycomm WHERE commentId=?", [commentId]) //
     .then((result) => result[0]);
 }
 

@@ -9,12 +9,13 @@ import { makeFormData } from "hooks/makeFormData";
 import ReplycommApi from "api/replycomm";
 import Textarea from "components/Textarea/Textarea";
 import CommonBtn from "components/CommonBtn/CommonBtn";
-import { replyState } from "state/reply";
+import { replyState } from "state/comment";
 
 function ReplycommWrite({
   http,
   commentId,
   value,
+  replycomm,
   setEdit,
   setShowReply,
   setShowReplyWrite,
@@ -30,6 +31,8 @@ function ReplycommWrite({
       alert("댓글을 입력해주세요");
       return;
     }
+
+    console.log("commentId", commentId);
 
     const postId = id;
     const text = form.reply;
@@ -50,7 +53,10 @@ function ReplycommWrite({
   };
 
   return (
-    <form className={cx("container")} onSubmit={(e) => onSubmit(e)}>
+    <form
+      className={cx("container", { replycomm })}
+      onSubmit={(e) => onSubmit(e)}
+    >
       <div className={cx("textarea")}>
         <Textarea
           name={"reply"}

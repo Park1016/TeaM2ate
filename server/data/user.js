@@ -108,6 +108,11 @@ export async function removeList(userId, column, value) {
 
 export async function getPostByBookmark(username) {
   const user = await getByUsername(username);
+
+  if (!user) {
+    return false;
+  }
+
   const bookmark = user.bookmark;
 
   if (bookmark.length === 0) {

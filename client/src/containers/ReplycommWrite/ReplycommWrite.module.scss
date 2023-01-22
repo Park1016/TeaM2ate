@@ -5,14 +5,20 @@
 .container {
     margin-top: 0.5rem;
     padding-top: 0.5rem;
-    // border-top: 1px solid $gray5;
+    padding-left: 1rem;
     @include text;
     @include flexColumn;
     position: relative;
-    width: 100%;
+    width: calc(100% - 2rem);
     justify-content: flex-start;
+    border-left: 3px solid $gray6;
     button {
         margin-left: 0.25rem;
+    }
+    &.replycomm {
+        width: 100%;
+        border-left: none;
+        padding-left: 0;
     }
 }
 
