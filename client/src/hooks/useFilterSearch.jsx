@@ -7,13 +7,14 @@ const useFilterSearch = (props) => {
     }
   };
 
-  const onSearch = (data, item, setSearch) => {
+  const onSearch = (data, item, setSearch, setInfinite) => {
     const title = data.filter((x) => x.title.includes(item));
     const tag = data.filter((x) => x.tag.includes(item));
     const type = data.filter((x) => onSeachType(x.type, item));
 
     const arr = title.concat(tag.concat(type));
     setSearch(arr);
+    setInfinite(arr.slice(0, 2));
   };
 
   return [onSearch];
