@@ -1,0 +1,17 @@
+@import '../../static/stylesheets/lib/variables';
+@import '../../static/stylesheets/lib/mixin';
+
+.top {
+    position: fixed;
+    bottom: 1rem;
+    right: 2rem;
+    border-radius: 50%;
+    color: $blue;
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    z-index: 999;
+    &:hover {
+        transform: scale(1.05);
+    }
+}

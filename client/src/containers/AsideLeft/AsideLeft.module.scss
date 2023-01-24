@@ -3,7 +3,32 @@
  
 
 .container {
-    width: $side_width;
-    height: 70vh;
+    width: calc(#{$side_width} - 2rem);
+    height: auto;
+    padding: 1rem;
     background-color: $gray6;
+    // border-right: $border;
+    border-radius: 5px;
+    @include text;
+    text-align: start;
+    p {
+        font-weight: 600;
+    }
+    ul {
+        @include flexColumn;
+        align-items: flex-start;
+        margin-top: 0.5rem;
+        li {
+            max-width: 90%;
+            background-color: #fff;
+            padding: 0.25rem 0.8rem 0.25rem 0.5rem;
+            border: 1px solid $gray1;
+            border-radius: 15px;
+            margin: 0.25rem 0;
+            cursor: pointer;
+        }
+        li:hover {
+            background-color: $gray5;
+        }
+    }
 }

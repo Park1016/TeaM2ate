@@ -11,7 +11,7 @@ export async function getByUsername(username) {
 
 export async function getByPostId(postId) {
   return db
-    .execute("SELECT * FROM comment WHERE postId=?", [postId]) //
+    .execute("SELECT * FROM comment WHERE postId=? order by id desc", [postId]) //
     .then((result) => result[0]);
 }
 

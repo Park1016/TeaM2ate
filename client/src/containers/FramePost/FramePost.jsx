@@ -33,13 +33,21 @@ const FramePost = ({ value, board, auth, postId, http, user }) => {
     <>
       <article className={cx("article")}>
         <p className={cx("title", { board })}>{title}</p>
+        <ul className={cx("proTime", { board })}>
+          <li className={cx("progress", { done: progress === "done" })}>
+            {progress === "ing" ? "모집중" : "모집마감"}
+          </li>
+          <li>
+            <Time createdAt={createdAt} />
+          </li>
+        </ul>
         <div className={cx("top")}>
           <div className={cx("topLeft")}>
             <ProfilePhoto url={url} username={username} id={userId} />
             <div>
               <Username username={username} id={userId} />
-              <div className={cx("line")}></div>
-              <Time createdAt={createdAt} />
+              {/* <div className={cx("line")}></div>
+              <Time createdAt={createdAt} /> */}
             </div>
           </div>
           <div className={cx("topRight")}>

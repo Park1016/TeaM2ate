@@ -7,6 +7,22 @@
     margin-bottom: 0.5rem;
 }
 
+.proTime {
+    @include flexColumn;
+}
+
+.progress {
+    @include text;
+    border-radius: 5px;
+    padding: 0.1rem 0.5rem;
+    color: #fff;
+    // background-color: #92B9D6;
+    background-color: $blue;
+    &.done {
+        background-color: $red;
+    }
+}
+
 .top {
     @include flexRow;
     justify-content: space-between;

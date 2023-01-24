@@ -8,6 +8,7 @@ import "./App.css";
 import Header from "containers/Header/Header";
 import Aside from "containers/Aside/Aside";
 import Loading from "components/Loading/Loading";
+import Top from "components/Top/Top";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,6 +26,7 @@ const App = (props) => {
         <Suspense fallback={<Loading />}>
           <Header />
           <Aside />
+          <Top />
           <Outlet />
         </Suspense>
       </RecoilRoot>
