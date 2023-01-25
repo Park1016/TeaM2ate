@@ -1,30 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
-import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 
 import styles from "./SettingContent.module.scss";
 
 import { httpSelector } from "state/http";
-import { authState } from "state/auth";
-import UserApi from "api/user";
+import { userState } from "state/user";
 import UpdateProfile from "containers/UpdateProfile/UpdateProfile";
 import Security from "containers/Security/Security";
 // import useHttp from "hooks/useHttp";
 
 const SettingContent = (props) => {
   const cx = classNames.bind(styles);
-  const auth = useRecoilValue(authState);
+  const user = useRecoilValue(userState);
   const http = useRecoilValue(httpSelector);
   // const [makeHttp] = useHttp({ http });
   const [show, setShow] = useState("profile");
-  const { data: user } = useQuery(["settingAuth"], async () => {
-    if (auth) {
-      return await new UserApi(http).me();
-    } else {
-      return false;
-    }
-  });
 
   // useEffect(() => {
   //   makeHttp();

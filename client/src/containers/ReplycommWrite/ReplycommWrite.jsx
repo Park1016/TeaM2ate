@@ -32,8 +32,6 @@ function ReplycommWrite({
       return;
     }
 
-    console.log("commentId", commentId);
-
     const postId = id;
     const text = form.reply;
     const formData = makeFormData({ postId, commentId, text });

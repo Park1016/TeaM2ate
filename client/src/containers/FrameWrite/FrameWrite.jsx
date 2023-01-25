@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from "react";
+﻿import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
@@ -17,7 +17,6 @@ import { makeFormData } from "hooks/makeFormData";
 import FrameType from "containers/FrameType/FrameType";
 import Type from "containers/Type/Type";
 import SelectTag from "components/SelectTag/SelectTag";
-import PlusBtn from "components/PlusBtn/PlusBtn";
 import ChooseBox from "components/ChooseBox/ChooseBox";
 import Input from "components/Input/Input";
 import TextEditor from "components/TextEditor/TextEditor";
@@ -125,7 +124,6 @@ const FrameWrite = ({ form, setForm, editId }) => {
             <button type="button" onClick={() => setShow(!show)}>
               모집유형 선택하기
             </button>
-            {/* <PlusBtn setShow={setShow} /> */}
           </div>
           {form.type.length !== 0 && (
             <div className={cx("typeBottom")}>

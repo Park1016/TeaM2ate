@@ -60,7 +60,6 @@ export async function addList(userId, column, value) {
       ? [value, ...user.replycomm]
       : [value, ...user.bookmark];
 
-  console.log("???????", column, value);
   return db
     .execute(`UPDATE user SET ${column}=? WHERE id=?`, [arr, userId])
     .then(async () => await getById(userId));

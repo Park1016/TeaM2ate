@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useRecoilValue } from "recoil";
 
-import { authState } from "state/auth";
-import useCheckAuth from "hooks/useCheckAuth";
+import { userState } from "state/user";
 import SettingContent from "containers/SettingContent/SettingContent";
 import Alert from "components/Alert/Alert";
 
 const Setting = (props) => {
-  const auth = useRecoilValue(authState);
-  const [check, setCheck] = useState(false);
-  const [checkAuth] = useCheckAuth({ auth, setCheck, type: "alert" });
+  const user = useRecoilValue(userState);
 
-  useEffect(() => {
-    checkAuth();
-  }, [auth]);
-
-  return <>{check ? <SettingContent /> : <Alert />}</>;
+  return <>{user ? <SettingContent /> : <Alert />}</>;
 };
 
 export default Setting;

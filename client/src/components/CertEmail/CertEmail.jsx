@@ -6,6 +6,7 @@ import styles from "./CertEmail.module.scss";
 
 import { checkAuth, sendEmail } from "hooks/certEmail";
 import { makeFormData } from "hooks/makeFormData";
+import { isEmailForm } from "hooks/formatChecker";
 import { httpSelector } from "state/http";
 import Input from "components/Input/Input";
 import Timer from "components/Timer/Timer";
@@ -18,9 +19,14 @@ const CertEmail = ({ form, setForm, checkEmail, setCheckEmail, checkDup }) => {
   // const [makeHttp] = useHttp({ http });
   const [reStart, setReStart] = useState(false);
   const [checkAuthNum, setCheckAuthNum] = useState(false);
+  const [text, setText] = useState(false);
 
   const onSendEmail = async () => {
     if (checkEmail) {
+      return;
+    }
+    if (isEmailForm(form.email) === false) {
+      setText("이메일을 형식에 맞게 입력해주세요");
       return;
     }
     const email = form.email;
@@ -32,7 +38,11 @@ const CertEmail = ({ form, setForm, checkEmail, setCheckEmail, checkDup }) => {
         return;
       }
     }
+    setText("인증번호를 요청했습니다. 잠시만 기다려주세요.");
     const user = await sendEmail(http, formData);
+    if (!user) {
+      setText(false);
+    }
     if (user.status === 200 || user.data) {
       if (!checkDup) {
         setForm({ ...form, username: user.data.username });
@@ -40,6 +50,7 @@ const CertEmail = ({ form, setForm, checkEmail, setCheckEmail, checkDup }) => {
       if (checkAuthNum) {
         setReStart(!reStart);
       } else {
+        setText("이메일로 인증번호가 발송되었습니다");
         setCheckAuthNum(true);
       }
       // alert("이메일로 인증번호가 발송되었습니다");
@@ -54,10 +65,12 @@ const CertEmail = ({ form, setForm, checkEmail, setCheckEmail, checkDup }) => {
 
     if (res === 200) {
       alert("인증이 완료되었습니다");
+      setText(false);
       setCheckEmail(true);
     } else {
       if (res === 408) {
         setCheckAuthNum(false);
+        setText("인증에 실패했습니다");
         return;
       }
       setForm({ ...form, authNum: "" });
@@ -70,7 +83,7 @@ const CertEmail = ({ form, setForm, checkEmail, setCheckEmail, checkDup }) => {
 
   return (
     <>
-      <article className={cx("content")}>
+      <article className={cx("content", { margin: text })}>
         <label htmlFor="email">이메일</label>
         <div className={cx("inputBox")}>
           <Input
@@ -101,6 +114,7 @@ const CertEmail = ({ form, setForm, checkEmail, setCheckEmail, checkDup }) => {
             </button>
           )}
         </div>
+        {text && <p className={cx("text")}>{text}</p>}
       </article>
 
       {checkAuthNum && !checkEmail && (
@@ -128,7 +142,11 @@ const CertEmail = ({ form, setForm, checkEmail, setCheckEmail, checkDup }) => {
               </div>
             )}
             <div className={cx("timer")}>
-              <Timer setCheckAuthNum={setCheckAuthNum} start={reStart} />
+              <Timer
+                setCheckAuthNum={setCheckAuthNum}
+                start={reStart}
+                setText={setText}
+              />
             </div>
           </article>
         </>

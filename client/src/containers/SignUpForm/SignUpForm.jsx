@@ -11,12 +11,16 @@ import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
 import CertEmail from "components/CertEmail/CertEmail";
 import CommonBtn from "components/CommonBtn/CommonBtn";
+import { isNull } from "hooks/formatChecker";
 // import useHttp from "hooks/useHttp";
 
 const SignUpForm = (props) => {
   const cx = classNames.bind(styles);
   const setModal = useSetRecoilState(modalState);
   const [checkEmail, setCheckEmail] = useState(false);
+  const [nameText, setNameText] = useState(false);
+  const [idText, setIdText] = useState(false);
+  const [pwText, setPwText] = useState(false);
 
   const [form, setForm] = useState({
     name: "",
@@ -42,13 +46,32 @@ const SignUpForm = (props) => {
     console.log(res);
   };
 
+  const nullCheck = () => {
+    if (nameText || idText || pwText) {
+      return false;
+    } else if (isNull(form.name)) {
+      alert("이름을 입력해주세요");
+      return false;
+    } else if (isNull(form.username)) {
+      alert("아이디를 입력해주세요");
+      return false;
+    } else if (isNull(form.password)) {
+      alert("비밀번호를 입력해주세요");
+      return false;
+    } else if (!checkEmail) {
+      alert("이메일 인증을 완료해주세요.");
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // if (!checkEmail) {
-    //   alert("이메일 인증을 완료해주세요.");
-    //   return;
-    // }
+    if (!nullCheck()) {
+      return;
+    }
 
     if (form.url) {
       await onSubmitPhoto();
@@ -99,9 +122,11 @@ const SignUpForm = (props) => {
           value={form.name}
           form={form}
           setForm={setForm}
+          setText={setNameText}
         />
+        {nameText && <p className={cx("text")}>{nameText}</p>}
       </article>
-      <article className={cx("inputBox")}>
+      <article className={cx("inputBox", { margin: idText })}>
         <label htmlFor="username">아이디</label>
         <Input
           placeholder={"아이디를 입력하세요"}
@@ -111,9 +136,11 @@ const SignUpForm = (props) => {
           value={form.username}
           form={form}
           setForm={setForm}
+          setText={setIdText}
         />
+        {idText && <p className={cx("text")}>{idText}</p>}
       </article>
-      <article className={cx("inputBox")}>
+      <article className={cx("inputBox", { margin: pwText })}>
         <label htmlFor="password">비밀번호</label>
         <Input
           placeholder={"비밀번호를 입력하세요"}
@@ -123,7 +150,9 @@ const SignUpForm = (props) => {
           value={form.password}
           form={form}
           setForm={setForm}
+          setText={setPwText}
         />
+        {pwText && <p className={cx("text")}>{pwText}</p>}
       </article>
       <CertEmail
         form={form}
@@ -140,7 +169,12 @@ const SignUpForm = (props) => {
         accept="imgae/*"
         onChange={(e) => onPhoto(e)}
       /> */}
-      <CommonBtn type={"submit"} color={"blue"} text={"회원가입"} />
+      <CommonBtn
+        type={"submit"}
+        color={"blue"}
+        text={"회원가입"}
+        notAllow={nameText || idText || pwText ? true : false}
+      />
     </form>
   );
 };

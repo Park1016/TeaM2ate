@@ -1,6 +1,5 @@
-﻿import React, { useEffect, useState } from "react";
+﻿import React, { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 
@@ -11,22 +10,16 @@ import CommentApi from "api/comment";
 import ReplycommApi from "api/replycomm";
 import CommentWrite from "containers/CommentWrite/CommentWrite";
 import CommentContent from "containers/CommentContent/CommentContent";
-import useCheckAuth from "hooks/useCheckAuth";
-import { authState } from "state/auth";
 import { commentState, replyState } from "state/comment";
 // import useHttp from "hooks/useHttp";
 
-function Comment(props) {
+function Comment({ id, user }) {
   const cx = classNames.bind(styles);
   const http = useRecoilValue(httpSelector);
   // const [makeHttp] = useHttp({ http });
-  const auth = useRecoilValue(authState);
   const comment = useRecoilValue(commentState);
   const setComment = useSetRecoilState(commentState);
   const setReply = useSetRecoilState(replyState);
-  const [check, setCheck] = useState(false);
-  const [checkAuth] = useCheckAuth({ auth, setCheck, type: "noAlert" });
-  const { id } = useParams();
 
   const { data } = useQuery(["comment"], async () => {
     return await new CommentApi(http).getCommentByPostId(id);
@@ -51,17 +44,13 @@ function Comment(props) {
   //   makeHttp();
   // }, [http]);
 
-  useEffect(() => {
-    checkAuth();
-  }, [auth]);
-
   return (
     <article className={cx("container")}>
       <CommentWrite
         http={http}
         id={id}
         value={undefined}
-        readOnly={check ? false : true}
+        readOnly={user ? false : true}
       />
       {comment && (
         <ul className={cx("content")}>

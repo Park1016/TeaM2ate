@@ -6,10 +6,9 @@ import classNames from "classnames/bind";
 
 import styles from "./Post.module.scss";
 
-import { authState } from "state/auth";
 import { httpSelector } from "state/http";
+import { userState } from "state/user";
 import PostApi from "api/post";
-import UserApi from "api/user";
 import FramePost from "containers/FramePost/FramePost";
 import Comment from "containers/Comment/Comment";
 // import useHttp from "hooks/useHttp";
@@ -19,17 +18,10 @@ const Post = (props) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const http = useRecoilValue(httpSelector);
+  const user = useRecoilValue(userState);
   // const [makeHttp] = useHttp({ http });
-  const auth = useRecoilValue(authState);
   const { data: post } = useQuery(["post", id], async () => {
     return await new PostApi(http).getPostById(id);
-  });
-  const { data: user } = useQuery(["postUser", id], async () => {
-    if (auth) {
-      return await new UserApi(http).me();
-    } else {
-      return false;
-    }
   });
 
   useEffect(() => {
@@ -50,12 +42,11 @@ const Post = (props) => {
             <FramePost
               value={post}
               board={false}
-              auth={auth}
               postId={id}
               http={http}
               user={user}
             />
-            <Comment id={id} />
+            <Comment id={id} user={user} />
           </>
         )}
       </div>

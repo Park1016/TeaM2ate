@@ -13,7 +13,7 @@ import Bookmark from "components/Bookmark/Bookmark";
 import UpdateDelBtn from "components/UpdateDelBtn/UpdateDelBtn";
 import Username from "components/Username/Username";
 
-const FramePost = ({ value, board, auth, postId, http, user }) => {
+const FramePost = ({ value, board, postId, http, user }) => {
   const cx = classNames.bind(styles);
   const {
     url,
@@ -51,10 +51,8 @@ const FramePost = ({ value, board, auth, postId, http, user }) => {
             </div>
           </div>
           <div className={cx("topRight")}>
-            {user && <Bookmark id={postId} http={http} user={user} />}
-            {value.userId === auth && (
-              <UpdateDelBtn type={"post"} id={postId} />
-            )}
+            {!board && user && <Bookmark id={postId} http={http} user={user} />}
+            {user && <UpdateDelBtn type={"post"} id={postId} />}
           </div>
         </div>
       </article>

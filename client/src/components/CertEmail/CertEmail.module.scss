@@ -8,6 +8,9 @@
     @include flexColumn;
     align-items: flex-start;
     margin-bottom: 1rem;
+    &.margin {
+        margin-bottom: 1.5rem;
+    }
 }
 
 .inputBox {
@@ -39,6 +42,14 @@
 
 .button:hover {
     background-color: $gray6;
+}
+
+.text {
+    position: absolute;
+    bottom: -1.2rem;
+    left: 0;
+    font-size: 0.7rem;
+    color: $red;
 }
 
 @media screen and (max-width: 420px) {

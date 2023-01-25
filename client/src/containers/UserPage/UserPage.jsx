@@ -10,7 +10,7 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { FaBookmark } from "react-icons/fa";
 import { BsFileText, BsChatDots } from "react-icons/bs";
 
-// import { httpSelector } from "state/http";
+import { httpSelector } from "state/http";
 import UserApi from "api/user";
 import PostApi from "api/post";
 import CommentApi from "api/comment";
@@ -19,8 +19,9 @@ import CommonBtn from "components/CommonBtn/CommonBtn";
 import Time from "components/Time/Time";
 // import useHttp from "hooks/useHttp";
 
-const UserPage = ({ user, http, mypage }) => {
+const UserPage = ({ user, mypage }) => {
   const cx = classNames.bind(styles);
+  const http = useRecoilValue(httpSelector);
   // const [makeHttp] = useHttp({ http });
   const navigate = useNavigate();
   const [data, setData] = useState({ post: [], type: "", comment: [] });
@@ -43,7 +44,7 @@ const UserPage = ({ user, http, mypage }) => {
 
   return (
     <>
-      {user && (
+      {user && data.type !== "" && (
         <section className={cx("container")}>
           <div className={cx("content")}>
             <article className={cx("user")}>

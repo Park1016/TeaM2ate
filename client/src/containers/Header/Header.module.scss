@@ -59,6 +59,8 @@
     width: auto;
     height: auto;
     @include flexRow;
+    border-radius: 50%;
+    overflow: hidden;
     :hover {
         background-color: $gray6;
         cursor: pointer;

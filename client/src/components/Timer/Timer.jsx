@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 
 import styles from "./Timer.module.scss";
 
-const Timer = ({ setCheckAuthNum, start }) => {
+const Timer = ({ setCheckAuthNum, start, setText }) => {
   const cx = classNames.bind(styles);
   const time = new Date();
   time.setSeconds(time.getSeconds() + 10);
@@ -13,6 +13,7 @@ const Timer = ({ setCheckAuthNum, start }) => {
     autoStart: true,
     onExpire: () => {
       alert("유효시간이 만료되었습니다");
+      setText(false);
       setCheckAuthNum(false);
     },
   });

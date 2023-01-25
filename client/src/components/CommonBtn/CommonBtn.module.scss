@@ -18,6 +18,9 @@
             background-color: $hoverBlue;
         }
     }
+    &.notAllow {
+        cursor: not-allowed;
+    }
     a, p {
         @include border2;
         @include text;

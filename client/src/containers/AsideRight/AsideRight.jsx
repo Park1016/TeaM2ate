@@ -12,10 +12,22 @@ const AsideRight = (props) => {
   return (
     <aside className={cx("container")}>
       <article onClick={() => onMove("https://travelhere.netlify.app/")}>
-        여행
+        <div className={cx("travel")}></div>
+        <div>
+          <p>Travel here</p>
+          <p>React, Redux, Firebase</p>
+          <button type="button">보러가기</button>
+        </div>
       </article>
-      <article onClick={() => onMove("https://park1016.vercel.app/")}>
-        포트폴리오
+      <article
+        onClick={() => onMove("https://search-naver-movie.netlify.app/")}
+      >
+        <div className={cx("movie")}></div>
+        <div>
+          <p>Search Naver Movie</p>
+          <p>React, PostCss</p>
+          <button type="button">보러가기</button>
+        </div>
       </article>
     </aside>
   );

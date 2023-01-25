@@ -3,17 +3,20 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import UserApi from "api/user";
 import { httpSelector } from "state/http";
 import { modalState } from "state/modal";
+import { userState } from "state/user";
 
-const useCheckAuth = ({ auth, setCheck, type }) => {
+const useCheckAuth = ({ auth, type }) => {
   const http = useRecoilValue(httpSelector);
   const setModal = useSetRecoilState(modalState);
+  const setUser = useSetRecoilState(userState);
 
   const onAlert = () => {
     if (type === "alert") {
       alert("로그인 후 접근 가능한 페이지입니다");
       setModal({ login: true, signup: false, find: false });
     }
-    setCheck(false);
+    // setCheck(false);
+    setUser(false);
   };
 
   const checkAuth = async () => {
@@ -22,7 +25,8 @@ const useCheckAuth = ({ auth, setCheck, type }) => {
       if (!user) {
         onAlert();
       } else {
-        setCheck(true);
+        // setCheck(true);
+        setUser(user);
       }
     } else {
       onAlert();

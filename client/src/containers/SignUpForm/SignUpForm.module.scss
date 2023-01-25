@@ -13,8 +13,20 @@
 }
 
 .inputBox {
+    position: relative;
     width: 100%;
     @include flexColumn;
     align-items: flex-start;
     margin-bottom: 1rem;
+    &.margin {
+        margin-bottom: 1.5rem;
+    }
+}
+
+.text {
+    position: absolute;
+    bottom: -1.2rem;
+    left: 0;
+    font-size: 0.7rem;
+    color: $red;
 }

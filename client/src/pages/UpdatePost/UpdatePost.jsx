@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import PostApi from "api/post";
 
 import { httpSelector } from "state/http";
-import { authState } from "state/auth";
+import { userState } from "state/user";
 import FrameWrite from "containers/FrameWrite/FrameWrite";
 // import useHttp from "hooks/useHttp";
 
@@ -14,7 +14,7 @@ const UpdatePost = (props) => {
   const { id } = useParams();
   const http = useRecoilValue(httpSelector);
   // const [makeHttp] = useHttp({ http });
-  const auth = useRecoilValue(authState);
+  const user = useRecoilValue(userState);
   const navigate = useNavigate();
   const { data } = useQuery(["post", id], async () => {
     return await new PostApi(http).getPostById(id);
@@ -24,7 +24,7 @@ const UpdatePost = (props) => {
 
   useEffect(() => {
     if (data) {
-      if (auth !== data.userId) {
+      if (user) {
         alert("글 수정,삭제는 작성자 본인만 할 수 있습니다");
         navigate("/");
       }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
@@ -7,12 +7,13 @@ import styles from "./DeleteUser.module.scss";
 
 import { authState } from "state/auth";
 import { httpSelector } from "state/http";
+import { userState } from "state/user";
 import UserApi from "api/user";
 // import useHttp from "hooks/useHttp";
 
 const DeleteUser = (props) => {
   const cx = classNames.bind(styles);
-  const auth = useRecoilValue(authState);
+  const user = useRecoilValue(userState);
   const setAuth = useSetRecoilState(authState);
   const http = useRecoilValue(httpSelector);
   // const [makeHttp] = useHttp({ http });
@@ -22,7 +23,7 @@ const DeleteUser = (props) => {
     if (!check) {
       return;
     }
-    const res = await new UserApi(http).delete(auth);
+    const res = await new UserApi(http).delete(user.id);
     if (res) {
       const logout = await new UserApi(http).logout();
       if (logout) {

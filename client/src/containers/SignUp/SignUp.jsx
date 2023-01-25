@@ -10,6 +10,7 @@ import SignUpForm from "containers/SignUpForm/SignUpForm";
 function SignUp(props) {
   const cx = classNames.bind(styles);
   const setModal = useSetRecoilState(modalState);
+
   return (
     <section className={cx("container")}>
       <SignUpForm />

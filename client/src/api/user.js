@@ -11,7 +11,11 @@ export default class UserApi {
   async me(params) {
     try {
       const res = await this.user.get("me", params);
-      return res.data;
+      if (res.data.message) {
+        return false;
+      } else {
+        return res.data;
+      }
     } catch (error) {
       // alert(error.response.data.message);
       console.warn(error.response.data.message);
@@ -112,6 +116,7 @@ export default class UserApi {
       return res;
     } catch (error) {
       alert(error.response.data.message);
+      return false;
     }
   }
 

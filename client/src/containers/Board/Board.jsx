@@ -9,6 +9,7 @@ import styles from "./Board.module.scss";
 import { httpSelector } from "state/http";
 import BoardApi from "api/board";
 
+import { userState } from "state/user";
 import BoardPost from "containers/BoardPost/BoardPost";
 import Filter from "components/Filter/Filter";
 import useFilterSearch from "hooks/useFilterSearch";
@@ -20,8 +21,10 @@ function Board(props) {
   const http = useRecoilValue(httpSelector);
   const [searchParams] = useSearchParams();
   const [onSearch] = useFilterSearch();
+
+  const user = useRecoilValue(userState);
   // const [makeHttp] = useHttp({ http });
-  const { isLoading, error, data } = useQuery(["board"], async () => {
+  const { data } = useQuery(["board"], async () => {
     return await new BoardApi(http).getBoard();
     // return await new BoardApi(http).getBoardByAmount("findTeam", 0, 3);
   });
@@ -38,8 +41,6 @@ function Board(props) {
 
   return (
     <>
-      {isLoading && <p>Loading!</p>}
-      {error && <p>Error!</p>}
       {data && (
         <>
           <article className={cx("article")}>
@@ -56,12 +57,16 @@ function Board(props) {
                   ) : (
                     search
                       .filter((x) => x.progress === "ing")
-                      .map((item) => <BoardPost key={item.id} value={item} />)
+                      .map((item) => (
+                        <BoardPost key={item.id} value={item} user={user} />
+                      ))
                   )
                 ) : (
                   data
                     .filter((x) => x.progress === "ing")
-                    .map((item) => <BoardPost key={item.id} value={item} />)
+                    .map((item) => (
+                      <BoardPost key={item.id} value={item} user={user} />
+                    ))
                 )
               ) : searchParams.get("keyword") ? (
                 search.length === 0 ? (
@@ -71,10 +76,14 @@ function Board(props) {
                     )}"에 대한 검색 결과가 없습니다`}
                   </p>
                 ) : (
-                  search.map((item) => <BoardPost key={item.id} value={item} />)
+                  search.map((item) => (
+                    <BoardPost key={item.id} value={item} user={user} />
+                  ))
                 )
               ) : (
-                data.map((item) => <BoardPost key={item.id} value={item} />)
+                data.map((item) => (
+                  <BoardPost key={item.id} value={item} user={user} />
+                ))
               )}
             </ul>
           </article>

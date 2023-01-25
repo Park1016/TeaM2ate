@@ -11,6 +11,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { httpSelector } from "state/http";
 import { authState } from "state/auth";
 import { modalState } from "state/modal";
+import { userState } from "state/user";
 import useCheckAuth from "hooks/useCheckAuth";
 import HeaderSearch from "components/HeaderSearch/HeaderSearch";
 import CommonBtn from "components/CommonBtn/CommonBtn";
@@ -22,13 +23,12 @@ import Modal from "components/Modal/Modal";
 const Header = () => {
   const cx = classNames.bind(styles);
   const auth = useRecoilValue(authState);
-  const [check, setCheck] = useState(false);
-  const [checkAuth] = useCheckAuth({ auth, setCheck, type: "noAlert" });
+  const user = useRecoilValue(userState);
   const http = useRecoilValue(httpSelector);
   // const [makeHttp] = useHttp({ http });
   const modal = useRecoilValue(modalState);
   const setModal = useSetRecoilState(modalState);
-
+  const [checkAuth] = useCheckAuth({ auth, type: "noAlert" });
   const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
@@ -48,10 +48,10 @@ const Header = () => {
           <button className={cx("logo")}>
             <Logo />
           </button>
-          <HeaderSearch auth={auth} />
-          <ul className={cx("rightBtns", { check })}>
+          <HeaderSearch auth={user} />
+          <ul className={cx("rightBtns", { check: user })}>
             <li>
-              {check ? (
+              {user ? (
                 <button type="button" className={cx("iconBox")}>
                   <BsPencilSquare
                     className={cx("icon", { profile: false })}
@@ -68,7 +68,7 @@ const Header = () => {
               )}
             </li>
             <li>
-              {check ? (
+              {user ? (
                 <button
                   type="button"
                   className={cx("iconBox")}

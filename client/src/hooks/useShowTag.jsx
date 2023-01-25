@@ -25,7 +25,10 @@ const useShowTag = (props) => {
       if (data.length === 0) {
         return false;
       }
-      const str = data.map((x) => x.tag).join(",");
+      const str = data
+        .map((x) => x.tag)
+        .filter((x) => x.length !== 0)
+        .join(",");
       const obj = onCountDup(str);
       const sort = Object.entries(obj)
         .sort(([, a], [, b]) => b - a)

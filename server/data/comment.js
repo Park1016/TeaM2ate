@@ -31,11 +31,6 @@ export async function getPostByComment(username) {
     result;
   });
   const data = { post: res[0], comment: arr };
-
-  console.log("reply", reply);
-  console.log("arr", arr);
-  console.log("res", res);
-  console.log("data", data);
   return data;
 }
 

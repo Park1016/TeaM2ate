@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import classNames from "classnames/bind";
 
@@ -12,11 +12,12 @@ import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
 import CommonBtn from "components/CommonBtn/CommonBtn";
+import { userState } from "state/user";
 // import useHttp from "hooks/useHttp";
 
 const UpdatePw = (props) => {
   const cx = classNames.bind(styles);
-  const auth = useRecoilValue(authState);
+  const user = useRecoilValue(userState);
   const http = useRecoilValue(httpSelector);
   // const [makeHttp] = useHttp({ http });
   const setAuth = useSetRecoilState(authState);
@@ -34,7 +35,7 @@ const UpdatePw = (props) => {
       return;
     }
 
-    const id = auth;
+    const id = user.id;
     const password = form.newPw;
     const formData = makeFormData({ id, password });
     const res = await new UserApi(http).updatePw(formData);

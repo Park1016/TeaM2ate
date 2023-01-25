@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import classNames from "classnames/bind";
 
 import styles from "./CheckPw.module.scss";
 
-import { authState } from "state/auth";
 import { httpSelector } from "state/http";
+import { userState } from "state/user";
 // import useHttp from "hooks/useHttp";
 import UserApi from "api/user";
 import { makeFormData } from "hooks/makeFormData";
@@ -14,7 +14,7 @@ import CommonBtn from "components/CommonBtn/CommonBtn";
 
 const CheckPw = ({ setShow }) => {
   const cx = classNames.bind(styles);
-  const auth = useRecoilValue(authState);
+  const user = useRecoilValue(userState);
   const http = useRecoilValue(httpSelector);
   // const [makeHttp] = useHttp({ http });
   const [form, setForm] = useState({ password: "" });
@@ -26,7 +26,7 @@ const CheckPw = ({ setShow }) => {
       return;
     }
 
-    const id = auth;
+    const id = user.id;
     const pw = form.password;
     const formData = makeFormData({ id, pw });
     const res = await new UserApi(http).checkPw(formData);

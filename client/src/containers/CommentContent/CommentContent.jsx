@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import classNames from "classnames/bind";
 
@@ -6,6 +6,7 @@ import styles from "./CommentContent.module.scss";
 
 import { authState } from "state/auth";
 import { replyState } from "state/comment";
+import { userState } from "state/user";
 import UpdateDelBtn from "components/UpdateDelBtn/UpdateDelBtn";
 import CommentWrite from "containers/CommentWrite/CommentWrite";
 import ProfilePhoto from "components/ProfilePhoto/ProfilePhoto";
@@ -17,16 +18,16 @@ import ReplycommWrite from "containers/ReplycommWrite/ReplycommWrite";
 
 function CommentContent({ http, postId, item, replycomm, commentId }) {
   const cx = classNames.bind(styles);
-  const auth = useRecoilValue(authState);
   const [edit, setEdit] = useState(false);
   const [showReply, setShowReply] = useState(false);
   const [showReplyWrite, setShowReplyWrite] = useState(false);
   const reply = useRecoilValue(replyState);
+  const user = useRecoilValue(userState);
 
   return (
     <li className={cx("list")}>
       <div className={cx("icon")}>
-        {item.userId === auth && !edit && (
+        {user && !edit && (
           <UpdateDelBtn
             type={replycomm ? "replycomm" : "comment"}
             id={replycomm ? commentId : postId}
@@ -83,7 +84,7 @@ function CommentContent({ http, postId, item, replycomm, commentId }) {
             {showReply ? "답글접기" : "답글보기"}
           </button>
         )}
-        {auth && (
+        {user && (
           <button
             className={cx("reply")}
             onClick={() => setShowReplyWrite(!showReplyWrite)}

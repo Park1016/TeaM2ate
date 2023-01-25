@@ -54,7 +54,7 @@ const HeaderSearch = ({ auth }) => {
       </form>
       <div className={cx("iconBox", { search, auth })}>
         <div onClick={() => setSearch(true)}>
-          <GoSearch className={cx("resFind")} onClick={(e) => onSubmit(e)} />
+          <GoSearch className={cx("resFind")} />
         </div>
       </div>
     </>

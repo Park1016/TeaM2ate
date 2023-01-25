@@ -27,7 +27,7 @@ export const isAuth = async (req, res, next) => {
     token = createAccessJwtToken(id);
     setAccessToken(res, token);
   } else if (!token && !refresh) {
-    return res.status(401).json(AUTH_ERROR);
+    return res.status(202).json(AUTH_ERROR);
   }
 
   jwt.verify(token, config.jwt.secretKey, async (error, decoded) => {
