@@ -15,6 +15,17 @@ function FindAuth(props) {
   const [form, setForm] = useState({ email: "", username: "" });
   const [checkEmail, setCheckEmail] = useState(false);
 
+  const onCloseCheck = () => {
+    if (!window.confirm("진행상황이 초기화됩니다. 취소하시겠습니까?")) {
+      return;
+    }
+    setModal({
+      login: true,
+      signup: false,
+      find: false,
+    });
+  };
+
   return (
     <section className={cx("container")}>
       {!checkEmail && (
@@ -26,16 +37,7 @@ function FindAuth(props) {
         />
       )}
       {checkEmail && <FindPw user={form} />}
-      <div
-        className={cx("cancelBtn")}
-        onClick={() =>
-          setModal({
-            login: true,
-            signup: false,
-            find: false,
-          })
-        }
-      >
+      <div className={cx("cancelBtn")} onClick={onCloseCheck}>
         <CommonBtn type={"button"} color={"white"} text={"취소"} />
       </div>
     </section>

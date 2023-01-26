@@ -50,10 +50,12 @@ const FramePost = ({ value, board, postId, http, user }) => {
               <Time createdAt={createdAt} /> */}
             </div>
           </div>
-          <div className={cx("topRight")}>
-            {!board && user && <Bookmark id={postId} http={http} user={user} />}
-            {user && <UpdateDelBtn type={"post"} id={postId} />}
-          </div>
+          {!board && (
+            <div className={cx("topRight")}>
+              {user && <Bookmark id={postId} http={http} user={user} />}
+              {user.id === userId && <UpdateDelBtn type={"post"} id={postId} />}
+            </div>
+          )}
         </div>
       </article>
       {!board && (

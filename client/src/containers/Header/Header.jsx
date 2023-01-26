@@ -1,6 +1,6 @@
 ﻿import React, { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
 
 import styles from "./Header.module.scss";
@@ -22,6 +22,7 @@ import Modal from "components/Modal/Modal";
 
 const Header = () => {
   const cx = classNames.bind(styles);
+  const location = useLocation();
   const auth = useRecoilValue(authState);
   const user = useRecoilValue(userState);
   const http = useRecoilValue(httpSelector);
@@ -35,7 +36,7 @@ const Header = () => {
 
   useEffect(() => {
     checkAuth();
-  }, [auth]);
+  }, [auth, location]);
 
   // useEffect(() => {
   //   makeHttp();
@@ -45,9 +46,9 @@ const Header = () => {
     <>
       <header className={cx("container")}>
         <article className={cx("content")}>
-          <button className={cx("logo")}>
+          <nav className={cx("logo")}>
             <Logo />
-          </button>
+          </nav>
           <HeaderSearch auth={user} />
           <ul className={cx("rightBtns", { check: user })}>
             <li>

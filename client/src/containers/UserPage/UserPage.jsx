@@ -37,9 +37,7 @@ const UserPage = ({ user, mypage }) => {
   });
 
   useEffect(() => {
-    if (post) {
-      setData({ ...data, post, type: "post" });
-    }
+    setData({ ...data, post, type: "post" });
   }, [user, post]);
 
   return (

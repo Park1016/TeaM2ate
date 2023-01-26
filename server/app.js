@@ -11,8 +11,8 @@ import postRouter from "./router/post.js";
 import commentRouter from "./router/comment.js";
 import userRouter from "./router/user.js";
 import replycommRouter from "./router/replycomm.js";
+import writesampleRouter from "./router/writesample.js";
 import { config } from "./config.js";
-import { db } from "./db/database.js";
 import { csrfCheck } from "./middleware/csrf.js";
 
 const app = express();
@@ -37,6 +37,7 @@ app.use("/post", postRouter);
 app.use("/comment", commentRouter);
 app.use("/user", userRouter);
 app.use("/replycomm", replycommRouter);
+app.use("/writesample", writesampleRouter);
 
 // 지원하지 않는 api
 app.use((req, res, next) => {

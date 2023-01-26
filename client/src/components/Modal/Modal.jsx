@@ -14,19 +14,31 @@ import FindAuth from "containers/FindAuth/FindAuth";
 const Modal = ({ type }) => {
   const cx = classNames.bind(styles);
   const setModal = useSetRecoilState(modalState);
+
+  const onClose = () => {
+    setModal({
+      login: false,
+      signup: false,
+      find: false,
+    });
+  };
+
+  const onCloseCheck = () => {
+    if (type !== "login") {
+      if (!window.confirm("진행상황이 초기화됩니다. 화면을 나가시겠습니까?")) {
+        return;
+      }
+      onClose();
+    } else {
+      onClose();
+    }
+  };
+
   return (
     <section className={cx("container")}>
       <div className={cx("content")}>
         <Logo />
-        <GrClose
-          onClick={() =>
-            setModal({
-              login: false,
-              signup: false,
-              find: false,
-            })
-          }
-        />
+        <GrClose onClick={onCloseCheck} />
         {type === "login" && <Login />}
         {type === "signup" && <SignUp />}
         {type === "find" && <FindAuth />}

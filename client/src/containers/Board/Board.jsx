@@ -28,7 +28,7 @@ function Board(props) {
     return await new BoardApi(http).getBoard();
     // return await new BoardApi(http).getBoardByAmount("findTeam", 0, 3);
   });
-  const [check, setCheck] = useState(true);
+  const [check, setCheck] = useState(false);
   const [search, setSearch] = useState([]);
 
   // useEffect(() => {

@@ -24,7 +24,7 @@ const UpdatePost = (props) => {
 
   useEffect(() => {
     if (data) {
-      if (user) {
+      if (!user) {
         alert("글 수정,삭제는 작성자 본인만 할 수 있습니다");
         navigate("/");
       }

@@ -1,4 +1,4 @@
-﻿import React from "react";
+﻿import React, { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import classNames from "classnames/bind";
 
@@ -10,6 +10,18 @@ import SignUpForm from "containers/SignUpForm/SignUpForm";
 function SignUp(props) {
   const cx = classNames.bind(styles);
   const setModal = useSetRecoilState(modalState);
+
+  const preventClose = (e) => {
+    e.preventDefault();
+    e.returnValue = "";
+  };
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", preventClose);
+    return () => {
+      window.removeEventListener("beforeunload", preventClose);
+    };
+  }, []);
 
   return (
     <section className={cx("container")}>

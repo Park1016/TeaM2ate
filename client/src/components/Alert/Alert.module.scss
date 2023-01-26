@@ -2,17 +2,26 @@
 @import '../../static/stylesheets/lib/mixin';
 
 .container {
-    @include container;
-    flex-direction: column;
+    @include container; 
+}
+
+.content {
+    @include flexColumn;
+    z-index: 100;
     svg {
         width: 5rem;
         height: 5rem;
         color: $yellow;
-        // color: $red;
         margin-bottom: 0.5rem;
     }
     p {
         @include text;
         font-size: 1.5rem;
     }
+}
+
+.login {
+    color: $red;
+    border-bottom: 2px solid $red;
+    cursor: pointer;
 }

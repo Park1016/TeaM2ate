@@ -7,6 +7,7 @@ import styles from "./UpdateProfile.module.scss";
 
 import { tagSelector } from "state/local";
 import UserApi from "api/user";
+import { useCheckPageOut } from "hooks/useCheckPageOut";
 import { makeFormData } from "hooks/makeFormData";
 import Input from "components/Input/Input";
 import Textarea from "components/Textarea/Textarea";
@@ -16,6 +17,7 @@ import CommonBtn from "components/CommonBtn/CommonBtn";
 
 const UpdateProfile = ({ http, user }) => {
   const cx = classNames.bind(styles);
+  const [onCheckPageOut] = useCheckPageOut();
   const _tag = useRecoilValue(tagSelector);
   const { id, url, username, introduce, alert, tag } = user;
   const [form, setForm] = useState({ url, username, introduce, alert, tag });
@@ -38,6 +40,12 @@ const UpdateProfile = ({ http, user }) => {
       }
     } catch (err) {
       console.warn(err);
+    }
+  };
+
+  const onClick = () => {
+    if (onCheckPageOut()) {
+      navigate("/mypage");
     }
   };
 
@@ -79,7 +87,7 @@ const UpdateProfile = ({ http, user }) => {
         </li>
       </ul>
       <article className={cx("buttons")}>
-        <div onClick={() => navigate("/mypage")}>
+        <div onClick={onClick}>
           <CommonBtn type={"button"} color={"white"} text={"취소"} />
         </div>
         <CommonBtn type={"submit"} color={"blue"} text={"저장"} />

@@ -12,14 +12,14 @@ function required(key, defaultValue = undefined) {
 export const config = {
   jwt: {
     secretKey: required("JWT_SECRET"),
-    expiresInSecAccess: parseInt(required("JWT_EXPIRES_SEC_ACCESS", 3600)),
-    expiresInSecRefresh: parseInt(required("JWT_EXPIRES_SEC_REFRESH", 86400)),
+    expiresInSecAccess: parseInt(required("JWT_EXPIRES_SEC_ACCESS")),
+    expiresInSecRefresh: parseInt(required("JWT_EXPIRES_SEC_REFRESH")),
   },
   bcrypt: {
-    saltRounds: parseInt(required("BCRYPT_SALT_ROUNDS", 10)),
+    saltRounds: parseInt(required("BCRYPT_SALT_ROUND")),
   },
   host: {
-    port: parseInt(required("HOST_PORT", 8080)),
+    port: parseInt(required("HOST_PORT")),
   },
   cors: {
     allowedOrigin: required("CORS_ALLOW_ORIGIN"),
@@ -34,6 +34,6 @@ export const config = {
     plainToken: required("CSRF_SECRET_KEY"),
   },
   email: {
-    validTime: parseInt(required("VALID_TIME", 180)),
+    validTime: parseInt(required("VALID_TIME")),
   },
 };
