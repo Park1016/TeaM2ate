@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import helmet from "helmet";
 import multer from "multer";
+import hpp from "hpp";
 import "express-async-errors";
 
 import boardRouter from "./router/board.js";
@@ -24,6 +25,7 @@ const corsOption = {
   credentials: true,
 };
 
+app.use(hpp());
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());

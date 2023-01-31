@@ -23,10 +23,7 @@ const Input = ({
     if (id === "name") {
       if (value.length === 0) {
         setText(false);
-      }
-      // else if (value.length < 2 || value.length > 7) {
-      //   setText("2~7자로 입력해주세요");
-      else if (isNameForm(value) === false) {
+      } else if (isNameForm(value) === false) {
         setText("2~20자 한글 또는 영문만 입력해주세요");
       } else {
         setText(false);
@@ -51,6 +48,7 @@ const Input = ({
       }
     }
   };
+
   return (
     <input
       className={cx("container")}
