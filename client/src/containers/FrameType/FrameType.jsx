@@ -26,7 +26,7 @@ function FrameType({ type, form, setForm }) {
 
   return (
     <>
-      {type.length !== 0 && (
+      {Array.isArray(type) && type.length !== 0 && (
         <ul className={cx("container")}>
           {type.map((item, index) => (
             <li

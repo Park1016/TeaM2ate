@@ -1,5 +1,6 @@
 ﻿import express from "express";
 import cors from "cors";
+import { matcher } from "matcher";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import helmet from "helmet";
@@ -20,8 +21,11 @@ const app = express();
 const upload = multer();
 
 const corsOption = {
-  origin: config.cors.allowedOrigin,
+  origin: (origin, callback) => {
+    callback(null, true);
+  },
   optionsSuccessStatus: 200,
+  methods: "GET, POST, OPTIONS, PUT, DELETE",
   credentials: true,
 };
 

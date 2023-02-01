@@ -72,7 +72,7 @@ const UserPage = ({ user, mypage }) => {
                   </div>
                 )}
               </div>
-              {user.tag.length !== 0 && (
+              {Array.isArray(user.tag) && user.tag.length !== 0 && (
                 <ul className={cx("tag")}>
                   {user.tag.map((item, index) => (
                     <li key={index}>#{item}</li>
@@ -120,42 +120,54 @@ const UserPage = ({ user, mypage }) => {
                 </li>
               )}
             </ul>
-            {data.post && data.post.length !== 0 && data.type !== "comment" && (
-              <ul className={cx("post")}>
-                {data.post.map((item, index) => (
-                  <li key={index} onClick={() => navigate(`/post/${item.id}`)}>
-                    <p>{item.title}</p>
-                    <Time createdAt={item.createdAt} />
-                  </li>
-                ))}
-              </ul>
-            )}
-            {data.post && data.post.length !== 0 && data.type === "comment" && (
-              <ul className={cx("comment")}>
-                {data.comment.map((item, index) => (
-                  <li
-                    key={index}
-                    onClick={() => navigate(`/post/${item.postId}`)}
-                  >
-                    <div className={cx("commentBox")}>
-                      <p>{item.text}</p>
+            {data.post &&
+              Array.isArray(data.post) &&
+              data.post.length !== 0 &&
+              data.type !== "comment" && (
+                <ul className={cx("post")}>
+                  {data.post.map((item, index) => (
+                    <li
+                      key={index}
+                      onClick={() => navigate(`/post/${item.id}`)}
+                    >
+                      <p>{item.title}</p>
                       <Time createdAt={item.createdAt} />
-                    </div>
-                    <div className={cx("postBox")}>
-                      <p>
-                        {data.post.filter((x) => x.id === item.postId)[0].title}
-                      </p>
-                      <Time
-                        createdAt={
-                          data.post.filter((x) => x.id === item.postId)[0]
-                            .createdAt
-                        }
-                      />
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            {data.post &&
+              Array.isArray(data.post) &&
+              data.post.length !== 0 &&
+              data.type === "comment" && (
+                <ul className={cx("comment")}>
+                  {data.comment.map((item, index) => (
+                    <li
+                      key={index}
+                      onClick={() => navigate(`/post/${item.postId}`)}
+                    >
+                      <div className={cx("commentBox")}>
+                        <p>{item.text}</p>
+                        <Time createdAt={item.createdAt} />
+                      </div>
+                      <div className={cx("postBox")}>
+                        <p>
+                          {
+                            data.post.filter((x) => x.id === item.postId)[0]
+                              .title
+                          }
+                        </p>
+                        <Time
+                          createdAt={
+                            data.post.filter((x) => x.id === item.postId)[0]
+                              .createdAt
+                          }
+                        />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
             {(!data.post || data.post.length === 0) && (
               <div className={cx("noData")}>
                 <TfiCommentAlt />

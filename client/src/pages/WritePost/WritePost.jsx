@@ -1,7 +1,6 @@
 ﻿import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import classNames from "classnames/bind";
 
 import styles from "./WritePost.module.scss";

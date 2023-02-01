@@ -27,7 +27,6 @@ const useCheckAuth = ({ auth, type }) => {
       if (!user) {
         onAlert();
       } else {
-        // setCheck(true);
         setUser(user);
       }
     } else {

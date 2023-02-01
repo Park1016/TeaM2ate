@@ -36,7 +36,7 @@ function Replycomm({ postId, commentId, item }) {
 
   return (
     <>
-      {data && data.length !== 0 && (
+      {data && Array.isArray(data) && data.length !== 0 && (
         <article className={cx("container")}>
           <ul className={cx("content")}>
             {data.map((item, index) => (

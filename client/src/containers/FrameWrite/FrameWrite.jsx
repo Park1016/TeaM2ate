@@ -21,6 +21,7 @@ import ChooseBox from "components/ChooseBox/ChooseBox";
 import Input from "components/Input/Input";
 import TextEditor from "components/TextEditor/TextEditor";
 import CommonBtn from "components/CommonBtn/CommonBtn";
+import WritesampleApi from "api/writesample";
 // import useHttp from "hooks/useHttp";
 
 const FrameWrite = ({ form, setForm, editId }) => {
@@ -51,6 +52,11 @@ const FrameWrite = ({ form, setForm, editId }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    // const content = form.text;
+    // const formData = makeFormData({ content });
+
+    // new WritesampleApi(http).write(formData);
 
     if (nullCheck()) {
       return;

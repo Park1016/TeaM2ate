@@ -63,7 +63,7 @@ const FramePost = ({ value, board, postId, http, user }) => {
           <Viewer initialValue={text} />
         </article>
       )}
-      {tag.length !== 0 && (
+      {Array.isArray(tag) && tag.length !== 0 && (
         <div className={cx("tag")}>
           {tag.map((item, index) => (
             <p key={`tag${index}`}>#{item}</p>
