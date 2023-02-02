@@ -18,6 +18,7 @@ import { csrfCheck } from "./middleware/csrf.js";
 
 const app = express();
 const upload = multer();
+const __dirname = path.resolve();
 
 const corsOption = {
   // origin: (origin, callback) => {
