@@ -35,7 +35,13 @@ const corsOption = {
 app.use(hpp());
 app.use(express.json());
 app.use(cookieParser());
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: false,
+  })
+);
 app.use(cors(corsOption));
 app.use(morgan("tiny"));
 app.use(upload.array());
