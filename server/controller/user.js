@@ -198,7 +198,7 @@ function createRefreshJwtToken(id) {
 
 const options = {
   httpOnly: true,
-  sameSite: "lax",
+  sameSite: "strict",
   secure: false,
 };
 export function setAccessToken(res, accessToken) {
