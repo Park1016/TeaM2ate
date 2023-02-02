@@ -25,7 +25,8 @@ const corsOption = {
   //   callback(null, true);
   // },
   // origin: config.cors.allowedOrigin,
-  origin: true,
+  // origin: true,
+  origin: "http://13.124.244.122:8080",
   optionsSuccessStatus: 200,
   methods: "GET, POST, OPTIONS, PUT, DELETE",
   credentials: true,
