@@ -5,6 +5,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import multer from "multer";
 import hpp from "hpp";
+import path from "path";
 import "express-async-errors";
 import boardRouter from "./router/board.js";
 import postRouter from "./router/post.js";
