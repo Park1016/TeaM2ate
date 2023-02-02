@@ -6,7 +6,6 @@ import helmet from "helmet";
 import multer from "multer";
 import hpp from "hpp";
 import "express-async-errors";
-
 import boardRouter from "./router/board.js";
 import postRouter from "./router/post.js";
 import commentRouter from "./router/comment.js";
@@ -38,6 +37,8 @@ app.use(cors(corsOption));
 app.use(morgan("tiny"));
 app.use(upload.array());
 
+app.use(express.static(path.join(__dirname, "../client/build")));
+
 app.use(csrfCheck);
 app.use("/board", boardRouter);
 app.use("/post", postRouter);
@@ -59,3 +60,7 @@ app.use((error, req, res, next) => {
 
 // db.getConnection().then((connection)=>console.log(connection));
 app.listen(config.host.port);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
