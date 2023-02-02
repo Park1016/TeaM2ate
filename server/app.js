@@ -20,9 +20,10 @@ const app = express();
 const upload = multer();
 
 const corsOption = {
-  origin: (origin, callback) => {
-    callback(null, true);
-  },
+  // origin: (origin, callback) => {
+  //   callback(null, true);
+  // },
+  origin: config.cors.allowedOrigin,
   optionsSuccessStatus: 200,
   methods: "GET, POST, OPTIONS, PUT, DELETE",
   credentials: true,
