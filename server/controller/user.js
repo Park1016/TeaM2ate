@@ -203,14 +203,14 @@ const options = {
 };
 export function setAccessToken(res, accessToken) {
   res.cookie("accessToken", accessToken, {
-    ...options,
+    // ...options,
     maxAge: config.jwt.expiresInSecAccess * 1000,
   });
 }
 
 function setRefreshToken(res, refreshToken) {
   res.cookie("refreshToken", refreshToken, {
-    ...options,
+    // ...options,
     maxAge: config.jwt.expiresInSecRefresh * 1000,
   });
 }
