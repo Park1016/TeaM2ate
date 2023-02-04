@@ -53,38 +53,38 @@ const FrameWrite = ({ form, setForm, editId }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // const content = form.text;
-    // const formData = makeFormData({ content });
+    const content = form.text;
+    const formData = makeFormData({ content });
 
-    // new WritesampleApi(http).update(formData);
+    new WritesampleApi(http).update(formData);
 
-    if (nullCheck()) {
-      return;
-    }
+    // if (nullCheck()) {
+    //   return;
+    // }
 
-    const cate = "findTeam";
-    const title = form.title;
-    const text = form.text;
-    const tag = JSON.stringify(form.tag);
-    const type = JSON.stringify(form.type);
-    const progress = form.progress;
-    const formData = makeFormData({ cate, title, text, tag, type, progress });
+    // const cate = "findTeam";
+    // const title = form.title;
+    // const text = form.text;
+    // const tag = JSON.stringify(form.tag);
+    // const type = JSON.stringify(form.type);
+    // const progress = form.progress;
+    // const formData = makeFormData({ cate, title, text, tag, type, progress });
 
-    let res;
-    if (editId) {
-      res = await new PostApi(http).updatePost(formData, editId);
-      const post = await new PostApi(http).getPostById(editId);
-      if (res) {
-        alert("글 수정이 완료되었습니다");
-        navigate(`/post/${res.id}`, { state: post });
-      }
-    } else {
-      res = await new PostApi(http).writePost(formData);
-      if (res) {
-        alert("글 작성이 완료되었습니다");
-        navigate(`/post/${res.id}`);
-      }
-    }
+    // let res;
+    // if (editId) {
+    //   res = await new PostApi(http).updatePost(formData, editId);
+    //   const post = await new PostApi(http).getPostById(editId);
+    //   if (res) {
+    //     alert("글 수정이 완료되었습니다");
+    //     navigate(`/post/${res.id}`, { state: post });
+    //   }
+    // } else {
+    //   res = await new PostApi(http).writePost(formData);
+    //   if (res) {
+    //     alert("글 작성이 완료되었습니다");
+    //     navigate(`/post/${res.id}`);
+    //   }
+    // }
   };
 
   // useEffect(() => {
