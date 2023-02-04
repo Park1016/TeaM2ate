@@ -19,7 +19,11 @@ const LoginForm = (props) => {
   // const [makeHttp] = useHttp({ http });
   const setAuth = useSetRecoilState(authState);
   const setModal = useSetRecoilState(modalState);
-  const [form, setForm] = useState({ id: "", pw: "" });
+  const modal = useRecoilValue(modalState);
+  const [form, setForm] = useState({
+    id: typeof modal.login === "boolean" ? "" : modal.login,
+    pw: "",
+  });
 
   const onSubmit = async (e) => {
     e.preventDefault();

@@ -47,6 +47,15 @@ const Input = ({
         setText(false);
       }
     }
+    if (id === "checkPw") {
+      if (value.length === 0) {
+        setText(false);
+      } else if (value !== form.password) {
+        setText("비밀번호가 일치하지 않습니다");
+      } else {
+        setText(false);
+      }
+    }
   };
 
   return (

@@ -36,7 +36,9 @@ function Board(props) {
   // }, [http]);'
 
   useEffect(() => {
-    onSearch(data, searchParams.get("keyword"), setSearch);
+    if (data && searchParams.get("keyword")) {
+      onSearch(data, searchParams.get("keyword").toLowerCase(), setSearch);
+    }
   }, [searchParams]);
 
   return (

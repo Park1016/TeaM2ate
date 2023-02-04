@@ -22,9 +22,7 @@ export async function getByPostId(id) {
 
 export async function getByCommentId(commentId) {
   return db
-    .execute("SELECT * FROM replycomm WHERE commentId=? order by id desc", [
-      commentId,
-    ]) //
+    .execute("SELECT * FROM replycomm WHERE commentId=?", [commentId]) //
     .then((result) => result[0]);
 }
 

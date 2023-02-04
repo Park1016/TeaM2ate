@@ -91,7 +91,7 @@ const Header = () => {
                   <CommonBtn type={"button"} color={"white"} text={"로그인"} />
                 </div>
               )}
-              {show && <ProfileToggle http={http} />}
+              {show && <ProfileToggle http={http} setShow={setShow} />}
             </li>
           </ul>
         </article>

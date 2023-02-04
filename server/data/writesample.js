@@ -13,3 +13,9 @@ export async function create(content) {
     .execute("INSERT INTO writesample (content) VALUES(?)", [content])
     .then(async (result) => await getSample(result[0].insertId));
 }
+
+export async function update(content) {
+  return db
+    .execute("UPDATE writesample SET content=? WHERE id=?", [content, 1])
+    .then(async (result) => await getSample(result[0].insertId));
+}

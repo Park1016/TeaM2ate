@@ -8,4 +8,6 @@ router.get("/", writesampleRepository.getSample);
 
 router.post("/write", writesampleRepository.create);
 
+router.post("/update", writesampleRepository.update);
+
 export default router;

@@ -10,11 +10,16 @@ import { useSetRecoilState } from "recoil";
 import UserApi from "api/user";
 import { useNavigate } from "react-router-dom";
 
-const ProfileToggle = ({ http }) => {
+const ProfileToggle = ({ http, setShow }) => {
   const cx = classNames.bind(styles);
 
   const setAuth = useSetRecoilState(authState);
   const navigate = useNavigate();
+
+  const onMouseDown = () => {
+    navigate("/mypage");
+    setShow(false);
+  };
 
   const onLogout = async () => {
     const check = window.confirm("로그아웃 하시겠습니까?");
@@ -22,13 +27,14 @@ const ProfileToggle = ({ http }) => {
       const logout = await new UserApi(http).logout();
       if (logout) {
         setAuth(false);
+        setShow(false);
       }
     }
   };
 
   return (
     <article className={cx("container")}>
-      <div onMouseDown={() => navigate("/mypage")}>
+      <div onMouseDown={onMouseDown}>
         <CgProfile />
         <p>마이페이지</p>
       </div>

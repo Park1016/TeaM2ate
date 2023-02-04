@@ -21,11 +21,13 @@ const SignUpForm = (props) => {
   const [nameText, setNameText] = useState(false);
   const [idText, setIdText] = useState(false);
   const [pwText, setPwText] = useState(false);
+  const [checkPwText, setCheckPwText] = useState(false);
 
   const [form, setForm] = useState({
     name: "",
     username: "",
     password: "",
+    checkPw: "",
     email: "",
     authNum: "",
     url: "",
@@ -57,6 +59,9 @@ const SignUpForm = (props) => {
       return false;
     } else if (isNull(form.password)) {
       alert("비밀번호를 입력해주세요");
+      return false;
+    } else if (form.password !== form.checkPw) {
+      alert("비밀번호를 재확인해주세요");
       return false;
     } else if (!checkEmail) {
       alert("이메일 인증을 완료해주세요.");
@@ -91,7 +96,7 @@ const SignUpForm = (props) => {
         alert("회원가입이 완료되었습니다");
         setForm({ name: "", username: "", password: "", email: "", url: "" });
         setModal({
-          login: true,
+          login: form.username,
           signup: false,
           find: false,
         });
@@ -153,6 +158,21 @@ const SignUpForm = (props) => {
           setText={setPwText}
         />
         {pwText && <p className={cx("text")}>{pwText}</p>}
+      </article>
+      <article className={cx("inputBox", { margin: checkPwText })}>
+        <label htmlFor="password">비밀번호 재확인</label>
+        <Input
+          placeholder={"비밀번호를 한번 더 입력하세요"}
+          type={"password"}
+          name={"checkPw"}
+          id={"checkPw"}
+          value={form.checkPw}
+          form={form}
+          setForm={setForm}
+          setText={setCheckPwText}
+          readOnly={form.password.length === 0 ? true : false}
+        />
+        {checkPwText && <p className={cx("text")}>{checkPwText}</p>}
       </article>
       <CertEmail
         form={form}

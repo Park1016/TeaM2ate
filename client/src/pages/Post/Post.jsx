@@ -1,6 +1,6 @@
 ﻿import React, { useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 
@@ -16,6 +16,7 @@ import Comment from "containers/Comment/Comment";
 const Post = (props) => {
   const cx = classNames.bind(styles);
   const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams();
   const http = useRecoilValue(httpSelector);
   const user = useRecoilValue(userState);
@@ -40,7 +41,7 @@ const Post = (props) => {
         {post && (
           <>
             <FramePost
-              value={post}
+              value={location.state ? location.state : post}
               board={false}
               postId={id}
               http={http}

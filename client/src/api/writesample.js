@@ -27,4 +27,14 @@ export default class WritesampleApi {
       console.log(error.response);
     }
   }
+
+  async update(formData) {
+    try {
+      const res = await this.writesample.post("update", formData);
+      return res.data;
+    } catch (error) {
+      alert(error.response.data.message);
+      console.log(error.response);
+    }
+  }
 }

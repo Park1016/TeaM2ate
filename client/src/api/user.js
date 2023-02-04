@@ -23,7 +23,6 @@ export default class UserApi {
   }
 
   async getById(id) {
-    console.log(id);
     try {
       const res = await this.user.get(`getById/${id}`);
       return res.data;

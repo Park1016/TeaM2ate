@@ -56,7 +56,7 @@ const FrameWrite = ({ form, setForm, editId }) => {
     // const content = form.text;
     // const formData = makeFormData({ content });
 
-    // new WritesampleApi(http).write(formData);
+    // new WritesampleApi(http).update(formData);
 
     if (nullCheck()) {
       return;
@@ -73,17 +73,18 @@ const FrameWrite = ({ form, setForm, editId }) => {
     let res;
     if (editId) {
       res = await new PostApi(http).updatePost(formData, editId);
+      const post = await new PostApi(http).getPostById(editId);
       if (res) {
         alert("글 수정이 완료되었습니다");
+        navigate(`/post/${res.id}`, { state: post });
       }
     } else {
       res = await new PostApi(http).writePost(formData);
       if (res) {
         alert("글 작성이 완료되었습니다");
+        navigate(`/post/${res.id}`);
       }
     }
-
-    navigate(`/post/${res.id}`);
   };
 
   // useEffect(() => {
