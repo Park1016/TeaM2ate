@@ -48,29 +48,6 @@ const SignUpForm = (props) => {
     console.log(res);
   };
 
-  const nullCheck = () => {
-    if (nameText || idText || pwText) {
-      return false;
-    } else if (isNull(form.name)) {
-      alert("이름을 입력해주세요");
-      return false;
-    } else if (isNull(form.username)) {
-      alert("아이디를 입력해주세요");
-      return false;
-    } else if (isNull(form.password)) {
-      alert("비밀번호를 입력해주세요");
-      return false;
-    } else if (form.password !== form.checkPw) {
-      alert("비밀번호를 재확인해주세요");
-      return false;
-    } else if (!checkEmail) {
-      alert("이메일 인증을 완료해주세요.");
-      return false;
-    } else {
-      return true;
-    }
-  };
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
