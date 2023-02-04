@@ -198,8 +198,8 @@ function createRefreshJwtToken(id) {
 
 const options = {
   httpOnly: true,
-  sameSite: false,
-  secure: false,
+  sameSite: "none",
+  secure: true,
 };
 export function setAccessToken(res, accessToken) {
   res.cookie("accessToken", accessToken, {
