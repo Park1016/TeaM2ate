@@ -53,7 +53,7 @@ const FramePost = ({ value, board, postId, http, user }) => {
           {!board && (
             <div className={cx("topRight")}>
               {user && <Bookmark id={postId} http={http} user={user} />}
-              {(user.id === "padhmijn" || user.id === userId) && (
+              {(user.username === "padhmijn" || user.id === userId) && (
                 <UpdateDelBtn type={"post"} id={postId} />
               )}
             </div>
