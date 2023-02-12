@@ -20,11 +20,18 @@ const UpdateProfile = ({ http, user }) => {
   const [onCheckPageOut] = useCheckPageOut();
   const _tag = useRecoilValue(tagSelector);
   const { id, url, username, introduce, alert, tag } = user;
+  const [text, setText] = useState(false);
   const [form, setForm] = useState({ url, username, introduce, alert, tag });
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    if (text || form.username.length < 3) {
+      window.alert("아이디를 형식에 맞게 입력해주세요");
+      return;
+    }
+
     const url = form.url;
     const username = form.username;
     const introduce = form.introduce;
@@ -66,7 +73,9 @@ const UpdateProfile = ({ http, user }) => {
               value={form.username}
               form={form}
               setForm={setForm}
+              setText={setText}
             />
+            {text && <p className={cx("text")}>{text}</p>}
           </div>
         </li>
         <li>

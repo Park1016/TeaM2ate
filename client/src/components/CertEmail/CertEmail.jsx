@@ -31,10 +31,15 @@ const CertEmail = ({ form, setForm, checkEmail, setCheckEmail, checkDup }) => {
     }
     const email = form.email;
     const formData = makeFormData({ email, checkDup });
+    const res = await new UserApi(http).checkExist(formData);
     if (!checkDup) {
-      const res = await new UserApi(http).checkExist(formData);
       if (!res) {
         alert("회원가입이 되어있지 않은 이메일입니다");
+        return;
+      }
+    } else {
+      if (res) {
+        alert("이미 회원가입된 이메일입니다");
         return;
       }
     }

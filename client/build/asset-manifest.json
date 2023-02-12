@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.ea22c8b8.css",
-    "main.js": "/static/js/main.c77426b3.js",
+    "main.css": "/static/css/main.f6806abb.css",
+    "main.js": "/static/js/main.a0fd2d13.js",
     "static/media/movie.gif": "/static/media/movie.e4e5732db90898d1b3e2.gif",
     "static/media/travelhere.gif": "/static/media/travelhere.731ea513db9ac3213856.gif",
     "static/media/index.cjs": "/static/media/index.b599194a631d76b49328.cjs",
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.ea22c8b8.css",
-    "static/js/main.c77426b3.js"
+    "static/css/main.f6806abb.css",
+    "static/js/main.a0fd2d13.js"
   ]
 }

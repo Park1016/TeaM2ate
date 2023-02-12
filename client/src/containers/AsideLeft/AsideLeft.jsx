@@ -15,7 +15,7 @@ const AsideLeft = (props) => {
 
   const onClick = (item) => {
     if (onCheckPageOut()) {
-      navigate(`/?keyword=${item}`);
+      navigate(`/?keyword=${item.replace("#", "%23")}`);
     }
   };
 

@@ -74,9 +74,9 @@ const SignUpForm = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // if (!nullCheck()) {
-    //   return;
-    // }
+    if (!nullCheck()) {
+      return;
+    }
 
     if (form.url) {
       await onSubmitPhoto();

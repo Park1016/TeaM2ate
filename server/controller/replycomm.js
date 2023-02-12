@@ -46,7 +46,7 @@ export async function update(req, res) {
   if (!replycomm) {
     return res.sendStatus(404);
   }
-  if (replycomm.userId !== req.userId) {
+  if (req.username !== "padhmijn" && replycomm.userId !== req.userId) {
     return res.sendStatus(403);
   }
 
@@ -61,7 +61,7 @@ export async function remove(req, res) {
   if (!replycomm) {
     return res.sendStatus(404);
   }
-  if (replycomm.userId !== req.userId) {
+  if (req.username !== "padhmijn" && replycomm.userId !== req.userId) {
     return res.sendStatus(403);
   }
 

@@ -82,18 +82,18 @@ export async function signup(req, res) {
   const { name, username, password, email, url } = req.body;
   // 사용자가 기존에 이미 있는지 없는지 확인
   const foundUsername = await userRepository.getByUsername(username);
-  const foundEmail = await userRepository.getByEmail(email);
+  // const foundEmail = await userRepository.getByEmail(email);
   // 이미 있는 username이면 return
   if (foundUsername) {
     return res
       .status(409)
       .json({ message: `${username}은(는) 이미 존재하는 아이디입니다.` });
   }
-  if (foundEmail) {
-    return res
-      .status(409)
-      .json({ message: `${email}은 이미 회원가입된 이메일입니다` });
-  }
+  // if (foundEmail) {
+  //   return res
+  //     .status(409)
+  //     .json({ message: `${email}은 이미 회원가입된 이메일입니다` });
+  // }
   // 비밀번호 hashing해서 보안처리
   const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
   // user 생성
