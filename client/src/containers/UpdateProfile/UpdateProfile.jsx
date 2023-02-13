@@ -44,6 +44,7 @@ const UpdateProfile = ({ http, user }) => {
       const res = await new UserApi(http).update(id, formData);
       if (res) {
         window.alert("수정이 완료되었습니다");
+        navigate("/mypage");
       }
     } catch (err) {
       console.warn(err);
